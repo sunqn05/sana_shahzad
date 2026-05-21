@@ -66,7 +66,15 @@ function Navbar() {
                     </Link>
                 </li>
             </ul>
-            {button && <Button buttonStyle='btn--outline'>ABOUT ME</Button>}
+            {button && (
+            <Button
+                path='/about'
+                buttonStyle='btn--outline'
+                buttonSize='btn--medium'
+            >
+                ABOUT ME
+            </Button>
+            )}
         </div>
       </nav>
     </>
