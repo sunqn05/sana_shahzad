@@ -5,6 +5,13 @@ import './HeroSection.css';
 import { ReactTyped } from 'react-typed';
 
 function HeroSection() {
+
+  const scrollToWork = () => {
+    document.getElementById('work').scrollIntoView({
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <div className='hero-container'>
       <video src='/videos/video-wave.mp4' autoPlay loop muted />
@@ -32,8 +39,9 @@ function HeroSection() {
           className='btns'
           buttonStyle='btn--outline'
           buttonSize='btn--large'
+          onClick={scrollToWork}
         >
-          GET STARTED
+          VIEW MY WORK
         </Button>
       </div>
     </div>

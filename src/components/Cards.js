@@ -4,26 +4,26 @@ import CardItem from './Carditem';
 
 function Cards() {
   return (
-    <div className='cards'>
-      <h1>Check Out My Work!</h1>
+    <div className='cards' id='work'>
+      <h1>CREATIVE ARCHIVE</h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
               src='images/img-3.jpg'
-              text='Explore The various Projects Ive Completed'
+              text='Creative coding, web experiments, and interactive builds'
               label='Projects'
               path='/projects'
             />
             <CardItem
               src='images/img-4.jpg'
-              text='Take A Look through My Journey In The Arts'
+              text='Posters, branding, layouts, and visual systems'
               label='Design'
               path='/graphicdesign'
             />
             <CardItem
               src='images/img-5.jpg'
-              text='Look At The Cool Pics I took Over The Years'
+              text='Captured moments, textures, places, and light'
               label='Photos'
               path='/photography'
             />
