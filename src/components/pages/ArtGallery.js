@@ -2,65 +2,126 @@ import React from "react";
 import "./ArtGallery.css";
 
 function ArtGallery() {
-  const artworks = [
+  const featured = [
     {
-      image: "/images/art-1.png",
-      title: "Artwork One",
-      type: "Sketch",
-      year: "2026",
+      image: "/images/photo-car-1.jpg",
+      title: "Midnight Drive",
+      category: "Car Photography",
     },
     {
-      image: "/images/art-2.jpg",
-      title: "Artwork Two",
-      type: "Digital Art",
-      year: "2026",
+      image: "/images/design-poster-1.jpg",
+      title: "Poster Study",
+      category: "Graphic Design",
     },
     {
-      image: "/images/art-3.jpg",
-      title: "Artwork Three",
-      type: "Painting",
-      year: "2025",
+      image: "/images/photo-nature-1.jpg",
+      title: "Still Air",
+      category: "Nature Photography",
+    },
+  ];
+
+  const photography = [
+    {
+      image: "/images/img-3.jpg",
+      title: "Car Photography",
+      text: "Motion, reflections, details, and atmosphere.",
     },
     {
-      image: "/images/art-4.jpg",
-      title: "Artwork Four",
-      type: "Mixed Media",
-      year: "2025",
+      image: "/images/img-4.jpg",
+      title: "Portraits",
+      text: "People, expression, mood, and personality.",
+    },
+    {
+      image: "/images/img-5.jpg",
+      title: "Nature",
+      text: "Light, textures, landscapes, and quiet moments.",
+    },
+  ];
+
+  const design = [
+    {
+      image: "/images/design-poster-1.png",
+      title: "Posters",
+      text: "Bold layouts, typography, and visual storytelling.",
+    },
+    {
+      image: "/images/img-3.jpg",
+      title: "Branding",
+      text: "Logos, colour systems, identity, and presentation.",
+    },
+    {
+      image: "/images/img-9.jpg",
+      title: "Social Media",
+      text: "Digital graphics, campaigns, and content design.",
     },
   ];
 
   return (
-    <div className="art-gallery-page">
-      <section className="art-hero">
-        <p className="art-kicker">Creative Portfolio</p>
-        <h1>Art Gallery</h1>
-        <div className="wave-line">〰</div>
+    <div className="gallery-page">
+      <section className="gallery-hero">
+        <p className="gallery-label">Creative Gallery</p>
+        <h1>Photography & Design</h1>
         <p>
-          A collection of my artwork, sketches, experiments, and visual ideas.
+          A scrollable gallery of captured moments, visual ideas, and creative
+          experiments.
         </p>
       </section>
 
-      <section className="filter-row">
-        <button>All</button>
-        <button>Sketches</button>
-        <button>Paintings</button>
-        <button>Digital</button>
-        <button>Mixed Media</button>
+      <section className="gallery-section">
+        <div className="section-heading">
+          <p>Curated Selection</p>
+          <h2>Featured Work</h2>
+        </div>
+
+        <div className="featured-grid">
+          {featured.map((item, index) => (
+            <div className="featured-card" key={index}>
+              <img src={item.image} alt={item.title} />
+              <div className="featured-overlay">
+                <h3>{item.title}</h3>
+                <p>{item.category}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
-      <section className="art-grid">
-        {artworks.map((art, index) => (
-          <div className="art-card" key={index}>
-            <img src={art.image} alt={art.title} />
+      <section className="gallery-section">
+        <div className="section-heading">
+          <p>Through the Lens</p>
+          <h2>Photography</h2>
+        </div>
 
-            <div className="art-info">
-              <h3>{art.title}</h3>
-              <p>
-                {art.type} • {art.year}
-              </p>
+        <div className="category-grid">
+          {photography.map((item, index) => (
+            <div className="category-card" key={index}>
+              <img src={item.image} alt={item.title} />
+              <div className="category-info">
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </section>
+
+      <section className="gallery-section">
+        <div className="section-heading">
+          <p>Visual Systems</p>
+          <h2>Graphic Design</h2>
+        </div>
+
+        <div className="category-grid">
+          {design.map((item, index) => (
+            <div className="category-card" key={index}>
+              <img src={item.image} alt={item.title} />
+              <div className="category-info">
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );

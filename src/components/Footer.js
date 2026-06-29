@@ -15,10 +15,10 @@ function Footer() {
           </div>
 
           <div className='footer-link-items'>
-            <h2>Services</h2>
-            <Link to='/photography'>Photography</Link>
-            <Link to='/graphicdesign'>Graphic Design</Link>
+            <h2>Explore</h2>
+            <Link to='/gallery'>Gallery</Link>
             <Link to='/projects'>Projects</Link>
+            <Link to='/about'>About</Link>
           </div>
 
         </div>

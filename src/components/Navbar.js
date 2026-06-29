@@ -46,16 +46,6 @@ function Navbar() {
                     </Link>
                 </li>
                 <li className='nav-item'>
-                    <Link to='/graphicdesign' className='nav-links' onClick={closeMobileMenu}>
-                        Graphic Design
-                    </Link>
-                </li>
-                <li className='nav-item'>
-                    <Link to='/photography' className='nav-links' onClick={closeMobileMenu}>
-                        Photography
-                    </Link>
-                </li>
-                <li className='nav-item'>
                     <Link to='/projects' className='nav-links' onClick={closeMobileMenu}>
                         Projects
                     </Link>
@@ -65,9 +55,9 @@ function Navbar() {
                         About
                     </Link>
                 </li>
-                <li className="nav-item">
-                    <Link to="/artgallery" className="nav-links" onClick={closeMobileMenu}>
-                        Art Gallery
+                <li className='nav-item'>
+                    <Link to='/gallery' className='nav-links' onClick={closeMobileMenu}>
+                        Gallery
                     </Link>
                 </li>
             </ul>
