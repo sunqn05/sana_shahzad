@@ -4,17 +4,17 @@ import "./ArtGallery.css";
 function ArtGallery() {
   const featured = [
     {
-      image: "/images/photo-car-1.jpg",
+      image: "/images/design-poster-1.png",
       title: "Midnight Drive",
       category: "Car Photography",
     },
     {
-      image: "/images/design-poster-1.jpg",
+      image: "/images/img-3.jpg",
       title: "Poster Study",
       category: "Graphic Design",
     },
     {
-      image: "/images/photo-nature-1.jpg",
+      image: "/images/img-home.jpg",
       title: "Still Air",
       category: "Nature Photography",
     },
@@ -60,7 +60,7 @@ function ArtGallery() {
     <div className="gallery-page">
       <section className="gallery-hero">
         <p className="gallery-label">Creative Gallery</p>
-        <h1>Photography & Design</h1>
+        <h1>My Precious Gems</h1>
         <p>
           A scrollable gallery of captured moments, visual ideas, and creative
           experiments.

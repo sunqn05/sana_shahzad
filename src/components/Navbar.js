@@ -41,24 +41,27 @@ function Navbar() {
             </div>
             <ul className={click ? 'nav-menu active' : 'nav-menu'}> 
                 <li className='nav-item'>
-                    <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                        Home
-                    </Link>
+                <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                    Home
+                </Link>
                 </li>
+
                 <li className='nav-item'>
-                    <Link to='/projects' className='nav-links' onClick={closeMobileMenu}>
-                        Projects
-                    </Link>
+                <Link to='/gallery' className='nav-links' onClick={closeMobileMenu}>
+                    Gallery
+                </Link>
                 </li>
+
                 <li className='nav-item'>
-                    <Link to='/about' className='nav-links-mobile' onClick={closeMobileMenu}>
-                        About
-                    </Link>
+                <Link to='/projects' className='nav-links' onClick={closeMobileMenu}>
+                    Projects
+                </Link>
                 </li>
+
                 <li className='nav-item'>
-                    <Link to='/gallery' className='nav-links' onClick={closeMobileMenu}>
-                        Gallery
-                    </Link>
+                <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
+                    About
+                </Link>
                 </li>
             </ul>
             {button && (
