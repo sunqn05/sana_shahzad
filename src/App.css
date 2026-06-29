@@ -96,3 +96,13 @@ body {
   color: #fff;
   font-size: 100px;
 }
+
+:root {
+  --deep-bg: #020617;
+  --ocean-bg: #061826;
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(94, 231, 255, 0.18);
+  --cyan: #5ee7ff;
+  --soft-text: #cbd5e1;
+  --muted-text: #94a3b8;
+}

@@ -2,88 +2,85 @@ import React from "react";
 import "./ArtGallery.css";
 
 function ArtGallery() {
-  const featured = [
-    {
-      image: "/images/design-poster-1.png",
-      title: "Midnight Drive",
-      category: "Car Photography",
-    },
-    {
-      image: "/images/img-3.jpg",
-      title: "Poster Study",
-      category: "Graphic Design",
-    },
-    {
-      image: "/images/img-home.jpg",
-      title: "Still Air",
-      category: "Nature Photography",
-    },
-  ];
-
   const photography = [
     {
-      image: "/images/img-3.jpg",
+      folder: "animal",
+      cover: "photo-1.jpg",
+      title: "Animal Photography",
+      description: "Animals, movement, expression, and detail.",
+      images: ["photo-1.jpg", "photo-2.png", "photo-3.jpg"],
+    },
+    {
+      folder: "people",
+      cover: "photo-1.jpg",
+      title: "People Photography",
+      description: "Portraits, candid moments, personality, and mood.",
+      images: ["photo-1.jpg", "photo-2.png", "photo-3.jpg"],
+    },
+    {
+      folder: "car",
+      cover: "photo-1.jpg",
       title: "Car Photography",
-      text: "Motion, reflections, details, and atmosphere.",
+      description: "Reflections, angles, motion, and automotive details.",
+      images: ["photo-1.jpg", "photo-2.png", "photo-3.jpg"],
     },
     {
-      image: "/images/img-4.jpg",
-      title: "Portraits",
-      text: "People, expression, mood, and personality.",
-    },
-    {
-      image: "/images/img-5.jpg",
-      title: "Nature",
-      text: "Light, textures, landscapes, and quiet moments.",
+      folder: "product",
+      cover: "photo-1.jpg",
+      title: "Product Photography",
+      description: "Clean product shots, lighting, styling, and presentation.",
+      images: ["photo-1.jpg", "photo-2.png", "photo-3.jpg"],
     },
   ];
 
   const design = [
     {
-      image: "/images/design-poster-1.png",
-      title: "Posters",
-      text: "Bold layouts, typography, and visual storytelling.",
+      folder: "illustrator",
+      cover: "art-1.png",
+      title: "Illustrator",
+      description: "Vector artwork, layouts, icons, and digital illustrations.",
+      images: ["art-1.png", "art-2.jpg", "art-3.png"],
     },
     {
-      image: "/images/img-3.jpg",
-      title: "Branding",
-      text: "Logos, colour systems, identity, and presentation.",
+      folder: "business",
+      cover: "art-1.png",
+      title: "Business Design",
+      description: "Branding, professional graphics, and visual identity work.",
+      images: ["art-1.png", "art-2.jpg", "art-3.png"],
     },
     {
-      image: "/images/img-9.jpg",
-      title: "Social Media",
-      text: "Digital graphics, campaigns, and content design.",
+      folder: "photoshop",
+      cover: "art-1.png",
+      title: "Photoshop",
+      description: "Photo edits, composites, posters, and creative manipulation.",
+      images: ["art-1.png", "art-2.jpg", "art-3.png"],
     },
   ];
+
+  const renderCategory = (item) => (
+    <div className="category-card" key={item.folder}>
+      <img
+        src={`/images/${item.folder}/${item.cover}`}
+        alt={item.title}
+      />
+
+      <div className="category-info">
+        <h3>{item.title}</h3>
+        <p>{item.description}</p>
+        <span>{item.images.length} pieces</span>
+      </div>
+    </div>
+  );
 
   return (
     <div className="gallery-page">
       <section className="gallery-hero">
         <p className="gallery-label">Creative Gallery</p>
-        <h1>My Precious Gems</h1>
+        <h1>Photography & Design</h1>
         <p>
           A scrollable gallery of captured moments, visual ideas, and creative
           experiments.
         </p>
-      </section>
-
-      <section className="gallery-section">
-        <div className="section-heading">
-          <p>Curated Selection</p>
-          <h2>Featured Work</h2>
-        </div>
-
-        <div className="featured-grid">
-          {featured.map((item, index) => (
-            <div className="featured-card" key={index}>
-              <img src={item.image} alt={item.title} />
-              <div className="featured-overlay">
-                <h3>{item.title}</h3>
-                <p>{item.category}</p>
-              </div>
-            </div>
-          ))}
-        </div>
       </section>
 
       <section className="gallery-section">
@@ -93,15 +90,7 @@ function ArtGallery() {
         </div>
 
         <div className="category-grid">
-          {photography.map((item, index) => (
-            <div className="category-card" key={index}>
-              <img src={item.image} alt={item.title} />
-              <div className="category-info">
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </div>
-            </div>
-          ))}
+          {photography.map(renderCategory)}
         </div>
       </section>
 
@@ -112,15 +101,7 @@ function ArtGallery() {
         </div>
 
         <div className="category-grid">
-          {design.map((item, index) => (
-            <div className="category-card" key={index}>
-              <img src={item.image} alt={item.title} />
-              <div className="category-info">
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </div>
-            </div>
-          ))}
+          {design.map(renderCategory)}
         </div>
       </section>
     </div>
