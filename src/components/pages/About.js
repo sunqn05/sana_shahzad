@@ -9,7 +9,7 @@ function About() {
         <p className='about-label'>ABOUT ME</p>
 
         <h1>
-          Hi!, I’m Sana Shahzad a creative developer, designer, and photographer!
+          Hi! I’m Sana Shahzad a creative developer, designer, and photographer!
         </h1>
 
         <p className='about-intro'>
@@ -33,7 +33,8 @@ function About() {
           <h2>How I Think</h2>
           <p>
             I’m drawn to mood, detail, colour, and atmosphere, 
-            and really just how it make you feel.
+            and really just how it make you feel. Im always considering
+            the tiny details and how they play out in the grand scheme of things
           </p>
         </div>
 
@@ -48,7 +49,7 @@ function About() {
       </section>
 
       <section className='about-footer-note'>
-        <h2>It May Not Be Perfect But Its Me:</h2>
+        <h2>It May Not Be Perfect But Its Me</h2>
       </section>
     </div>
   );
