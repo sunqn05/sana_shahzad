@@ -21,12 +21,6 @@ function Cards() {
               label='Projects'
               path='/projects'
             />
-            <CardItem
-              src='images/img-5.jpg'
-              text='A little more about me, my style, and what I am building'
-              label='About'
-              path='/about'
-            />
           </ul>
         </div>
       </div>

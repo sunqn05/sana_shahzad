@@ -26,7 +26,7 @@ function ArtGallery() {
     },
     {
       folder: "product",
-      cover: "photo-1.jpg",
+      cover: "photo-1.png",
       title: "Product Photography",
       description: "Clean product shots, lighting, styling, and presentation.",
       images: ["photo-1.jpg", "photo-2.png", "photo-3.jpg"],
@@ -43,7 +43,7 @@ function ArtGallery() {
     },
     {
       folder: "business",
-      cover: "art-1.png",
+      cover: "art-1.jpg",
       title: "Business Design",
       description: "Branding, professional graphics, and visual identity work.",
       images: ["art-1.png", "art-2.jpg", "art-3.png"],
