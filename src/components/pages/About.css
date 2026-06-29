@@ -4,12 +4,13 @@
     linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.95)),
     url('../../../public/images/img-home.jpg') center/cover no-repeat;
   color: white;
-  padding: 100px 10%;
+  padding: 140px 10% 100px;
 }
 
 .about-hero {
-  max-width: 900px;
-  margin-bottom: 70px;
+  max-width: 950px;
+  margin: 0 auto 80px;
+  text-align: center;
 }
 
 .about-label {
@@ -20,30 +21,34 @@
 }
 
 .about-hero h1 {
-  font-size: 4rem;
+  font-size: 4.5rem;
   line-height: 1.1;
-  margin-bottom: 24px;
+  margin-bottom: 30px;
 }
 
 .about-intro {
+  max-width: 750px;
+  margin: 0 auto;
   font-size: 1.3rem;
   line-height: 1.8;
-  color: #d8d8d8;
-  max-width: 750px;
+  color: #d6d6d6;
 }
 
 .about-content {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  gap: 30px;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 .about-card {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 32px;
-  backdrop-filter: blur(8px);
-  transition: 0.3s ease;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 35px;
+  transition: all 0.3s ease;
 }
 
 .about-card:hover {
@@ -52,36 +57,53 @@
 }
 
 .about-card h2 {
-  margin-bottom: 16px;
-  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.7rem;
 }
 
-.about-card p,
-.about-footer-note p {
+.about-card p {
   color: #d6d6d6;
-  line-height: 1.7;
+  line-height: 1.8;
+  text-align: center;
 }
 
 .about-footer-note {
-  margin-top: 70px;
+  margin: 80px auto 0;
   max-width: 800px;
+  text-align: center;
 }
 
 .about-footer-note h2 {
-  margin-bottom: 12px;
   color: #9fd8ff;
+  margin-bottom: 15px;
 }
 
-@media screen and (max-width: 900px) {
+.about-footer-note p {
+  color: #d6d6d6;
+  line-height: 1.8;
+}
+
+@media screen and (max-width: 1000px) {
   .about-page {
-    padding: 80px 7%;
+    padding: 120px 8% 80px;
   }
 
   .about-hero h1 {
-    font-size: 2.6rem;
+    font-size: 3rem;
   }
 
   .about-content {
     grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-hero h1 {
+    font-size: 2.4rem;
+  }
+
+  .about-intro {
+    font-size: 1.1rem;
   }
 }
