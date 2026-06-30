@@ -11,8 +11,8 @@ function Projects() {
       github: "https://github.com/sunqn05/sana_shahzad",
     },
     {
-      title: "Python Projects",
-      tools: "Python",
+      title: "Projects",
+      tools: "Python • C • Java",
       description: "Small coding projects, practice files, and experiments from my computer science learning.",
       github: "https://github.com/wandering3ngineer/courses",
     },
