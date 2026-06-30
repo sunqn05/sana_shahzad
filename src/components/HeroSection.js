@@ -15,7 +15,7 @@ function HeroSection() {
     <div className='hero-container'>
       <video
           src="/videos/video-wave.mp4"
-          poster="/images/video-poster.jpg"
+          poster="/images/video-poster.png"
           autoPlay
           muted
           loop

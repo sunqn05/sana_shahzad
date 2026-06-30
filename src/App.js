@@ -5,13 +5,11 @@ import Home from './components/pages/Home';
 import Gallery from './components/pages/ArtGallery';
 import Projects from './components/pages/Projects';
 import About from './components/pages/About';
-import CursorTrail from './components/CursorTrail';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
-      <CursorTrail />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
