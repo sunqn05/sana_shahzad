@@ -1,0 +1,24 @@
+.cursor-trail {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.cursor-trail span {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(94, 231, 255, 0.35);
+  box-shadow: 0 0 18px rgba(94, 231, 255, 0.55);
+  animation: fadeTrail 0.5s ease forwards;
+}
+
+@keyframes fadeTrail {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2.3);
+  }
+}

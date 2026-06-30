@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import { Button } from './Button';
 import './HeroSection.css';
+import ScrambleText from "./ScrambleText";
 import { ReactTyped } from 'react-typed';
 
 function HeroSection() {
@@ -16,7 +17,9 @@ function HeroSection() {
     <div className='hero-container'>
       <video src='/videos/video-wave.mp4' autoPlay loop muted />
 
-      <h1>SANA SHAHZAD</h1>
+      <h1>
+        <ScrambleText text="SANA SHAHZAD" />
+      </h1>
       <ReactTyped
         className='typed-text'
         strings={[
