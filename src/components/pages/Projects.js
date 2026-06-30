@@ -7,20 +7,20 @@ function Projects() {
     {
       title: "Portfolio Website",
       tools: "React • CSS • JavaScript",
-      description: "A personal portfolio built with React, custom styling, and an ocean-inspired visual identity.",
-      github: "https://github.com/sunqn05",
+      description: "A personal portfolio built with React, and an ocean-inspired visual identity.",
+      github: "https://github.com/sunqn05/sana_shahzad",
     },
     {
       title: "Python Projects",
       tools: "Python",
       description: "Small coding projects, practice files, and experiments from my computer science learning.",
-      github: "https://github.com/sunqn05",
+      github: "https://github.com/wandering3ngineer/courses",
     },
     {
-      title: "Creative Experiments",
-      tools: "Web Design • Frontend",
-      description: "Interactive ideas, layouts, and design-focused coding experiments.",
-      github: "https://github.com/sunqn05",
+      title: "Game Development",
+      tools: "C# • Backend • Frontend",
+      description: "Design-focused coding experiments and all rounded projects.",
+      github: "https://github.com/damhahlat/Battleship-2.0",
     },
   ];
 
@@ -30,8 +30,8 @@ function Projects() {
         <p className="projects-label">Coding Portfolio</p>
         <h1>Projects</h1>
         <p>
-          A small collection of things I’ve built, tested, and experimented with
-          while learning software development.
+          A small collection of things I’ve built and experimented with
+          while learning software, web and game development!
         </p>
       </section>
 
