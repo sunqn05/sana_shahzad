@@ -91,3 +91,12 @@ video {
   filter: contrast(1.08) brightness(0.78) saturate(1.05);
   z-index: -2;
 }
+
+.hero-fallback {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(94, 231, 255, 0.12), transparent 35%),
+    linear-gradient(180deg, #020617, #061826, #020617);
+  z-index: -3;
+}

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import { Button } from './Button';
 import './HeroSection.css';
-import ScrambleText from "./ScrambleText";
 import { ReactTyped } from 'react-typed';
+import ScrambleText from './ScrambleText';
 
 function HeroSection() {
+  const [videoReady, setVideoReady] = useState(false);
 
   const scrollToWork = () => {
     document.getElementById('work').scrollIntoView({
@@ -15,14 +16,26 @@ function HeroSection() {
 
   return (
     <div className='hero-container'>
-      <video src='/videos/video-wave.mp4' autoPlay loop muted />
+      {!videoReady && <div className='hero-fallback'></div>}
+
+      <video
+        src='/videos/video-wave.mp4'
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload='auto'
+        onCanPlayThrough={() => setVideoReady(true)}
+      />
 
       <h1>
-        <ScrambleText text="SANA SHAHZAD" />
+        {videoReady ? <ScrambleText text="SANA SHAHZAD" /> : "SANA SHAHZAD"}
       </h1>
-      <ReactTyped
-        className='typed-text'
-        strings={[
+
+      {videoReady && (
+        <ReactTyped
+          className='typed-text'
+          strings={[
             'Graphic Designer',
             'Coder and Developer',
             'Pixel Perfectionist',
@@ -31,11 +44,12 @@ function HeroSection() {
             'Exploring Digital Depths',
             'Surfacing New Ideas Daily',
             'Do You Like The Ocean Puns'
-        ]}
-        typeSpeed={80}
-        backSpeed={50}
-        loop
+          ]}
+          typeSpeed={80}
+          backSpeed={50}
+          loop
         />
+      )}
 
       <div className='hero-btns'>
         <Button
