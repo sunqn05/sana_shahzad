@@ -1,19 +1,17 @@
 .skills-loop-section {
-  height: 95px;
+  height: 55px;
   width: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
-  background: #050914;
-  border-top: 1px solid rgba(231, 215, 178, 0.10);
-  border-bottom: 1px solid rgba(231, 215, 178, 0.10);
+  background: #020711;
 }
 
 .skills-track {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 20px;
+  gap: 85px;
   width: max-content;
   flex-wrap: nowrap;
   animation: skillsScroll 45s linear infinite;
@@ -21,24 +19,19 @@
 
 .skill-pill {
   flex: 0 0 auto;
-  width: auto;
-
   display: flex;
   align-items: center;
   gap: 10px;
 
-  padding: 12px 24px;
-  border-radius: 999px;
+  padding: 0;
+  margin: 0;
 
-  color: rgba(235, 250, 255, 0.9);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 
-  background: rgba(255, 255, 255, 0.055);
-
-  border: 1px solid rgba(231, 215, 178, 0.22);
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
+  color: rgba(255, 255, 255, 0.72);
   font-size: 0.95rem;
   white-space: nowrap;
 
@@ -46,25 +39,27 @@
 }
 
 .skill-pill i {
-  font-size: 1.35rem;
+  font-size: 1.45rem;
+  transition: all 0.35s ease;
 }
 
-.skill-pill:hover i,
-.skill-pill:hover svg {
-  color: var(--sun-gold);
+.skills-track:hover .skill-pill {
+  opacity: 0.35;
+}
+
+.skills-track:hover .skill-pill:hover {
+  opacity: 1;
 }
 
 .skill-pill:hover {
   color: var(--sun-gold);
+  transform: translateY(-2px);
+  text-shadow: 0 0 12px var(--sun-gold-glow);
+}
 
-  transform: translateY(-3px);
-
-  border-color: var(--sun-gold);
-
-  background: rgba(231, 215, 178, 0.08);
-
-  box-shadow:
-    0 0 18px var(--sun-gold-glow);
+.skill-pill:hover i {
+  color: var(--sun-gold);
+  filter: drop-shadow(0 0 8px var(--sun-gold-glow));
 }
 
 .skills-loop-section:hover .skills-track {
