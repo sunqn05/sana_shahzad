@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ArtGallery.css";
 
 function ArtGallery() {
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const section = document.querySelector(window.location.hash);
+
+      if (section) {
+        setTimeout(() => {
+          section.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
+      }
+    }
+  }, []);
+
   const photography = [
     {
       folder: "animal",
@@ -83,8 +99,8 @@ function ArtGallery() {
         </p>
       </section>
 
-      <section className="gallery-section">
-        <div className="section-heading">
+      <section className="gallery-section" id="photography">
+          <div className="section-heading">
           <p>Through the Lens</p>
           <h2>Photography</h2>
         </div>
@@ -94,8 +110,8 @@ function ArtGallery() {
         </div>
       </section>
 
-      <section className="gallery-section">
-        <div className="section-heading">
+      <section className="gallery-section" id="design">
+          <div className="section-heading">
           <p>Visual Systems</p>
           <h2>Graphic Design</h2>
         </div>

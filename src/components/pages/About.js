@@ -14,8 +14,7 @@ function About() {
 
         <p className='about-intro'>
           I like building things that feel personal. 
-          My work lives somewhere between design, photography,
-          code, and creative technology.
+          My work lives somewhere between art and code.
         </p>
       </section>
 
@@ -49,7 +48,7 @@ function About() {
       </section>
 
       <section className='about-footer-note'>
-        <h2>It May Not Be Perfect But Its Me</h2>
+        <h2>Thank You For Being A Part Of My Journey</h2>
       </section>
     </div>
   );

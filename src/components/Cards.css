@@ -1,137 +1,51 @@
-.cards {
-  padding: 7rem 4rem;
-  background:
-    radial-gradient(circle at top, rgba(94, 231, 255, 0.08), transparent 35%),
-    linear-gradient(180deg, #020617, #061826, #020617);
+.collage-section {
+  background: #020711;
+  min-height: 100vh;
+  padding: 70px 7%;
   color: white;
+  overflow: hidden;
 }
 
-.cards h1 {
+.collage-heading {
   text-align: center;
+  margin-bottom: 65px;
+}
+
+.collage-heading p {
+  color: var(--ocean-blue);
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  font-size: 0.78rem;
+  margin-bottom: 16px;
+}
+
+.collage-heading h1 {
   font-family: Georgia, serif;
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  letter-spacing: 3px;
-  margin-bottom: 2rem;
-}
-
-.cards__container {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  max-width: 1120px;
-  width: 90%;
-  margin: 0 auto;
-}
-
-.cards__wrapper {
-  position: relative;
-  margin: 50px 0 45px;
-}
-
-.cards__items {
-  margin-bottom: 24px;
-}
-
-.cards__item {
-  display: flex;
-  flex: 1;
-  margin: 0 1rem;
-  border-radius: 22px;
-}
-
-.cards__item__link {
-  display: flex;
-  flex-flow: column;
-  width: 100%;
-
-  background: rgba(3, 18, 32, 0.48);
-  border: 1px solid rgba(94, 231, 255, 0.28);
-  border-radius: 22px;
-  overflow: hidden;
-  text-decoration: none;
-
-  backdrop-filter: blur(22px) saturate(160%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
-
-  box-shadow:
-    0 0 35px rgba(94, 231, 255, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-
-  transition: 0.35s ease;
-}
-
-.cards__item__link:hover {
-  transform: translateY(-8px);
-  border-color: rgba(94, 231, 255, 0.65);
-  box-shadow:
-    0 0 45px rgba(94, 231, 255, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-}
-
-.cards__item__pic-wrap {
-  position: relative;
-  width: 100%;
-  padding-top: 67%;
-  overflow: hidden;
-}
-
-.cards__item__pic-wrap::after {
-  content: attr(data-category);
-  position: absolute;
-  bottom: 14px;
-  left: 14px;
-
-  padding: 7px 12px;
-  font-size: 12px;
+  font-size: clamp(2.9rem, 5vw, 4.6rem);
   font-weight: 700;
-  color: white;
+  letter-spacing: 2px;
+  line-height: 1.05;
 
-  background: rgba(94, 231, 255, 0.18);
-  border: 1px solid rgba(94, 231, 255, 0.35);
-  border-radius: 999px;
+  color: #f4ede0;
 
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  text-shadow:
+      0 0 8px rgba(231, 215, 178, 0.55),
+      0 0 20px rgba(231, 215, 178, 0.35),
+      0 0 45px rgba(231, 215, 178, 0.18),
+      0 0 80px rgba(231, 215, 178, 0.08);
 }
 
-.cards__item__img {
-  position: absolute;
-  inset: 0;
-
-  display: block;
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  transition: 0.45s ease;
+.masonry-holder {
+    width: 100%;
+    position: relative;
 }
 
-.cards__item__link:hover .cards__item__img {
-  transform: scale(1.06);
-}
-
-.cards__item__info {
-  padding: 24px 30px 32px;
-}
-
-.cards__item__text {
-  color: #cbd5e1;
-  font-size: 18px;
-  line-height: 1.5;
-}
-
-@media only screen and (min-width: 1024px) {
-  .cards__items {
-    display: flex;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .cards {
-    padding: 5rem 1.5rem;
+@media screen and (max-width: 768px) {
+  .collage-section {
+    padding: 70px 5%;
   }
 
-  .cards__item {
-    margin-bottom: 2rem;
+  .collage-heading {
+    margin-bottom: 35px;
   }
 }

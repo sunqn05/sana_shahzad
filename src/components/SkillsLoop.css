@@ -1,0 +1,82 @@
+.skills-loop-section {
+  height: 95px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: #050914;
+  border-top: 1px solid rgba(231, 215, 178, 0.10);
+  border-bottom: 1px solid rgba(231, 215, 178, 0.10);
+}
+
+.skills-track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  width: max-content;
+  flex-wrap: nowrap;
+  animation: skillsScroll 45s linear infinite;
+}
+
+.skill-pill {
+  flex: 0 0 auto;
+  width: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 24px;
+  border-radius: 999px;
+
+  color: rgba(235, 250, 255, 0.9);
+
+  background: rgba(255, 255, 255, 0.055);
+
+  border: 1px solid rgba(231, 215, 178, 0.22);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  font-size: 0.95rem;
+  white-space: nowrap;
+
+  transition: all 0.35s ease;
+}
+
+.skill-pill i {
+  font-size: 1.35rem;
+}
+
+.skill-pill:hover i,
+.skill-pill:hover svg {
+  color: var(--sun-gold);
+}
+
+.skill-pill:hover {
+  color: var(--sun-gold);
+
+  transform: translateY(-3px);
+
+  border-color: var(--sun-gold);
+
+  background: rgba(231, 215, 178, 0.08);
+
+  box-shadow:
+    0 0 18px var(--sun-gold-glow);
+}
+
+.skills-loop-section:hover .skills-track {
+  animation-play-state: paused;
+}
+
+@keyframes skillsScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
