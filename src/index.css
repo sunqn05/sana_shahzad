@@ -6,6 +6,10 @@
   --sun-gold-glow: rgba(246, 234, 209, 0.22);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

@@ -4,15 +4,10 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <div className='footer-container'>
+    <div className='footer-container' id='contact'>
       <div className='footer-links'>
 
         <div className='footer-link-wrapper'>
-
-          <div className='footer-link-items'>
-            <h2>About Me</h2>
-            <Link to='/about'>Who Am I?</Link>
-          </div>
 
           <div className='footer-link-items'>
             <h2>Explore</h2>
@@ -26,7 +21,11 @@ function Footer() {
         <div className='footer-link-wrapper'>
 
           <div className='footer-link-items'>
-            <h2>Social Media</h2>
+            <h2>Contact Me</h2>
+
+            <a href='mailto:sanashahzad0169@gmail.com'>
+              Email
+            </a>
 
             <a
               href='https://www.instagram.com/ssana_05/'
@@ -37,7 +36,7 @@ function Footer() {
             </a>
 
             <a
-              href='http://linkedin.com/in/sana-shahzad-01726328b'
+              href='https://www.linkedin.com/in/sana-shahzad-01726328b'
               target='_blank'
               rel='noreferrer'
             >
@@ -50,6 +49,14 @@ function Footer() {
               rel='noreferrer'
             >
               GitHub
+            </a>
+
+            <a
+              href='https://www.youtube.com/@ssunqn'
+              target='_blank'
+              rel='noreferrer'
+            >
+              YouTube
             </a>
 
           </div>
@@ -85,7 +92,7 @@ function Footer() {
 
             <a
               className='social-icon-link linkedin'
-              href='http://linkedin.com/in/sana-shahzad-01726328b'
+              href='https://www.linkedin.com/in/sana-shahzad-01726328b'
               target='_blank'
               rel='noreferrer'
               aria-label='LinkedIn'
@@ -101,6 +108,16 @@ function Footer() {
               aria-label='GitHub'
             >
               <i className='fab fa-github' />
+            </a>
+
+            <a
+              className='social-icon-link youtube'
+              href='https://www.youtube.com/@ssunqn'
+              target='_blank'
+              rel='noreferrer'
+              aria-label='YouTube'
+            >
+              <i className='fab fa-youtube' />
             </a>
 
           </div>

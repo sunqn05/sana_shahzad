@@ -1,5 +1,5 @@
 .skills-loop-section {
-  height: 55px;
+  height: 50px;
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -64,6 +64,10 @@
 
 .skills-loop-section:hover .skills-track {
   animation-play-state: paused;
+}
+
+.devicon-linux-plain {
+  color: rgba(255, 255, 255, 0.72) !important;
 }
 
 @keyframes skillsScroll {

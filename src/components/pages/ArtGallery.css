@@ -1,141 +1,1168 @@
+/* =========================
+   PAGE / LIQUID BACKGROUND
+========================= */
+
 .gallery-page {
+  position: relative;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top, rgba(94, 231, 255, 0.13), transparent 35%),
-    linear-gradient(180deg, #020617 0%, #061826 45%, #020617 100%);
   color: white;
-  padding: 110px 8% 70px;
+  background: #020617;
+  overflow-x: hidden;
 }
 
+.gallery-liquid-background {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gallery-liquid-background .liquid-ether-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.gallery-liquid-background canvas {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+}
+
+.gallery-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.gallery-hero,
+.gallery-section,
+.photography-section,
+.design-section {
+  position: relative;
+  background: transparent;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
 .gallery-hero {
-  min-height: 55vh;
+  min-height: 100vh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   text-align: center;
+
+  padding: 130px 8% 80px;
 }
 
-.gallery-label,
-.section-heading p {
+.gallery-label {
   color: var(--cyan);
+
   text-transform: uppercase;
-  letter-spacing: 3px;
-  font-size: 0.8rem;
-  margin-bottom: 12px;
+  letter-spacing: 4px;
+
+  font-size: 0.75rem;
+
+  margin-bottom: 14px;
 }
 
 .gallery-hero h1 {
-  font-size: clamp(3rem, 8vw, 6.2rem);
+  display: flex;
+  flex-direction: column;
+
+  font-size: clamp(3.5rem, 8vw, 7rem);
+
   font-family: Georgia, serif;
-  margin-bottom: 20px;
+  font-weight: 500;
+
+  line-height: 0.88;
+
+  margin: 0;
 }
 
-.gallery-hero p {
-  max-width: 680px;
-  color: var(--soft-text);
-  line-height: 1.7;
+.gallery-hero h1 span {
+  font-size: 0.4em;
+
+  margin: 16px 0;
+
+  color: var(--cyan);
 }
+
+.gallery-description {
+  max-width: 620px;
+
+  color: var(--soft-text);
+
+  line-height: 1.8;
+
+  margin-top: 35px;
+}
+
+
+/* =========================
+   HERO EXPLORE LINK
+========================= */
+
+.gallery-explore {
+  position: absolute;
+
+  bottom: 45px;
+
+  color: #fff8ec;
+  text-decoration: none;
+
+  letter-spacing: 4px;
+
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  opacity: 0;
+
+  cursor: pointer;
+  pointer-events: auto;
+
+  animation:
+    galleryFadeUp 0.5s ease 1s forwards,
+    galleryBob 2.5s ease-in-out infinite 2.2s;
+
+  transition: color 0.3s ease;
+}
+
+.gallery-explore:hover {
+  color: #e7d7b2;
+}
+
+@keyframes galleryFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
+}
+
+@keyframes galleryBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+
+/* =========================
+   GALLERY SECTIONS
+========================= */
 
 .gallery-section {
-  margin: 90px 0;
+  min-height: 100vh;
+
+  padding: 80px 5% 100px;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
+
+/* =========================
+   SECTION HEADINGS
+========================= */
+
 .section-heading {
-  margin-bottom: 30px;
+  width: 100%;
+  max-width: 1250px;
+
+  margin: 0 auto 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 6px;
+
+  position: relative;
+  z-index: 30;
+}
+
+.section-heading p {
+  color: var(--cyan);
+
+  text-transform: uppercase;
+  letter-spacing: 3px;
+
+  font-size: 0.65rem;
+
+  margin: 0;
 }
 
 .section-heading h2 {
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+
   font-family: Georgia, serif;
+  font-weight: 500;
+
+  line-height: 1;
+
+  margin: 0;
 }
 
-.category-grid {
+
+/* =========================
+   GALLERY MOSAIC
+========================= */
+
+.gallery-mosaic {
+  width: 100%;
+  max-width: 1250px;
+
+  margin: 0 auto;
+
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 26px;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  grid-template-rows:
+    repeat(2, 300px);
+
+  gap: 10px;
+
+  position: relative;
+  z-index: 5;
 }
 
-.category-card {
-  background: rgba(3, 18, 32, 0.48);
-  border: 1px solid rgba(94, 231, 255, 0.28);
-  border-radius: 22px;
+
+/* =========================
+   MOSAIC ITEMS
+========================= */
+
+.mosaic-item {
+  position: relative;
+
   overflow: hidden;
 
-  backdrop-filter: blur(22px) saturate(160%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border-radius: 16px;
+
+  background: #020617;
 
   box-shadow:
-    0 0 35px rgba(94, 231, 255, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-
-  transition: 0.35s ease;
+    0 20px 45px
+    rgba(0, 0, 0, 0.3);
 }
 
-.category-card:hover {
-  transform: translateY(-8px);
-  background: rgba(6, 28, 48, 0.62);
-  border-color: rgba(94, 231, 255, 0.65);
 
-  box-shadow:
-    0 0 45px rgba(94, 231, 255, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+/* Animal — wide landscape */
+
+.mosaic-item-1 {
+  grid-column: span 2;
+  grid-row: span 2;
 }
 
-.category-info h3 {
-  color: white;
+
+/* People — tall portrait */
+
+.mosaic-item-2 {
+  grid-column: span 1;
+  grid-row: span 2;
 }
 
-.category-info p {
-  color: #cbd5e1;
+
+/* Car — wide landscape */
+
+.mosaic-item-3 {
+  grid-column: span 1;
+  grid-row: span 1;
 }
 
-.category-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(94, 231, 255, 0.55);
-  box-shadow: 0 0 40px rgba(94, 231, 255, 0.16);
+
+/* Product — more compact */
+
+.mosaic-item-4 {
+  grid-column: span 1;
+  grid-row: span 1;
 }
 
-.category-card img {
+
+  /* =========================
+   GRAPHIC DESIGN: 3 ITEMS
+  ========================= */
+
+  .design-mosaic {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(2, 300px);
+  }
+
+  /* Illustrator — large left block */
+  .design-mosaic .mosaic-item-1 {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  /* Business Design — top-right rectangle */
+  .design-mosaic .mosaic-item-2 {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  /* Photoshop — bottom-right rectangle */
+  .design-mosaic .mosaic-item-3 {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+
+/* =========================
+   MOSAIC IMAGES
+========================= */
+
+.mosaic-item img {
+  position: absolute;
+
+  inset: 0;
+
   width: 100%;
-  height: 330px;
+  height: 100%;
+
   object-fit: cover;
-  display: block;
-  transition: 0.5s ease;
+
+  user-select: none;
+  pointer-events: none;
+
+  transition:
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease;
 }
 
-.category-card:hover img {
+.mosaic-item:hover img {
   transform: scale(1.04);
 }
 
-.category-info {
-  padding: 22px;
+/* =========================
+   MOSAIC OVERLAY
+========================= */
+
+.mosaic-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-in;
+
+  text-align: center;
+
+  padding: 25px;
+
+  /* Dark by default */
+  background: rgba(2, 6, 23, 0.58);
+
+  transition: background 0.5s ease;
 }
 
-.category-info h3 {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
+/* Reveal the image on hover */
+.mosaic-item:hover .mosaic-overlay {
+  background: rgba(2, 6, 23, 0.18);
 }
 
-.category-info p {
-  color: var(--muted-text);
-  line-height: 1.6;
+
+/* =========================
+   MOSAIC TITLE
+========================= */
+
+.mosaic-overlay h3 {
+  font-family: Georgia, serif;
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  font-weight: 500;
+
+  color: white;
+
+  margin: 0;
+
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+
+  opacity: 1;
+
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease;
 }
 
-@media screen and (max-width: 900px) {
-  .category-grid {
+/* Dim title when exploring images */
+.mosaic-item:hover .mosaic-overlay h3 {
+  transform: translateY(-12px);
+  opacity: 0.35;
+}
+
+
+/* =========================
+   MOSAIC TITLE LINE
+========================= */
+
+.mosaic-line {
+  width: 28px;
+  height: 2px;
+
+  margin-top: 16px;
+
+  background: white;
+
+  opacity: 0.8;
+
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease;
+}
+
+.mosaic-item:hover .mosaic-line {
+  transform: translateY(-8px);
+  opacity: 0.25;
+}
+
+
+/* =========================
+   MINI CAROUSEL CONTROLS
+========================= */
+
+.mosaic-controls {
+  position: absolute;
+
+  bottom: 24px;
+
+  left: 50%;
+
+  transform:
+    translate(
+      -50%,
+      12px
+    );
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.mosaic-item:hover
+.mosaic-controls {
+  opacity: 1;
+
+  transform:
+    translate(
+      -50%,
+      0
+    );
+}
+
+
+/* =========================
+   CAROUSEL ARROWS
+========================= */
+
+.mosaic-controls button {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.45);
+
+  border-radius: 50%;
+
+  background:
+    rgba(0, 0, 0, 0.25);
+
+  color: white;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.mosaic-controls button:hover {
+  background:
+    rgba(255, 255, 255, 0.18);
+
+  border-color:
+    rgba(255, 255, 255, 0.8);
+
+  transform:
+    scale(1.08);
+}
+
+
+/* =========================
+   IMAGE COUNT
+========================= */
+
+.mosaic-controls span {
+  color:
+    rgba(255, 255, 255, 0.8);
+
+  font-size: 0.65rem;
+
+  letter-spacing: 2px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   DESIGN SECTION
+========================= */
+
+.design-section {
+  margin-top: 0;
+}
+
+
+/* =========================
+   MOBILE SECTION NAVIGATION
+========================= */
+
+.gallery-mobile-nav {
+  display: none;
+}
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 60px 100px;
+
+  background: rgba(0, 3, 10, 0.92);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  animation: lightboxFadeIn 0.3s ease;
+}
+
+.lightbox-content {
+  position: relative;
+
+  max-width: 85vw;
+  max-height: 88vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  animation:
+    lightboxImageIn
+    0.4s
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox-content img {
+  display: block;
+
+  max-width: 85vw;
+  max-height: 78vh;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 30px 80px
+    rgba(0, 0, 0, 0.65);
+}
+
+
+/* =========================
+   LIGHTBOX INFO
+========================= */
+
+.lightbox-info {
+  margin-top: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+}
+
+.lightbox-info h3 {
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: 1rem;
+
+  font-weight: 400;
+
+  color: white;
+}
+
+.lightbox-info span {
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 0.65rem;
+
+  letter-spacing: 2px;
+}
+
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.lightbox-close {
+  position: absolute;
+
+  top: 30px;
+  right: 38px;
+
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 2.2rem;
+
+  font-weight: 200;
+
+  cursor: pointer;
+
+  opacity: 0.7;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+
+  transform: rotate(90deg);
+}
+
+
+/* =========================
+   LIGHTBOX ARROWS
+========================= */
+
+.lightbox-arrow {
+  position: absolute;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.3);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.05);
+
+  color: white;
+
+  font-size: 1.2rem;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.lightbox-arrow:hover {
+  background:
+    rgba(255, 255, 255, 0.15);
+
+  border-color:
+    rgba(255, 255, 255, 0.7);
+}
+
+.lightbox-arrow-left {
+  left: 35px;
+}
+
+.lightbox-arrow-right {
+  right: 35px;
+}
+
+
+/* =========================
+   VIEW FULL IMAGE
+========================= */
+
+.mosaic-view {
+  position: absolute;
+  bottom: 70px;
+
+  color: white;
+
+  font-size: 0.65rem;
+  font-weight: 500;
+
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+
+  pointer-events: none;
+}
+
+.mosaic-item:hover .mosaic-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mosaic-controls button {
+  cursor: pointer;
+}
+
+
+/* =========================
+   LIGHTBOX ANIMATIONS
+========================= */
+
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightboxImageIn {
+  from {
+    opacity: 0;
+
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   TABLET / MOBILE
+  ========================= */
+
+  @media screen and (max-width: 900px) {
+
+    /* =========================
+      LIGHTBOX
+    ========================= */
+
+    .gallery-lightbox {
+      padding: 70px 20px 80px;
+    }
+
+    .lightbox-content {
+      max-width: 92vw;
+      max-height: 85vh;
+    }
+
+    .lightbox-content img {
+      max-width: 92vw;
+      max-height: 70vh;
+    }
+
+    .lightbox-close {
+      top: 18px;
+      right: 18px;
+    }
+
+    /* Move arrows to bottom on mobile/tablet */
+
+    .lightbox-arrow {
+      width: 40px;
+      height: 40px;
+
+      top: auto;
+      bottom: 20px;
+
+      transform: none;
+    }
+
+    .lightbox-arrow-left {
+      left: 25%;
+    }
+
+    .lightbox-arrow-right {
+      right: 25%;
+    }
+
+    /* No hover-based "View Full Image" on touch screens */
+
+    .mosaic-view {
+      display: none;
+    }
+
+
+    /* =========================
+      HERO
+    ========================= */
+
+    .gallery-hero {
+      min-height: 100vh;
+
+      padding:
+        115px 6%
+        85px;
+    }
+
+    .gallery-hero h1 {
+      font-size:
+        clamp(
+          3rem,
+          14vw,
+          5rem
+        );
+    }
+
+    .gallery-explore {
+      bottom: 30px;
+
+      font-size: 0.7rem;
+
+      letter-spacing: 3px;
+
+      white-space: nowrap;
+    }
+
+
+    /* =========================
+      GALLERY SECTIONS
+    ========================= */
+
+    .gallery-section {
+      min-height: 100vh;
+
+      padding:
+        80px 5%
+        100px;
+
+      justify-content: center;
+    }
+
+
+    /* =========================
+      SECTION HEADINGS
+    ========================= */
+
+    .section-heading {
+      width: 100%;
+
+      margin-bottom: 25px;
+
+      align-items: flex-start;
+
+      text-align: left;
+    }
+
+    .section-heading h2 {
+      font-size:
+        clamp(
+          2rem,
+          9vw,
+          3rem
+        );
+    }
+
+
+    /* =========================
+      PHOTOGRAPHY MOSAIC
+    ========================= */
+
+    .gallery-mosaic {
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      grid-template-rows:
+        repeat(2, 240px);
+
+      gap: 8px;
+    }
+
+    .mosaic-item-1,
+    .mosaic-item-2,
+    .mosaic-item-3,
+    .mosaic-item-4 {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+
+    /* =========================
+      GRAPHIC DESIGN MOSAIC
+      Illustrator on top,
+      Business + Photoshop below
+    ========================= */
+
+    .design-mosaic {
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      grid-template-rows:
+        repeat(2, 240px);
+    }
+
+    /* Illustrator — wide top */
+
+    .design-mosaic .mosaic-item-1 {
+      grid-column: 1 / span 2;
+      grid-row: 1;
+    }
+
+    /* Business Design — bottom left */
+
+    .design-mosaic .mosaic-item-2 {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    /* Photoshop — bottom right */
+
+    .design-mosaic .mosaic-item-3 {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+
+    /* =========================
+      MOSAIC TEXT
+    ========================= */
+
+    .mosaic-overlay h3 {
+      font-size: 1.2rem;
+    }
+
+
+    /* =========================
+      CAROUSEL CONTROLS
+    ========================= */
+
+    .mosaic-controls {
+      opacity: 1;
+
+      bottom: 18px;
+
+      transform:
+        translate(
+          -50%,
+          0
+        );
+    }
+
+    .mosaic-controls button {
+      width: 32px;
+      height: 32px;
+    }
+
+    .mosaic-overlay {
+      background:
+        rgba(2, 6, 23, 0.4);
+    }
+
+
+  /* =========================
+    MOBILE NEXT / BACK LINKS
+    ========================= */
+
+    .gallery-mobile-nav {
+      display: block;
+
+      position: relative;
+
+      bottom: auto;
+      left: auto;
+
+      transform: none;
+
+      width: fit-content;
+
+      margin:
+        32px auto
+        0;
+
+      color: #fff8ec;
+
+      text-decoration: none;
+
+      letter-spacing: 3px;
+
+      font-size: 0.65rem;
+      font-weight: 500;
+
+      opacity: 0.8;
+
+      cursor: pointer;
+
+      z-index: 50;
+
+      white-space: nowrap;
+
+      animation:
+        galleryMobileBob
+        2.5s
+        ease-in-out
+        infinite;
+
+      transition:
+        color 0.3s ease,
+        opacity 0.3s ease;
+    }
+
+    .gallery-mobile-nav:hover {
+      color: #e7d7b2;
+      opacity: 1;
+    }
+
+    @keyframes galleryMobileBob {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(7px);
+      }
+    }
+
+  }
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media screen and (max-width: 600px) {
+
+  .gallery-section {
+    min-height: auto;
+
+    padding:
+      90px 5%
+      110px;
+  }
+
+  .gallery-mosaic {
     grid-template-columns: 1fr;
+
+    grid-template-rows: none;
+
+    gap: 10px;
   }
 
-  .gallery-page {
-    padding: 95px 5% 50px;
+  .mosaic-item {
+    height: 270px;
   }
-}
 
-.category-info span {
-  display: inline-block;
-  margin-top: 14px;
-  color: var(--cyan);
-  font-size: 0.85rem;
-  letter-spacing: 1px;
+  .mosaic-overlay h3 {
+    font-size: 1.25rem;
+  }
+
+  .mosaic-controls {
+    bottom: 16px;
+  }
+
+  /* Slightly larger artwork area
+     on really small screens */
+
+  .lightbox-content img {
+    max-width: 94vw;
+    max-height: 72vh;
+  }
 }

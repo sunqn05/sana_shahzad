@@ -4,12 +4,14 @@ import Navbar from './components/Navbar';
 import Home from './components/pages/Home';
 import Gallery from './components/pages/ArtGallery';
 import Projects from './components/pages/Projects';
-import About from './components/pages/About';
+import About from './components/pages/AboutMe';
+import ScrollToTop from "./components/ScrollToTop";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

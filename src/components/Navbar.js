@@ -9,7 +9,15 @@ function Navbar() {
   const [button, setButton] = useState(true);
 
   const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
+  const closeMobileMenu = () => {
+    setClick(false);
+
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+    });
+    };
 
   const showButton = () => {
     if(window.innerWidth <= 960) {
@@ -31,7 +39,7 @@ function Navbar() {
       <nav className="navbar">
         <div className="navbar-container">
             <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
-                SANA SHAHZAD
+                S.S
             </Link>
             <div 
             className='menu-icon'
@@ -55,6 +63,12 @@ function Navbar() {
                 <li className='nav-item'>
                 <Link to='/projects' className='nav-links' onClick={closeMobileMenu}>
                     Projects
+                </Link>
+                </li>
+
+                <li className="nav-item">
+                <Link to="/about" className="nav-links" onClick={closeMobileMenu}>
+                    About Me
                 </Link>
                 </li>
             </ul>

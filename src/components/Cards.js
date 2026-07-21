@@ -3,21 +3,22 @@ import "./Cards.css";
 
 function Cards() {
   const topImages = [
-    "/images/img-5.jpg",
-    "/images/img-4.jpg",
-    "/images/img-3.jpg",
-    "/images/img-home.jpg",
-    "/images/img-5.jpg",
-    "/images/img-4.jpg",
+    "/images/me/me-1.jpg",
+    "/images/me/me-2.jpg",
+    "/images/me/me-3.jpg",
+    "/images/me/me-4.jpeg",
+    "/images/me/me-5.jpg",
+    "/images/me/me-6.jpg",
+    "/images/me/me-14.jpg",
   ];
 
   const bottomImages = [
-    "/images/img-home.jpg",
-    "/images/img-3.jpg",
-    "/images/img-4.jpg",
-    "/images/img-5.jpg",
-    "/images/img-home.jpg",
-    "/images/img-3.jpg",
+    "/images/me/me-7.jpeg",
+    "/images/me/me-8.jpeg",
+    "/images/me/me-9.jpg",
+    "/images/me/me-10.jpg",
+    "/images/me/me-11.jpg",
+    "/images/me/me-12.jpg",
   ];
 
   const links = [
@@ -28,9 +29,8 @@ function Cards() {
   ];
 
   return (
-    <section className="cards-section" id="work">
-      <div className="archive-heading">
-        <p>Dive In</p>
+    <section className="cards-section" id="archive">
+        <div className="archive-heading">
         <h1>Creative Archive</h1>
       </div>
 

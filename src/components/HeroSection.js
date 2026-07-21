@@ -3,14 +3,16 @@ import { Button } from './Button';
 import './HeroSection.css';
 import React, { useState } from 'react';
 import LoadingScreen from './LoadingScreen';
+import CircularText from './CircularText';
 import { ReactTyped } from 'react-typed';
 
 function HeroSection() {
   const [videoReady, setVideoReady] = useState(false);
 
   const scrollToWork = () => {
-    document.getElementById('work').scrollIntoView({
+    document.getElementById('archive')?.scrollIntoView({
       behavior: 'smooth',
+      block: 'start',
     });
   };
 
@@ -19,6 +21,32 @@ function HeroSection() {
       <LoadingScreen fadeOut={videoReady} />
 
       <div className="hero-container">
+        <button
+          className="hero-profile-contact"
+          onClick={() => {
+            document.getElementById("contact")?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }}
+          aria-label="Scroll to contact information"
+        >
+          <div className="hero-profile-circle">
+            <CircularText
+              text="LETS CONNECT • LETS CONNECT • "
+              onHover="speedUp"
+              spinDuration={18}
+              className="hero-circular-text"
+            />
+
+            <img
+              src="/images/me/me-13.jpg"
+              alt="Sana Shahzad"
+              className="hero-profile-photo"
+            />
+          </div>
+        </button>
+        
         <video
           src="/videos/video-wave.mp4"
           poster="/images/video-poster.png"
@@ -38,9 +66,10 @@ function HeroSection() {
         <ReactTyped
           className="typed-text"
           strings={[
+            'Game Developer',
             'Graphic Designer',
             'Photographer',
-            'Coder and Developer',
+            'Software Developer',
             'Creative Thinker',
             'Exploring Digital Depths',
           ]}

@@ -54,8 +54,49 @@
 
 .scroll {
   position: absolute;
-  bottom: 50px;
+  bottom: 45px;
+
+  color: #fff8ec;
+  text-decoration: none;
+
   letter-spacing: 4px;
-  font-size: 0.8rem;
-  opacity: 0.8;
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  opacity: 0;
+  cursor: pointer;
+
+  pointer-events: auto;
+
+  animation:
+    fadeUp 1s ease 1.2s forwards,
+    bob 2.5s ease-in-out infinite 2.2s;
+
+  transition: color .3s ease;
+}
+
+.scroll:hover {
+  color: #E7D7B2;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: .8;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bob {
+  0%,100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
 }

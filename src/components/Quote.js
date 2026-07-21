@@ -37,9 +37,9 @@ function Quote() {
           — Quran 20:114
         </span>
 
-        <div className="scroll">
+        <a href="#archive" className="scroll">
           ↓ Scroll to Explore
-        </div>
+        </a>
 
       </div>
 
