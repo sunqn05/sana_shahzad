@@ -799,19 +799,33 @@ text, this is already styled for it.
 
 
   .hero-container {
+    width: 100vw;
     min-height: 720px;
+
+    overflow: hidden;
   }
 
-
   .hero-container video {
-    object-position:
-      62%
-      center;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 105%;
+    height: 105%;
+
+    max-width: none;
+
+    object-fit: cover;
+    object-position: 62% center;
+
+    transform:
+      translate(-50%, -50%);
 
     filter:
-      brightness(0.5)
-      contrast(1.08)
-      saturate(0.68);
+      brightness(0.65)
+      contrast(1.05)
+      saturate(0.78);
   }
 
 

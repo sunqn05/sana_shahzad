@@ -1000,28 +1000,6 @@
    MOBILE
 ========================================= */
 
-@media screen and (max-width: 768px) {
-  .ocean-intro-background {
-    background:
-      radial-gradient(
-        ellipse at 50% 30%,
-        rgba(30, 90, 120, 0.22),
-        transparent 55%
-      ),
-      #020711;
-  }
-
-  .jellyfish-wrapper {
-  width: 350px;
-}
-}
-
-@media screen and (max-width: 480px) {
-  .jellyfish-wrapper {
-    width: 230px;
-  }
-}
-
 @media screen and (max-width: 700px) {
   
 
@@ -1142,8 +1120,8 @@
   .jellyfish-wrapper {
     width:
       min(
-        430px,
-        100vw
+        260px,
+        68vw
       );
   }
 
