@@ -95,7 +95,7 @@ function AboutMe() {
   const selectTrack = (track) => {
     setCurrent(track);
 
-    if (window.innerWidth <= 850) {
+    if (window.innerWidth <= 1250) {
       setTimeout(() => {
         nowPlayingRef.current?.scrollIntoView({
           behavior: "smooth",
