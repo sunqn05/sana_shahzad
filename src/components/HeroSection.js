@@ -24,24 +24,31 @@ function HeroSection() {
   };
 
   useEffect(() => {
-  const video =
-    videoRef.current;
+    const video = videoRef.current;
 
-  if (!video) return;
+    if (!video) return;
 
-  const tryPlay = async () => {
-    try {
-      await video.play();
-    } catch (error) {
-      console.log(
-        "Video autoplay waiting:",
-        error
-      );
-    }
-  };
+    const tryPlay = async () => {
+      try {
+        await video.play();
+      } catch (error) {
+        console.log(
+          "Video autoplay waiting:",
+          error
+        );
+      }
+    };
 
-  tryPlay();
-}, []);
+    tryPlay();
+
+    const fallbackTimer = setTimeout(() => {
+      setVideoReady(true);
+    }, 5000);
+
+    return () => {
+      clearTimeout(fallbackTimer);
+    };
+  }, []);
 
   return (
     <>
