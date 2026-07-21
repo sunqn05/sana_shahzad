@@ -133,26 +133,54 @@
 }
 
 
-/* SANA REVEALS FIRST */
+.hero-name-first,
+.hero-name-last {
+  display: block;
 
+  width: fit-content;
+
+  clip-path: inset(
+    0 100% 0 0
+  );
+
+  opacity: 0;
+
+  will-change:
+    clip-path,
+    opacity;
+}
+
+
+/* Start animations only once loading screen is done */
+
+.hero-name.hero-ready
 .hero-name-first {
   animation:
     heroRevealLeftToRight
-    1.0s
-    cubic-bezier(0.77, 0, 0.18, 1)
-    0.8s
+    1s
+    cubic-bezier(
+      0.77,
+      0,
+      0.18,
+      1
+    )
+    0.2s
     forwards;
 }
 
 
-/* SHAHZAD REVEALS SECOND */
-
+.hero-name.hero-ready
 .hero-name-last {
   animation:
     heroRevealLeftToRight
     1.2s
-    cubic-bezier(0.77, 0, 0.18, 1)
-    1.30s
+    cubic-bezier(
+      0.77,
+      0,
+      0.18,
+      1
+    )
+    0.65s
     forwards;
 }
 

@@ -136,7 +136,11 @@ function HeroSection() {
 
         <div className="hero-overlay"></div>
 
-        <h1 className="hero-name">
+        <h1
+          className={`hero-name ${
+            videoReady ? "hero-ready" : ""
+          }`}
+        >
           <span className="hero-name-first">SANA</span>
           <span className="hero-name-last">SHAHZAD</span>
         </h1>
