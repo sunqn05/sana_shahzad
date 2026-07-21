@@ -2,62 +2,82 @@ import { Link } from "react-router-dom";
 import "./Cards.css";
 
 function Cards() {
-  const topImages = [
-    "/images/me/me-1.jpg",
-    "/images/me/me-2.jpg",
-    "/images/me/me-3.jpg",
-    "/images/me/me-4.jpeg",
-    "/images/me/me-5.jpg",
-    "/images/me/me-6.jpg",
-    "/images/me/me-14.jpg",
-  ];
-
-  const bottomImages = [
-    "/images/me/me-7.jpeg",
-    "/images/me/me-8.jpeg",
-    "/images/me/me-9.jpg",
-    "/images/me/me-10.jpg",
-    "/images/me/me-11.jpg",
-    "/images/me/me-12.jpg",
-  ];
-
   const links = [
-    { title: "Photography", path: "/gallery#photography" },
-    { title: "Graphic Design", path: "/gallery#design" },
-    { title: "Projects", path: "/projects" },
-    { title: "About Me", path: "/about" },
+    {
+      number: "01",
+      title: "Photography",
+      path: "/gallery#photography",
+      image: "/images/me/me-1.jpg",
+      text: "Explore Collection",
+    },
+    {
+      number: "02",
+      title: "Graphic Design",
+      path: "/gallery#design",
+      image: "/images/me/me-3.jpg",
+      text: "Explore Collection",
+    },
+    {
+      number: "03",
+      title: "Projects",
+      path: "/projects",
+      image: "/images/me/me-5.jpg",
+      text: "Explore Projects",
+    },
+    {
+      number: "04",
+      title: "About Me",
+      path: "/about",
+      image: "/images/me/me-7.jpeg",
+      text: "Discover More",
+    },
   ];
 
   return (
-    <section className="cards-section" id="archive">
-        <div className="archive-heading">
-        <h1>Creative Archive</h1>
-      </div>
-
-      <div className="flow-row flow-row-left">
-        <div className="flow-track">
-        {[...topImages, ...topImages, ...topImages].map((img, index) => (
-          <img src={img} alt="" key={`top-${index}`} />
-        ))}
+    <section className="cards-section">
+      <div className="work-showcase">
+        <div className="work-heading">
+          <span>02 — EXPLORE</span>
+          <h2>Explore My Work</h2>
         </div>
-      </div>
 
-      <div className="flow-row flow-row-right">
-        <div className="flow-track">
-          {[...bottomImages, ...bottomImages, ...bottomImages].map((img, index) => (
-            <img src={img} alt="" key={`bottom-${index}`} />
+        <div className="work-panels">
+          {links.map((item) => (
+            <Link
+              to={item.path}
+              className="work-panel"
+              key={item.title}
+            >
+              <img
+                src={item.image}
+                alt=""
+                className="work-panel-image"
+              />
+
+              <div className="work-panel-overlay" />
+
+              <span className="work-panel-number">
+                {item.number}
+              </span>
+
+              <div className="work-panel-content">
+                <h3>{item.title}</h3>
+
+                <p>
+                  {item.text}
+                  <span className="work-arrow">→</span>
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
-      </div>
 
-      <div className="archive-links">
-        {links.map((item, index) => (
-          <Link to={item.path} className="archive-link" key={item.title}>
-            <span>0{index + 1}</span>
-            <h2>{item.title}</h2>
-            <p>Explore →</p>
-          </Link>
-        ))}
+        <div className="work-pagination">
+          <span className="active" />
+          <span />
+          <span />
+          <span />
+        </div>
       </div>
     </section>
   );

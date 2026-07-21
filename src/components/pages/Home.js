@@ -1,10 +1,10 @@
 import React from 'react'
 import '../../App.css'
 import HeroSection from '../HeroSection'
-import Quote from "../Quote";
 import OceanIntro from "../OceanIntro";
 import SkillsLoop from "../SkillsLoop";
-import Cards from '../Cards';
+import Cards from "../Cards";
+import Archive from "../Archive";
 import Footer from '../Footer';
 
 function Home () {
@@ -13,8 +13,8 @@ function Home () {
         <HeroSection/>
         <SkillsLoop />
         <OceanIntro />
-        <Quote />
         <Cards />
+        <Archive />
         <Footer />
         </>
     )

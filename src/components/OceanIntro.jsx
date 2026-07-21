@@ -4,6 +4,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import LiquidEther from "./LiquidEther";
 import { Link } from "react-router-dom";
 import "./OceanIntro.css";
 
@@ -131,6 +132,23 @@ function ScrambleWord({
 
 
 function OceanIntro() {
+
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth <= 768
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const sectionRef =
     useRef(null);
 
@@ -177,22 +195,27 @@ function OceanIntro() {
       ref={sectionRef}
     >
 
-      {/* BACKGROUND */}
+      {/* LIQUID BACKGROUND */}
 
       <div className="ocean-intro-background">
 
-        <video
-          className="ocean-intro-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source
-            src="/videos/video-wave.mp4"
-            type="video/mp4"
+        {!isMobile && (
+          <LiquidEther
+            colors={[
+              "#001B33",
+              "#0A4D68",
+              "#3FA7D6",
+              "#E7D7B2"
+            ]}
+            mouseForce={12}
+            cursorSize={220}
+            isViscous
+            viscous={45}
+            autoDemo
+            autoSpeed={0.25}
+            autoIntensity={1.2}
           />
-        </video>
+        )}
 
         <div className="ocean-intro-overlay" />
 
@@ -219,11 +242,9 @@ function OceanIntro() {
 
 
       <div className="ocean-intro-inner">
+        {/* TOP TEXT */}
 
-
-        {/* TEXT */}
-
-        <div className="ocean-intro-copy">
+        <div className="ocean-intro-copy ocean-intro-copy-top">
 
           <div className="intro-eyebrow">
 
@@ -246,9 +267,7 @@ function OceanIntro() {
 
               <ScrambleWord
                 word="code"
-                autoTrigger={
-                  introVisible
-                }
+                autoTrigger={introVisible}
                 delay={0}
               />
 
@@ -256,62 +275,13 @@ function OceanIntro() {
 
               <ScrambleWord
                 word="creativity"
-                autoTrigger={
-                  introVisible
-                }
+                autoTrigger={introVisible}
                 delay={200}
               />
 
             </em>
 
           </h2>
-
-
-          <p className="ocean-intro-description">
-
-            I'm Sana, a Computer
-            Science student and
-            creative developer
-            exploring the space
-            between technology,
-            design, photography,
-            and interactive
-            experiences.
-
-          </p>
-
-
-          <div className="ocean-intro-fields">
-
-            <span>
-              Development
-            </span>
-
-            <span>
-              Design
-            </span>
-
-            <span>
-              Photography
-            </span>
-
-          </div>
-
-
-          <Link
-            to="/about"
-            className="ocean-intro-link"
-          >
-
-            <span>
-              Learn more about me
-            </span>
-
-            <span className="intro-link-arrow">
-              ↗
-            </span>
-
-          </Link>
 
         </div>
 
@@ -322,7 +292,6 @@ function OceanIntro() {
 
           <div className="jellyfish-glow" />
 
-
           <div
             className="
               jellyfish-ring
@@ -330,14 +299,12 @@ function OceanIntro() {
             "
           />
 
-
           <div
             className="
               jellyfish-ring
               jellyfish-ring-two
             "
           />
-
 
           <div className="jellyfish-wrapper">
 
@@ -396,6 +363,55 @@ function OceanIntro() {
             PHOTOGRAPHY
 
           </div>
+
+        </div>
+
+
+        {/* BOTTOM TEXT */}
+
+        <div className="ocean-intro-copy ocean-intro-copy-bottom">
+
+          <p className="ocean-intro-description">
+
+            I'm Sana, a Computer Science student and
+            creative developer exploring the space
+            between technology, design, photography,
+            and interactive experiences.
+
+          </p>
+
+
+          <div className="ocean-intro-fields">
+
+            <span>
+              Development
+            </span>
+
+            <span>
+              Design
+            </span>
+
+            <span>
+              Photography
+            </span>
+
+          </div>
+
+
+          <Link
+            to="/about"
+            className="ocean-intro-link"
+          >
+
+            <span>
+              Learn more about me
+            </span>
+
+            <span className="intro-link-arrow">
+              ↗
+            </span>
+
+          </Link>
 
         </div>
 

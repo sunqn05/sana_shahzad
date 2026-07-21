@@ -6,6 +6,7 @@
   position: relative;
 
   min-height: 100vh;
+  width: 100%;
 
   display: flex;
   align-items: center;
@@ -15,8 +16,118 @@
   background: #020711;
 
   color: #f4efe6;
+
+  /* IMPORTANT: contains LiquidEther inside this section */
+  isolation: isolate;
+  z-index: 0;
 }
 
+
+/* =========================================
+   LIQUID ETHER BACKGROUND
+========================================= */
+
+.ocean-intro-background {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  z-index: -1;
+  pointer-events: auto;
+}
+
+.ocean-intro-background .liquid-ether-container {
+  position: absolute !important;
+  inset: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  z-index: 0 !important;
+}
+
+.ocean-intro-background .liquid-ether-container canvas {
+  position: absolute !important;
+  inset: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  z-index: 0 !important;
+}
+
+
+/* =========================================
+   BACKGROUND OVERLAY
+========================================= */
+
+.ocean-intro-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    /* subtle warm glow behind whale */
+    radial-gradient(
+      ellipse at 72% 47%,
+      rgba(218, 188, 112, 0.06) 0%,
+      rgba(184, 151, 79, 0.025) 25%,
+      transparent 58%
+    ),
+
+    /* very subtle text readability on left */
+    linear-gradient(
+      90deg,
+      rgba(2, 7, 17, 0.48) 0%,
+      rgba(2, 7, 17, 0.30) 38%,
+      rgba(2, 7, 17, 0.08) 70%,
+      rgba(2, 7, 17, 0.12) 100%
+    ),
+
+    /* soft section blending */
+    linear-gradient(
+      180deg,
+      rgba(2, 7, 17, 0.25) 0%,
+      transparent 40%,
+      rgba(2, 7, 17, 0.35) 100%
+    );
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.ocean-intro-inner {
+  position: relative;
+
+  z-index: 3;
+
+  width: min(
+    1320px,
+    calc(100% - 100px)
+  );
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(420px, 1.05fr);
+
+  align-items: center;
+
+  gap: 80px;
+
+  padding: 110px 0;
+}
 
 /* =========================================
    BACKGROUND
@@ -72,45 +183,6 @@
 
 }
 
-
-/* =========================================
-   BACKGROUND OVERLAY
-========================================= */
-
-.ocean-intro-overlay {
-  position: absolute;
-  inset: 0;
-
-  background:
-
-    /* warm atmospheric glow behind whale */
-    radial-gradient(
-      ellipse at 72% 47%,
-      rgba(218, 188, 112, 0.13) 0%,
-      rgba(184, 151, 79, 0.07) 20%,
-      rgba(90, 78, 55, 0.025) 38%,
-      transparent 58%
-    ),
-
-    /* keeps text readable on left */
-    linear-gradient(
-      90deg,
-      rgba(2, 7, 17, 0.98) 0%,
-      rgba(2, 7, 17, 0.92) 35%,
-      rgba(2, 7, 17, 0.68) 62%,
-      rgba(2, 7, 17, 0.78) 100%
-    ),
-
-    /* blends section vertically */
-    linear-gradient(
-      180deg,
-      rgba(2, 7, 17, 0.88) 0%,
-      rgba(2, 7, 17, 0.38) 48%,
-      rgba(2, 7, 17, 0.94) 100%
-    );
-}
-
-
 /* =========================================
    INNER LAYOUT
 ========================================= */
@@ -154,6 +226,30 @@
   z-index: 5;
 }
 
+/* Keep the two text sections together on desktop */
+
+.ocean-intro-copy-top {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+
+  /* Move title section upward */
+  transform: translateY(-70px);
+}
+
+.ocean-intro-copy-bottom {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+
+  /* Keeps description below title but moves overall content upward */
+  margin-top: 400px;
+}
+
+.jellyfish-scene {
+  grid-column: 2;
+  grid-row: 1;
+}
 
 .intro-eyebrow {
   display: flex;
@@ -890,7 +986,20 @@
    MOBILE
 ========================================= */
 
+@media screen and (max-width: 768px) {
+  .ocean-intro-background {
+    background:
+      radial-gradient(
+        ellipse at 50% 30%,
+        rgba(30, 90, 120, 0.22),
+        transparent 55%
+      ),
+      #020711;
+  }
+}
+
 @media screen and (max-width: 700px) {
+  
 
   .ocean-intro {
     min-height: auto;
@@ -974,16 +1083,37 @@
 
   /* WHALE FIRST ON MOBILE */
 
-  .jellyfish-scene {
-    order: -1;
+  /* =========================================
+   MOBILE INTRO ORDER
 
+   Title
+   ↓
+   Whale
+   ↓
+   Description
+========================================= */
+
+  .ocean-intro-copy-top {
+    order: 1;
     width: 100%;
-
-    height: 390px;
-
-    margin-bottom: 10px;
   }
 
+  .jellyfish-scene {
+    order: 2;
+
+    width: 100%;
+    height: 390px;
+
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+
+  .ocean-intro-copy-bottom {
+    order: 3;
+
+    width: 100%;
+    margin-top: 30px;
+  }
 
   .jellyfish-wrapper {
     width:

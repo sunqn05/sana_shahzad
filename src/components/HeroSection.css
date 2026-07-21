@@ -1,17 +1,25 @@
+/* =========================================
+   HERO
+========================================= */
+
 .hero-container {
-  height: 100vh;
-  width: 100%;
   position: relative;
+
+  width: 100%;
+  height: 100vh;
+  min-height: 720px;
+
   overflow: hidden;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  color: #f5efe4;
 
-  text-align: center;
-  color: white;
+  background: #03070d;
 }
+
+
+/* =========================================
+   BACKGROUND VIDEO
+========================================= */
 
 .hero-container video {
   position: absolute;
@@ -21,183 +29,901 @@
   height: 100%;
 
   object-fit: cover;
+  object-position: center;
 
-  transform: scale(1.02);
-  filter: brightness(0.72) contrast(1.08) saturate(1.05);
+  transform: scale(1.03);
 
-  z-index: -3;
+  filter:
+    brightness(0.58)
+    contrast(1.08)
+    saturate(0.72);
+
+  z-index: 0;
 }
+
+/* =========================================
+   LIGHT CINEMATIC OVERLAY
+========================================= */
 
 .hero-overlay {
   position: absolute;
   inset: 0;
 
+  z-index: 1;
+
+  pointer-events: none;
+
   background:
-    radial-gradient(circle at center, rgba(94, 231, 255, 0.08), transparent 40%),
-    rgba(0, 0, 0, 0.22);
+    /* small focused shadow behind text */
+    radial-gradient(
+      ellipse at 18% 52%,
+      rgba(2, 7, 15, 0.52) 0%,
+      rgba(2, 7, 15, 0.28) 28%,
+      rgba(2, 7, 15, 0.08) 48%,
+      transparent 67%
+    ),
 
-  z-index: -2;
+    /* very subtle cinematic edge treatment */
+    linear-gradient(
+      180deg,
+      rgba(2, 7, 15, 0.18) 0%,
+      transparent 25%,
+      transparent 75%,
+      rgba(2, 7, 15, 0.22) 100%
+    );
 }
 
-.hero-container h1 {
-  font-size: clamp(3.0rem, 8vw, 5rem);
-  font-family: Georgia, serif;
-  letter-spacing: 10px;
-  color: #fffaf0;
-  margin-bottom: 22px;
+/* =========================================
+   HERO NAME
+========================================= */
 
+.hero-name {
+  position: absolute;
+
+  left: clamp(34px, 5vw, 90px);
+  top: 50%;
+
+  z-index: 3;
+
+  width: min(650px, 48vw);
+
+  margin: 0;
+
+  transform: translateY(-56%);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(4.2rem, 7vw, 7.2rem);
+
+  line-height: 0.88;
+
+  font-weight: 400;
+
+  letter-spacing: 0.045em;
+
+  color: #fff9ed;
+
+  text-align: left;
+}
+
+
+/* =========================================
+   NAME REVEAL
+========================================= */
+
+.hero-name-first,
+.hero-name-last {
+  display: block;
+
+  width: fit-content;
+
+  /* Starts completely hidden */
+  clip-path: inset(
+    0 100% 0 0
+  );
+
+  opacity: 0;
+
+  will-change:
+    clip-path,
+    opacity;
+}
+
+
+/* SANA REVEALS FIRST */
+
+.hero-name-first {
+  animation:
+    heroRevealLeftToRight
+    1.0s
+    cubic-bezier(0.77, 0, 0.18, 1)
+    0.8s
+    forwards;
+}
+
+
+/* SHAHZAD REVEALS SECOND */
+
+.hero-name-last {
+  animation:
+    heroRevealLeftToRight
+    1.2s
+    cubic-bezier(0.77, 0, 0.18, 1)
+    1.30s
+    forwards;
+}
+
+
+/* =========================================
+   LEFT → RIGHT REVEAL
+========================================= */
+
+@keyframes heroRevealLeftToRight {
+
+  0% {
+    opacity: 1;
+
+    clip-path: inset(
+      0 100% 0 0
+    );
+  }
+
+  100% {
+    opacity: 1;
+
+    clip-path: inset(
+      0 0 0 0
+    );
+  }
 
 }
 
-.typed-text {
-  min-height: 42px;
-  font-size: clamp(1.1rem, 2.3vw, 1.8rem);
-  letter-spacing: 4px;
-  color: #e8faff;
+/* =========================================
+   EDITORIAL HERO DETAILS
+========================================= */
+
+.hero-editorial {
+  position: absolute;
+
+  top: 50%;
+
+  z-index: 3;
+
+  transform: translateY(-50%);
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 16px;
+
+  pointer-events: none;
 }
 
-.hero-btns {
-  margin-top: 38px;
-}
-.hero-btns .btn {
-  border: 1px solid rgba(231, 215, 178, 0.45);
-  color: #fff;
-  background: rgba(255,255,255,.04);
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+/* =========================================
+   LEFT + RIGHT SIDE
+========================================= */
 
-  transition: all .35s ease;
+.hero-editorial-left {
+  left: 35px;
 }
 
-.hero-btns .btn:hover {
-  border-color: var(--sun-gold);
-  color: var(--sun-gold);
-
-  background: rgba(231,215,178,.08);
-
-  box-shadow:
-      0 0 18px rgba(231,215,178,.18);
+.hero-editorial-right {
+  right: 35px;
 }
+
+
+/* =========================================
+   VERTICAL LINES
+========================================= */
+
+.editorial-line {
+  display: block;
+
+  width: 1px;
+  height: 75px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(227, 201, 139, 0.55),
+      transparent
+    );
+}
+
+
+/* =========================================
+   STAR
+========================================= */
+
+.editorial-star {
+  color: #d9bd7b;
+
+  font-size: 0.85rem;
+
+  line-height: 1;
+
+  opacity: 0.85;
+
+  text-shadow:
+    0 0 10px
+    rgba(227, 201, 139, 0.2);
+}
+
+
+/* =========================================
+   BOTTOM METADATA
+========================================= */
+
+.hero-editorial-bottom {
+  position: absolute;
+
+  left: 50%;
+  bottom: 24px;
+
+  z-index: 3;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  color:
+    rgba(
+      227,
+      201,
+      139,
+      0.6
+    );
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 0.52rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.32em;
+
+  pointer-events: none;
+}
+
+.editorial-dot {
+  font-size: 0.4rem;
+
+  opacity: 0.5;
+}
+
+
+/* =========================================
+   SUBTLE ENTRANCE
+========================================= */
+
+.hero-editorial-left,
+.hero-editorial-right,
+.hero-editorial-bottom {
+  opacity: 0;
+
+  animation:
+    editorialFadeIn
+    1s
+    ease
+    2.3s
+    forwards;
+}
+
+
+@keyframes editorialFadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
 
 @media screen and (max-width: 768px) {
-  .hero-container h1 {
-    letter-spacing: 4px;
+
+  .hero-editorial-left,
+  .hero-editorial-right {
+    display: none;
   }
 
-  .typed-text {
-    letter-spacing: 2px;
+  .hero-editorial-bottom {
+    left: 28px;
+    bottom: 22px;
+
+    transform: none;
+
+    gap: 8px;
+
+    font-size: 0.42rem;
+
+    letter-spacing: 0.2em;
+  }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media screen and (max-width: 768px) {
+
+  /*
+    Hide perimeter decorations on mobile
+    so they don't overcrowd the hero.
+  */
+
+  .hero-editorial-left,
+  .hero-editorial-right {
+    display: none;
+  }
+
+  .hero-editorial-bottom {
+    left: 28px;
+    bottom: 22px;
+
+    transform: none;
+
+    gap: 8px;
+
+    font-size: 0.42rem;
+
+    letter-spacing: 0.2em;
   }
 }
-/* CIRCULAR CONTACT PROFILE */
+
+/* =========================================
+   TYPED TEXT
+========================================= */
+
+.typed-text {
+  position: absolute;
+
+  left: clamp(38px, 6.2vw, 114px);
+  top: calc(50% + 125px);
+
+  z-index: 3;
+
+  min-height: 24px;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:
+    clamp(
+      0.62rem,
+      0.9vw,
+      0.8rem
+    );
+
+  font-weight: 500;
+
+  letter-spacing: 0.34em;
+
+  text-transform: uppercase;
+
+  color: #d9bd7b;
+
+  opacity: 0;
+
+  transform: translateY(18px);
+
+  animation:
+    heroFadeUp
+    0.9s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    1.05s
+    forwards;
+}
+
+
+/* =========================================
+   HERO BUTTON
+========================================= */
+
+.hero-btns {
+  position: absolute;
+
+  left: clamp(38px, 6.2vw, 114px);
+  top: calc(50% + 205px);
+
+  z-index: 3;
+
+  margin: 0;
+
+  opacity: 0;
+
+  transform: translateY(18px);
+
+  animation:
+    heroFadeUp
+    0.9s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    1.3s
+    forwards;
+}
+
+
+.hero-btns .btn {
+  min-width: 165px;
+
+  padding:
+    14px
+    20px;
+
+  border:
+    1px solid
+    rgba(221, 193, 128, 0.4);
+
+  border-radius: 0;
+
+  background:
+    rgba(2, 7, 15, 0.25);
+
+  backdrop-filter:
+    blur(8px);
+
+  -webkit-backdrop-filter:
+    blur(8px);
+
+  font-size: 0.7rem;
+
+  letter-spacing: 0.16em;
+
+  color: #f5efe4;
+
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+
+.hero-btns .btn:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(221, 193, 128, 0.85);
+
+  color: #e2c889;
+
+  background:
+    rgba(221, 193, 128, 0.06);
+}
+
+
+/* =========================================
+   CONTACT CIRCLE
+========================================= */
 
 .hero-profile-contact {
   position: absolute;
-  right: 45px;
-  bottom: 35px;
-  z-index: 5;
 
-  width: 130px;
-  height: 130px;
+  right: clamp(28px, 5vw, 90px);
+  bottom: clamp(28px, 5vw, 70px);
+
+  z-index: 4;
+
+  width: 118px;
+  height: 118px;
 
   padding: 0;
+
   border: none;
+
   background: transparent;
 
   cursor: pointer;
+
+  opacity: 0;
+
+  transform:
+    translateY(20px)
+    scale(0.92);
+
+  animation:
+    heroProfileEnter
+    1s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    1.55s
+    forwards;
 }
+
 
 .hero-profile-circle {
   position: relative;
 
-  width: 130px;
-  height: 130px;
+  width: 118px;
+  height: 118px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 }
 
+
 .hero-circular-text {
   position: absolute !important;
-  top: 0;
-  left: 0;
 
-  width: 130px !important;
-  height: 130px !important;
+  inset: 0;
+
+  width: 118px !important;
+  height: 118px !important;
 
   margin: 0 !important;
 
-  color: #f4e4b0 !important;
+  color: #dec786 !important;
 
-  font-family: Georgia, serif;
+  font-family:
+    Georgia,
+    serif;
+
   font-weight: 500 !important;
 }
 
-.hero-circular-text span {
-  font-size: 10px !important;
-  letter-spacing: 1px;
 
-  color: #f4e4b0;
+.hero-circular-text span {
+  font-size: 8px !important;
+
+  letter-spacing: 1.5px;
+
+  color: #dec786;
 
   text-shadow:
-    0 0 6px rgba(226, 194, 118, 0.25);
+    0 0 8px
+    rgba(226, 194, 118, 0.2);
 }
+
 
 .hero-profile-photo {
   position: absolute;
+
   z-index: 2;
 
-  width: 78px;
-  height: 78px;
+  width: 62px;
+  height: 62px;
 
   object-fit: cover;
-  object-position: center;
 
   border-radius: 50%;
 
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border:
+    1px solid
+    rgba(225, 202, 146, 0.48);
+
+  filter:
+    saturate(0.78)
+    brightness(0.9);
 
   box-shadow:
-    0 0 18px rgba(255, 255, 255, 0.1),
-    0 0 30px rgba(226, 194, 118, 0.12);
+    0 0 18px
+    rgba(0, 0, 0, 0.32);
 
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
 
-.hero-profile-contact:hover .hero-profile-photo {
-  transform: scale(1.06);
+
+.hero-profile-contact:hover
+.hero-profile-photo {
+  transform:
+    scale(1.06);
 
   box-shadow:
-    0 0 22px rgba(255, 255, 255, 0.18),
-    0 0 38px rgba(226, 194, 118, 0.2);
+    0 0 25px
+    rgba(226, 194, 118, 0.18);
 }
 
-/* MOBILE */
+
+/* =========================================
+   OPTIONAL SMALL DESCRIPTION
+========================================= */
+
+/*
+If you later add a paragraph under the typed
+text, this is already styled for it.
+*/
+
+.hero-description {
+  position: absolute;
+
+  left: clamp(38px, 6.2vw, 114px);
+  top: calc(50% + 155px);
+
+  z-index: 3;
+
+  width: min(340px, 32vw);
+
+  margin: 0;
+
+  font-size: 0.85rem;
+
+  line-height: 1.7;
+
+  color:
+    rgba(245, 239, 228, 0.7);
+}
+
+
+/* =========================================
+   ENTRANCE ANIMATIONS
+========================================= */
+
+@keyframes heroTitleEnter {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(
+        calc(-56% + 45px)
+      );
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(-56%);
+  }
+
+}
+
+
+@keyframes heroFadeUp {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+@keyframes heroProfileEnter {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(20px)
+      scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media screen and (max-width: 1000px) {
+
+  .hero-container h1 {
+    width: 60vw;
+
+    font-size:
+      clamp(
+        4rem,
+        8vw,
+        6rem
+      );
+  }
+
+
+  .typed-text {
+    top:
+      calc(
+        50% + 110px
+      );
+  }
+
+
+  .hero-btns {
+    top:
+      calc(
+        50% + 185px
+      );
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
 
 @media screen and (max-width: 768px) {
-  .hero-profile-contact {
-    right: 18px;
-    bottom: 20px;
 
-    width: 100px;
-    height: 100px;
+  .hero-container {
+    min-height: 720px;
   }
+
+
+  .hero-container video {
+    object-position:
+      62%
+      center;
+
+    filter:
+      brightness(0.5)
+      contrast(1.08)
+      saturate(0.68);
+  }
+
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(2, 7, 15, 0.94),
+        rgba(2, 7, 15, 0.58)
+      ),
+
+      linear-gradient(
+        180deg,
+        rgba(2, 7, 15, 0.2),
+        rgba(2, 7, 15, 0.65)
+      );
+  }
+
+
+  .hero-container h1 {
+    left: 28px;
+
+    top: 47%;
+
+    width:
+      calc(
+        100% - 56px
+      );
+
+    font-size:
+      clamp(
+        3.4rem,
+        15vw,
+        5rem
+      );
+
+    line-height: 0.92;
+
+    letter-spacing: 0.02em;
+
+    transform:
+      translateY(-50%);
+  }
+
+
+  .typed-text {
+    left: 30px;
+
+    top:
+      calc(
+        47% + 105px
+      );
+
+    max-width:
+      calc(
+        100% - 60px
+      );
+
+    font-size: 0.58rem;
+
+    letter-spacing: 0.25em;
+  }
+
+
+  .hero-btns {
+    left: 30px;
+
+    top:
+      calc(
+        47% + 175px
+      );
+  }
+
+
+  .hero-btns .btn {
+    min-width: 145px;
+
+    padding:
+      12px
+      16px;
+
+    font-size: 0.62rem;
+  }
+
+
+  .hero-profile-contact {
+    right: 22px;
+    bottom: 24px;
+
+    width: 92px;
+    height: 92px;
+  }
+
 
   .hero-profile-circle,
   .hero-circular-text {
-    width: 100px !important;
-    height: 100px !important;
+    width: 92px !important;
+    height: 92px !important;
   }
+
 
   .hero-profile-photo {
-    width: 60px;
-    height: 60px;
+    width: 52px;
+    height: 52px;
   }
 
+
   .hero-circular-text span {
-    font-size: 8px !important;
+    font-size: 6.5px !important;
   }
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+
+  .hero-container h1,
+  .typed-text,
+  .hero-btns,
+  .hero-profile-contact {
+    animation: none;
+
+    opacity: 1;
+
+    transform: none;
+  }
+
 }

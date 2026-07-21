@@ -21,6 +21,34 @@ function HeroSection() {
       <LoadingScreen fadeOut={videoReady} />
 
       <div className="hero-container">
+
+        {/* EDITORIAL DECORATIONS */}
+
+        {/* LEFT EDITORIAL DECORATION */}
+
+        <div className="hero-editorial hero-editorial-left">
+          <span className="editorial-line" />
+          <span className="editorial-star">✦</span>
+          <span className="editorial-line" />
+        </div>
+
+
+        {/* RIGHT EDITORIAL DECORATION */}
+
+        <div className="hero-editorial hero-editorial-right">
+          <span className="editorial-line" />
+          <span className="editorial-star">✦</span>
+          <span className="editorial-line" />
+        </div>
+
+        <div className="hero-editorial-bottom">
+          <span>CODE</span>
+          <span className="editorial-dot">•</span>
+          <span>DESIGN</span>
+          <span className="editorial-dot">•</span>
+          <span>PHOTOGRAPHY</span>
+        </div>
+
         <button
           className="hero-profile-contact"
           onClick={() => {
@@ -61,7 +89,10 @@ function HeroSection() {
 
         <div className="hero-overlay"></div>
 
-        <h1>SANA SHAHZAD</h1>
+        <h1 className="hero-name">
+          <span className="hero-name-first">SANA</span>
+          <span className="hero-name-last">SHAHZAD</span>
+        </h1>
 
         <ReactTyped
           className="typed-text"
