@@ -906,6 +906,19 @@
 
 }
 
+.intro-link-arrow {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.ocean-intro-link:hover .intro-link-arrow {
+  transform: translate(3px, -3px);
+}
+
 
 /* =========================================
    TABLET
@@ -996,6 +1009,16 @@
         transparent 55%
       ),
       #020711;
+  }
+
+  .jellyfish-wrapper {
+  width: 350px;
+}
+}
+
+@media screen and (max-width: 480px) {
+  .jellyfish-wrapper {
+    width: 230px;
   }
 }
 

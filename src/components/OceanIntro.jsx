@@ -423,7 +423,7 @@ function OceanIntro() {
             </span>
 
             <span className="intro-link-arrow">
-              ↗
+              {"\u2197\uFE0E"}
             </span>
 
           </Link>

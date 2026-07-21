@@ -5,6 +5,7 @@ import React, {
   useState,
 } from "react";
 
+import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 
 import { gsap } from "gsap";
@@ -14,20 +15,42 @@ import "./Archive.css";
 
 gsap.registerPlugin(Draggable);
 
-
 function Archive() {
-  const viewportRef = useRef(null);
-  const canvasRef = useRef(null);
-  const draggableRef = useRef(null);
+  /* =========================
+     PREVIEW REFS
+  ========================= */
 
-  const didDragRef = useRef(false);
-
-  const [zoom, setZoom] = useState(0.6);
-  const [selectedImage, setSelectedImage] = useState(null);
-
+  const previewViewportRef = useRef(null);
+  const previewCanvasRef = useRef(null);
 
   /* =========================
-     YOUR IMAGES
+     FULLSCREEN REFS
+  ========================= */
+
+  const fullscreenViewportRef = useRef(null);
+  const fullscreenCanvasRef = useRef(null);
+
+  const draggableRef = useRef(null);
+  const didDragRef = useRef(false);
+
+  /* =========================
+     STATE
+  ========================= */
+
+  const [zoom, setZoom] = useState(0.6);
+
+  const [selectedImage, setSelectedImage] =
+    useState(null);
+
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth <= 900
+  );
+
+  const [isFullscreen, setIsFullscreen] =
+    useState(false);
+
+  /* =========================
+     IMAGES
   ========================= */
 
   const images = [
@@ -44,6 +67,7 @@ function Archive() {
     "/images/me/me-11.jpg",
     "/images/me/me-12.jpg",
     "/images/me/me-14.jpg",
+
     "/images/about/about-1.jpg",
     "/images/about/about-2.jpg",
     "/images/about/about-3.jpg",
@@ -56,9 +80,7 @@ function Archive() {
     "/images/about/about-10.jpg",
     "/images/about/about-11.jpg",
     "/images/about/about-12.jpg",
-
   ];
-
 
   /* =========================
      GRID SETTINGS
@@ -78,31 +100,103 @@ function Archive() {
     rows * itemSize +
     (rows - 1) * gap;
 
-
   /* =========================
-     CREATE GRID
+     GRID ITEMS
   ========================= */
 
   const gridItems = [];
 
   for (let row = 0; row < rows; row++) {
-    for (let column = 0; column < columns; column++) {
+    for (
+      let column = 0;
+      column < columns;
+      column++
+    ) {
       const index =
         row * columns +
         column;
 
-      const image =
-        images[index % images.length];
-
       gridItems.push({
         id: index,
-        image,
+
+        image:
+          images[
+            index %
+              images.length
+          ],
+
         row,
         column,
       });
     }
   }
 
+  /* =========================
+     CURRENT ACTIVE ELEMENTS
+  ========================= */
+
+  const getActiveViewport = () => {
+    if (
+      isMobile &&
+      isFullscreen
+    ) {
+      return fullscreenViewportRef.current;
+    }
+
+    return previewViewportRef.current;
+  };
+
+  const getActiveCanvas = () => {
+    if (
+      isMobile &&
+      isFullscreen
+    ) {
+      return fullscreenCanvasRef.current;
+    }
+
+    return previewCanvasRef.current;
+  };
+
+  /* =========================
+     MOBILE CHECK
+  ========================= */
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile =
+        window.innerWidth <= 900;
+
+      setIsMobile(mobile);
+
+      /*
+       * If resizing to desktop
+       * while fullscreen is open,
+       * close mobile fullscreen.
+       */
+      if (
+        !mobile &&
+        isFullscreen
+      ) {
+        setIsFullscreen(false);
+
+        document.body.classList.remove(
+          "archive-fullscreen-open"
+        );
+      }
+    };
+
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
+
+    return () => {
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+    };
+  }, [isFullscreen]);
 
   /* =========================
      CENTER CANVAS
@@ -112,12 +206,15 @@ function Archive() {
     scale = zoom
   ) => {
     const viewport =
-      viewportRef.current;
+      getActiveViewport();
 
     const canvas =
-      canvasRef.current;
+      getActiveCanvas();
 
-    if (!viewport || !canvas) {
+    if (
+      !viewport ||
+      !canvas
+    ) {
       return;
     }
 
@@ -128,30 +225,37 @@ function Archive() {
       viewport.clientHeight;
 
     const scaledWidth =
-      canvasWidth * scale;
+      canvasWidth *
+      scale;
 
     const scaledHeight =
-      canvasHeight * scale;
+      canvasHeight *
+      scale;
 
     const x =
-      (viewportWidth -
-        scaledWidth) /
-      2;
+      (
+        viewportWidth -
+        scaledWidth
+      ) / 2;
 
     const y =
-      (viewportHeight -
-        scaledHeight) /
-      2;
+      (
+        viewportHeight -
+        scaledHeight
+      ) / 2;
 
-    gsap.set(canvas, {
-      x,
-      y,
-      scale,
-      transformOrigin:
-        "top left",
-    });
+    gsap.set(
+      canvas,
+      {
+        x,
+        y,
+        scale,
+
+        transformOrigin:
+          "top left",
+      }
+    );
   };
-
 
   /* =========================
      DRAG BOUNDS
@@ -161,7 +265,7 @@ function Archive() {
     scale = zoom
   ) => {
     const viewport =
-      viewportRef.current;
+      getActiveViewport();
 
     if (!viewport) {
       return {
@@ -179,13 +283,14 @@ function Archive() {
       viewport.clientHeight;
 
     const scaledWidth =
-      canvasWidth * scale;
+      canvasWidth *
+      scale;
 
     const scaledHeight =
-      canvasHeight * scale;
+      canvasHeight *
+      scale;
 
     const margin = 60;
-
 
     let minX;
     let maxX;
@@ -193,15 +298,15 @@ function Archive() {
     let minY;
     let maxY;
 
-
     if (
       scaledWidth <=
       viewportWidth
     ) {
       const centerX =
-        (viewportWidth -
-          scaledWidth) /
-        2;
+        (
+          viewportWidth -
+          scaledWidth
+        ) / 2;
 
       minX = centerX;
       maxX = centerX;
@@ -214,15 +319,15 @@ function Archive() {
       maxX = margin;
     }
 
-
     if (
       scaledHeight <=
       viewportHeight
     ) {
       const centerY =
-        (viewportHeight -
-          scaledHeight) /
-        2;
+        (
+          viewportHeight -
+          scaledHeight
+        ) / 2;
 
       minY = centerY;
       maxY = centerY;
@@ -235,7 +340,6 @@ function Archive() {
       maxY = margin;
     }
 
-
     return {
       minX,
       maxX,
@@ -244,22 +348,23 @@ function Archive() {
     };
   };
 
-
   /* =========================
-     DRAGGABLE
+     CREATE DRAGGABLE
   ========================= */
 
   const createDraggable = (
     scale = zoom
   ) => {
     const canvas =
-      canvasRef.current;
+      getActiveCanvas();
 
     if (!canvas) {
       return;
     }
 
-
+    /*
+     * Remove previous instance.
+     */
     if (
       draggableRef.current
     ) {
@@ -269,12 +374,21 @@ function Archive() {
         null;
     }
 
+    /*
+     * Mobile preview:
+     * no dragging.
+     */
+    if (
+      isMobile &&
+      !isFullscreen
+    ) {
+      return;
+    }
 
     const bounds =
       getBounds(scale);
 
-
-    const draggable =
+    draggableRef.current =
       Draggable.create(
         canvas,
         {
@@ -285,7 +399,8 @@ function Archive() {
           edgeResistance:
             0.82,
 
-          minimumMovement: 5,
+          minimumMovement:
+            5,
 
           onDragStart() {
             didDragRef.current =
@@ -301,35 +416,28 @@ function Archive() {
               "archive-is-dragging"
             );
 
-            /*
-             * Keep this true briefly so
-             * releasing a drag does not
-             * accidentally open an image.
-             */
-            setTimeout(() => {
-              didDragRef.current =
-                false;
-            }, 80);
+            setTimeout(
+              () => {
+                didDragRef.current =
+                  false;
+              },
+              80
+            );
           },
         }
       )[0];
-
-
-    draggableRef.current =
-      draggable;
   };
 
-
   /* =========================
-     INITIALIZE
+     INITIAL DESKTOP/PREVIEW
   ========================= */
 
   useLayoutEffect(() => {
     const canvas =
-      canvasRef.current;
+      previewCanvasRef.current;
 
     const viewport =
-      viewportRef.current;
+      previewViewportRef.current;
 
     if (
       !canvas ||
@@ -338,17 +446,56 @@ function Archive() {
       return;
     }
 
+    /*
+     * Center preview.
+     */
+    const viewportWidth =
+      viewport.clientWidth;
 
-    centerCanvas(zoom);
+    const viewportHeight =
+      viewport.clientHeight;
 
-    createDraggable(zoom);
+    const x =
+      (
+        viewportWidth -
+        canvasWidth * zoom
+      ) / 2;
 
+    const y =
+      (
+        viewportHeight -
+        canvasHeight * zoom
+      ) / 2;
 
+    gsap.set(
+      canvas,
+      {
+        x,
+        y,
+        scale: zoom,
+
+        transformOrigin:
+          "top left",
+      }
+    );
+
+    /*
+     * Desktop only:
+     * make preview draggable.
+     */
+    if (!isMobile) {
+      createDraggable(
+        zoom
+      );
+    }
+
+    /*
+     * Intro animation.
+     */
     const items =
       canvas.querySelectorAll(
         ".archive-grid-item"
       );
-
 
     gsap.fromTo(
       items,
@@ -367,37 +514,203 @@ function Archive() {
           from: "center",
         },
 
-        ease: "power3.out",
+        ease:
+          "power3.out",
       }
     );
-
 
     return () => {
       if (
         draggableRef.current
       ) {
         draggableRef.current.kill();
+
+        draggableRef.current =
+          null;
       }
     };
 
-    // Intentionally only runs
-    // when component mounts.
     // eslint-disable-next-line
   }, []);
 
+  /* =========================
+     FULLSCREEN INITIALIZE
+  ========================= */
+
+  useEffect(() => {
+    if (
+      !isFullscreen
+    ) {
+      /*
+       * After leaving fullscreen,
+       * desktop may need its
+       * draggable restored.
+       */
+      if (!isMobile) {
+        requestAnimationFrame(
+          () => {
+            centerCanvas(
+              zoom
+            );
+
+            createDraggable(
+              zoom
+            );
+          }
+        );
+      }
+
+      return;
+    }
+
+    /*
+     * Wait until portal is
+     * mounted into document.body.
+     */
+    const frame =
+      requestAnimationFrame(
+        () => {
+          const viewport =
+            fullscreenViewportRef.current;
+
+          const canvas =
+            fullscreenCanvasRef.current;
+
+          if (
+            !viewport ||
+            !canvas
+          ) {
+            return;
+          }
+
+          const x =
+            (
+              viewport.clientWidth -
+              canvasWidth *
+                zoom
+            ) / 2;
+
+          const y =
+            (
+              viewport.clientHeight -
+              canvasHeight *
+                zoom
+            ) / 2;
+
+          gsap.set(
+            canvas,
+            {
+              x,
+              y,
+              scale: zoom,
+
+              transformOrigin:
+                "top left",
+            }
+          );
+
+          createDraggable(
+            zoom
+          );
+        }
+      );
+
+    return () => {
+      cancelAnimationFrame(
+        frame
+      );
+    };
+
+    // eslint-disable-next-line
+  }, [
+    isFullscreen,
+    isMobile,
+  ]);
 
   /* =========================
-     ZOOM
+     OPEN FULLSCREEN
+  ========================= */
+
+  const openFullscreen =
+    () => {
+      /*
+       * Kill preview draggable
+       * before portal mounts.
+       */
+      if (
+        draggableRef.current
+      ) {
+        draggableRef.current.kill();
+
+        draggableRef.current =
+          null;
+      }
+
+      document.body.classList.add(
+        "archive-fullscreen-open"
+      );
+
+      setIsFullscreen(
+        true
+      );
+    };
+
+  /* =========================
+     CLOSE FULLSCREEN
+  ========================= */
+
+  const closeFullscreen =
+    () => {
+      setSelectedImage(
+        null
+      );
+
+      if (
+        draggableRef.current
+      ) {
+        draggableRef.current.kill();
+
+        draggableRef.current =
+          null;
+      }
+
+      setIsFullscreen(
+        false
+      );
+
+      document.body.classList.remove(
+        "archive-fullscreen-open"
+      );
+    };
+
+  /* =========================
+     BODY CLEANUP
+  ========================= */
+
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove(
+        "archive-fullscreen-open"
+      );
+
+      document.body.classList.remove(
+        "archive-is-dragging"
+      );
+    };
+  }, []);
+
+  /* =========================
+     CHANGE ZOOM
   ========================= */
 
   const changeZoom = (
     newZoom
   ) => {
     const canvas =
-      canvasRef.current;
+      getActiveCanvas();
 
     const viewport =
-      viewportRef.current;
+      getActiveViewport();
 
     if (
       !canvas ||
@@ -406,29 +719,23 @@ function Archive() {
       return;
     }
 
-
-    setZoom(newZoom);
-
-
-    const viewportWidth =
-      viewport.clientWidth;
-
-    const viewportHeight =
-      viewport.clientHeight;
-
+    setZoom(
+      newZoom
+    );
 
     const x =
-      (viewportWidth -
+      (
+        viewport.clientWidth -
         canvasWidth *
-          newZoom) /
-      2;
+          newZoom
+      ) / 2;
 
     const y =
-      (viewportHeight -
+      (
+        viewport.clientHeight -
         canvasHeight *
-          newZoom) /
-      2;
-
+          newZoom
+      ) / 2;
 
     if (
       draggableRef.current
@@ -436,113 +743,81 @@ function Archive() {
       draggableRef.current.disable();
     }
 
+    gsap.to(
+      canvas,
+      {
+        scale:
+          newZoom,
 
-    gsap.to(canvas, {
-      scale: newZoom,
+        x,
+        y,
 
-      x,
-      y,
+        duration:
+          0.8,
 
-      duration: 0.8,
+        ease:
+          "power3.inOut",
 
-      ease:
-        "power3.inOut",
-
-      onComplete: () => {
-        createDraggable(
-          newZoom
-        );
-      },
-    });
-  };
-
-
-  /* =========================
-     AUTO FIT
-  ========================= */
-
-  const fitCanvas = () => {
-    const viewport =
-      viewportRef.current;
-
-    if (!viewport) {
-      return;
-    }
-
-
-    const availableWidth =
-      viewport.clientWidth -
-      100;
-
-    const availableHeight =
-      viewport.clientHeight -
-      100;
-
-
-    const widthZoom =
-      availableWidth /
-      canvasWidth;
-
-    const heightZoom =
-      availableHeight /
-      canvasHeight;
-
-
-    let fitZoom =
-      Math.min(
-        widthZoom,
-        heightZoom
-      );
-
-
-    fitZoom =
-      Math.max(
-        0.18,
-        Math.min(
-          fitZoom,
-          1
-        )
-      );
-
-
-    changeZoom(fitZoom);
-  };
-
-
-  /* =========================
-     HANDLE RESIZE
-  ========================= */
-
-  useEffect(() => {
-    const handleResize =
-      () => {
-        centerCanvas(zoom);
-
-        createDraggable(
-          zoom
-        );
-      };
-
-
-    window.addEventListener(
-      "resize",
-      handleResize
+        onComplete() {
+          createDraggable(
+            newZoom
+          );
+        },
+      }
     );
+  };
 
+  /* =========================
+     FIT CANVAS
+  ========================= */
 
-    return () => {
-      window.removeEventListener(
-        "resize",
-        handleResize
+  const fitCanvas =
+    () => {
+      const viewport =
+        getActiveViewport();
+
+      if (!viewport) {
+        return;
+      }
+
+      const availableWidth =
+        viewport.clientWidth -
+        100;
+
+      const availableHeight =
+        viewport.clientHeight -
+        100;
+
+      const widthZoom =
+        availableWidth /
+        canvasWidth;
+
+      const heightZoom =
+        availableHeight /
+        canvasHeight;
+
+      let fitZoom =
+        Math.min(
+          widthZoom,
+          heightZoom
+        );
+
+      fitZoom =
+        Math.max(
+          0.18,
+          Math.min(
+            fitZoom,
+            1
+          )
+        );
+
+      changeZoom(
+        fitZoom
       );
     };
 
-    // eslint-disable-next-line
-  }, [zoom]);
-
-
   /* =========================
-     IMAGE CLICK
+     OPEN IMAGE
   ========================= */
 
   const openImage = (
@@ -555,6 +830,16 @@ function Archive() {
       return;
     }
 
+    /*
+     * Images cannot open
+     * from mobile preview.
+     */
+    if (
+      isMobile &&
+      !isFullscreen
+    ) {
+      return;
+    }
 
     if (
       draggableRef.current
@@ -562,45 +847,63 @@ function Archive() {
       draggableRef.current.disable();
     }
 
-
     setSelectedImage({
       image,
       index,
     });
   };
 
+  /* =========================
+     CLOSE IMAGE
+  ========================= */
 
-  const closeImage = () => {
-    setSelectedImage(null);
+  const closeImage =
+    () => {
+      setSelectedImage(
+        null
+      );
 
+      if (
+        draggableRef.current
+      ) {
+        draggableRef.current.enable();
+      }
+    };
 
-    if (
-      draggableRef.current
-    ) {
-      draggableRef.current.enable();
-    }
-  };
-
-
-  /* Escape closes image */
+  /* =========================
+     ESCAPE KEY
+  ========================= */
 
   useEffect(() => {
-    const handleKeyDown =
-      (event) => {
-        if (
-          event.key ===
-          "Escape"
-        ) {
-          closeImage();
-        }
-      };
+    const handleKeyDown = (
+      event
+    ) => {
+      if (
+        event.key !==
+        "Escape"
+      ) {
+        return;
+      }
 
+      if (
+        selectedImage
+      ) {
+        closeImage();
+
+        return;
+      }
+
+      if (
+        isFullscreen
+      ) {
+        closeFullscreen();
+      }
+    };
 
     window.addEventListener(
       "keydown",
       handleKeyDown
     );
-
 
     return () => {
       window.removeEventListener(
@@ -608,8 +911,190 @@ function Archive() {
         handleKeyDown
       );
     };
-  }, []);
 
+    // eslint-disable-next-line
+  }, [
+    selectedImage,
+    isFullscreen,
+  ]);
+
+  /* =========================
+     GRID CONTENT
+  ========================= */
+
+  const renderGrid = (
+    fullscreen = false
+  ) => (
+    <>
+      <div
+        className="archive-canvas"
+
+        ref={
+          fullscreen
+            ? fullscreenCanvasRef
+            : previewCanvasRef
+        }
+
+        style={{
+          width:
+            `${canvasWidth}px`,
+
+          height:
+            `${canvasHeight}px`,
+        }}
+      >
+        {gridItems.map(
+          (
+            item,
+            index
+          ) => (
+            <button
+              type="button"
+
+              className="archive-grid-item"
+
+              key={
+                fullscreen
+                  ? `fullscreen-${item.id}`
+                  : `preview-${item.id}`
+              }
+
+              style={{
+                left:
+                  item.column *
+                  (
+                    itemSize +
+                    gap
+                  ),
+
+                top:
+                  item.row *
+                  (
+                    itemSize +
+                    gap
+                  ),
+
+                width:
+                  itemSize,
+
+                height:
+                  itemSize,
+              }}
+
+              onClick={() =>
+                openImage(
+                  item.image,
+                  index
+                )
+              }
+            >
+              <img
+                src={
+                  item.image
+                }
+
+                alt={`Creative archive ${
+                  index + 1
+                }`}
+
+                draggable="false"
+              />
+            </button>
+          )
+        )}
+      </div>
+
+      <div className="archive-vignette" />
+    </>
+  );
+
+  /* =========================
+     CONTROLS CONTENT
+  ========================= */
+
+  const renderControls =
+    () => (
+      <div className="archive-controls">
+
+        <div className="archive-percentage">
+          {Math.round(
+            zoom *
+              100
+          )}
+          %
+        </div>
+
+        <div className="archive-zoom-switch">
+
+          <button
+            type="button"
+
+            className={
+              zoom === 0.35
+                ? "archive-control active"
+                : "archive-control"
+            }
+
+            onClick={() =>
+              changeZoom(
+                0.35
+              )
+            }
+          >
+            Zoom Out
+          </button>
+
+          <button
+            type="button"
+
+            className={
+              zoom === 0.6
+                ? "archive-control active"
+                : "archive-control"
+            }
+
+            onClick={() =>
+              changeZoom(
+                0.6
+              )
+            }
+          >
+            Normal
+          </button>
+
+          <button
+            type="button"
+
+            className={
+              zoom === 0.9
+                ? "archive-control active"
+                : "archive-control"
+            }
+
+            onClick={() =>
+              changeZoom(
+                0.9
+              )
+            }
+          >
+            Zoom In
+          </button>
+
+          <button
+            type="button"
+            className="archive-control"
+
+            onClick={
+              fitCanvas
+            }
+          >
+            Fit
+          </button>
+
+        </div>
+
+      </div>
+    );
 
   return (
     <section
@@ -618,7 +1103,7 @@ function Archive() {
     >
 
       {/* =========================
-          TOP TEXT
+          HEADER
       ========================== */}
 
       <div className="archive-header">
@@ -639,8 +1124,13 @@ function Archive() {
         <div className="archive-header-right">
 
           <span className="archive-drag-hint">
-            Drag to explore
+
+            {isMobile
+              ? "Interactive Archive"
+              : "Drag to explore"}
+
           </span>
+
 
           <Link
             to="/gallery"
@@ -655,258 +1145,214 @@ function Archive() {
 
 
       {/* =========================
-          DRAGGABLE VIEWPORT
+          NORMAL PAGE PREVIEW
       ========================== */}
 
-      <div
-        className="archive-viewport"
-        ref={viewportRef}
-      >
+      <div className="archive-preview-wrapper">
 
-        <div
-          className="archive-canvas"
-          ref={canvasRef}
-          style={{
-            width:
-              `${canvasWidth}px`,
+        <div className="archive-experience">
 
-            height:
-              `${canvasHeight}px`,
-          }}
-        >
+          <div
+            className="archive-viewport"
 
-          {gridItems.map(
-            (
-              item,
-              index
-            ) => (
+            ref={
+              previewViewportRef
+            }
+          >
+            {renderGrid(false)}
+          </div>
+
+
+          {/* Desktop controls */}
+
+          {!isMobile &&
+            renderControls()}
+
+        </div>
+
+
+        {/* =========================
+            MOBILE FULLSCREEN BUTTON
+        ========================== */}
+
+        {isMobile &&
+          !isFullscreen && (
+
+          <div className="archive-mobile-overlay">
+
+            <button
+              type="button"
+
+              className="archive-fullscreen-button"
+
+              onClick={
+                openFullscreen
+              }
+            >
+              Explore Fullscreen ↗
+            </button>
+
+          </div>
+
+        )}
+
+      </div>
+
+
+      {/* =========================
+          MOBILE FULLSCREEN PORTAL
+      ========================== */}
+
+      {isMobile &&
+        isFullscreen &&
+        createPortal(
+
+          <div className="archive-fullscreen-portal">
+
+            {/* TOP BAR */}
+
+            <div className="archive-fullscreen-bar">
+
+              <span>
+                Drag to explore
+              </span>
+
 
               <button
                 type="button"
 
-                className="archive-grid-item"
+                className="archive-fullscreen-close"
 
-                key={item.id}
-
-                style={{
-                  left:
-                    item.column *
-                    (
-                      itemSize +
-                      gap
-                    ),
-
-                  top:
-                    item.row *
-                    (
-                      itemSize +
-                      gap
-                    ),
-
-                  width:
-                    itemSize,
-
-                  height:
-                    itemSize,
-                }}
-
-                onClick={() =>
-                  openImage(
-                    item.image,
-                    index
-                  )
+                onClick={
+                  closeFullscreen
                 }
               >
-
-                <img
-                  src={
-                    item.image
-                  }
-
-                  alt={`Creative archive ${
-                    index + 1
-                  }`}
-
-                  draggable="false"
-                />
-
+                Close ×
               </button>
 
-            )
-          )}
-
-        </div>
+            </div>
 
 
-        {/* dark edge vignette */}
+            {/* FULLSCREEN GRID */}
 
-        <div className="archive-vignette" />
+            <div
+              className="archive-viewport archive-viewport-fullscreen"
 
-      </div>
+              ref={
+                fullscreenViewportRef
+              }
+            >
 
+              {renderGrid(true)}
 
-      {/* =========================
-          CONTROLS
-      ========================== */}
-
-      <div className="archive-controls">
-
-        <div className="archive-percentage">
-          {Math.round(
-            zoom * 100
-          )}
-          %
-        </div>
+            </div>
 
 
-        <div className="archive-zoom-switch">
+            {/* FULLSCREEN CONTROLS */}
 
-          <button
-            className={
-              zoom === 0.35
-                ? "archive-control active"
-                : "archive-control"
-            }
+            <div className="archive-fullscreen-controls">
 
-            onClick={() =>
-              changeZoom(0.35)
-            }
-          >
-            Zoom Out
-          </button>
+              {renderControls()}
 
+            </div>
 
-          <button
-            className={
-              zoom === 0.6
-                ? "archive-control active"
-                : "archive-control"
-            }
+          </div>,
 
-            onClick={() =>
-              changeZoom(0.6)
-            }
-          >
-            Normal
-          </button>
-
-
-          <button
-            className={
-              zoom === 0.9
-                ? "archive-control active"
-                : "archive-control"
-            }
-
-            onClick={() =>
-              changeZoom(0.9)
-            }
-          >
-            Zoom In
-          </button>
-
-
-          <button
-            className="archive-control"
-
-            onClick={
-              fitCanvas
-            }
-          >
-            Fit
-          </button>
-
-        </div>
-
-      </div>
+          document.body
+        )}
 
 
       {/* =========================
-          IMAGE EXPANSION
+          IMAGE LIGHTBOX
       ========================== */}
 
-      {selectedImage && (
-
-        <div
-          className="archive-lightbox"
-
-          onClick={
-            closeImage
-          }
-        >
+      {selectedImage &&
+        createPortal(
 
           <div
-            className="archive-lightbox-image"
-
-            onClick={(
-              event
-            ) =>
-              event.stopPropagation()
-            }
-          >
-
-            <img
-              src={
-                selectedImage.image
-              }
-
-              alt="Selected creative work"
-            />
-
-          </div>
-
-
-          <div className="archive-lightbox-info">
-
-            <span>
-              {String(
-                (
-                  selectedImage.index %
-                  images.length
-                ) +
-                  1
-              ).padStart(
-                2,
-                "0"
-              )}
-            </span>
-
-
-            <h3>
-              Creative Archive
-            </h3>
-
-
-            <p>
-              A moment from
-              my collection of
-              photography,
-              design, and visual
-              experiments.
-            </p>
-
-          </div>
-
-
-          <button
-            className="archive-close"
+            className="archive-lightbox"
 
             onClick={
               closeImage
             }
-
-            aria-label="Close image"
           >
-            ←
-          </button>
 
-        </div>
+            <div
+              className="archive-lightbox-image"
 
-      )}
+              onClick={(
+                event
+              ) => {
+                event.stopPropagation();
+              }}
+            >
+
+              <img
+                src={
+                  selectedImage.image
+                }
+
+                alt="Selected creative work"
+              />
+
+            </div>
+
+
+            <div className="archive-lightbox-info">
+
+              <span>
+
+                {String(
+                  (
+                    selectedImage.index %
+                    images.length
+                  ) +
+                    1
+                ).padStart(
+                  2,
+                  "0"
+                )}
+
+              </span>
+
+
+              <h3>
+                Creative Archive
+              </h3>
+
+
+              <p>
+                A moment from my
+                collection of
+                photography,
+                design, and visual
+                experiments.
+              </p>
+
+            </div>
+
+
+            <button
+              type="button"
+
+              className="archive-close"
+
+              onClick={
+                closeImage
+              }
+
+              aria-label="Close image"
+            >
+              ←
+            </button>
+
+          </div>,
+
+          document.body
+        )}
 
     </section>
   );
 }
-
 
 export default Archive;

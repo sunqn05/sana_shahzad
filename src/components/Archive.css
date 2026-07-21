@@ -7,16 +7,16 @@
 
   width: 100%;
 
-  background: #020711;
-
-  color: #fff8ec;
-
   padding:
     90px
     0
     100px;
 
   overflow: hidden;
+
+  background: #020711;
+
+  color: #fff8ec;
 }
 
 
@@ -149,10 +149,6 @@
 
   text-transform:
     uppercase;
-
-  transition:
-    color
-    0.3s ease;
 }
 
 
@@ -178,7 +174,9 @@
     );
 
   transform:
-    scaleX(0.35);
+    scaleX(
+      0.35
+    );
 
   transform-origin:
     left;
@@ -197,7 +195,25 @@
 
 .archive-gallery-link:hover::after {
   transform:
-    scaleX(1);
+    scaleX(
+      1
+    );
+}
+
+
+/* =========================
+   PREVIEW WRAPPER
+========================= */
+
+.archive-preview-wrapper {
+  position: relative;
+}
+
+
+.archive-experience {
+  position: relative;
+
+  z-index: 1;
 }
 
 
@@ -234,6 +250,8 @@
   cursor: grab;
 
   touch-action: none;
+
+  isolation: isolate;
 }
 
 
@@ -244,25 +262,27 @@
 
 
 /* =========================
-   DRAGGABLE CANVAS
+   CANVAS
 ========================= */
 
 .archive-canvas {
   position: absolute;
 
   top: 0;
+
   left: 0;
+
+  z-index: 1;
 
   transform-origin:
     top left;
 
-  will-change:
-    transform;
+  will-change: transform;
 }
 
 
 /* =========================
-   GRID ITEMS
+   GRID ITEM
 ========================= */
 
 .archive-grid-item {
@@ -340,11 +360,17 @@
   user-select: none;
 
   filter:
-    brightness(0.78)
-    saturate(0.88);
+    brightness(
+      0.78
+    )
+    saturate(
+      0.88
+    );
 
   transform:
-    scale(1.01);
+    scale(
+      1.01
+    );
 
   transition:
     transform
@@ -362,16 +388,22 @@
 
 .archive-grid-item:hover img {
   transform:
-    scale(1.055);
+    scale(
+      1.055
+    );
 
   filter:
-    brightness(1)
-    saturate(1);
+    brightness(
+      1
+    )
+    saturate(
+      1
+    );
 }
 
 
 /* =========================
-   VIEWPORT VIGNETTE
+   VIGNETTE
 ========================= */
 
 .archive-vignette {
@@ -415,13 +447,13 @@
 
 
 /* =========================
-   CONTROLS
+   ZOOM CONTROLS
 ========================= */
 
 .archive-controls {
   position: relative;
 
-  z-index: 10;
+  z-index: 20;
 
   display: flex;
 
@@ -430,8 +462,7 @@
   justify-content:
     center;
 
-  margin-top:
-    24px;
+  margin-top: 24px;
 }
 
 
@@ -440,8 +471,7 @@
 
   display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
   justify-content:
     center;
@@ -465,21 +495,18 @@
 
   font-size: 0.7rem;
 
-  letter-spacing:
-    1px;
+  letter-spacing: 1px;
 }
 
 
 .archive-zoom-switch {
   display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
   gap: 4px;
 
-  padding:
-    6px;
+  padding: 6px;
 
   background:
     rgba(
@@ -507,21 +534,21 @@
     0;
 
   backdrop-filter:
-    blur(14px);
+    blur(
+      14px
+    );
 }
 
 
 .archive-control {
-  position: relative;
-
   padding:
     8px
     13px;
 
+  border: none;
+
   background:
     transparent;
-
-  border: none;
 
   color:
     rgba(
@@ -535,17 +562,16 @@
 
   font-size: 0.62rem;
 
-  letter-spacing:
-    1.5px;
+  letter-spacing: 1.5px;
 
   text-transform:
     uppercase;
 
   transition:
     color
-    0.25s ease,
+      0.25s ease,
     background
-    0.25s ease;
+      0.25s ease;
 }
 
 
@@ -568,6 +594,222 @@
 
 
 /* =========================
+   MOBILE PREVIEW BUTTON
+========================= */
+
+.archive-mobile-overlay {
+  display: none;
+}
+
+
+/* =========================
+   FULLSCREEN PORTAL
+========================= */
+
+.archive-fullscreen-portal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 30000;
+
+  width: 100vw;
+
+  height: 100dvh;
+
+  overflow: hidden;
+
+  background: #020711;
+
+  isolation: isolate;
+
+  overscroll-behavior:
+    none;
+}
+
+
+/* =========================
+   FULLSCREEN VIEWPORT
+========================= */
+
+.archive-viewport-fullscreen {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  width: 100%;
+
+  height: 100%;
+
+  cursor: grab;
+
+  touch-action: none;
+}
+
+
+/* =========================
+   FULLSCREEN TOP BAR
+========================= */
+
+.archive-fullscreen-bar {
+  position: fixed;
+
+  /*
+   * Leave space for
+   * normal website navbar.
+   */
+
+  top: 85px;
+
+  left: 20px;
+
+  right: 20px;
+
+  z-index: 30010;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  pointer-events: none;
+}
+
+
+.archive-fullscreen-bar span {
+  color:
+    rgba(
+      231,
+      215,
+      178,
+      0.75
+    );
+
+  font-size: 0.58rem;
+
+  letter-spacing: 2px;
+
+  text-transform:
+    uppercase;
+}
+
+
+.archive-fullscreen-close {
+  position: relative;
+
+  z-index: 30011;
+
+  pointer-events: auto;
+
+  padding:
+    10px
+    14px;
+
+  border:
+    1px solid
+    rgba(
+      231,
+      215,
+      178,
+      0.5
+    );
+
+  border-radius: 3px;
+
+  background:
+    rgba(
+      2,
+      7,
+      17,
+      0.92
+    );
+
+  backdrop-filter:
+    blur(
+      12px
+    );
+
+  color: #fff8ec;
+
+  font-family: inherit;
+
+  font-size: 0.62rem;
+
+  letter-spacing: 1.5px;
+
+  text-transform:
+    uppercase;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   FULLSCREEN CONTROLS
+========================= */
+
+.archive-fullscreen-controls {
+  position: fixed;
+
+  left: 50%;
+
+  bottom:
+    max(
+      20px,
+      env(
+        safe-area-inset-bottom
+      )
+    );
+
+  z-index: 30010;
+
+  width:
+    min(
+      92%,
+      520px
+    );
+
+  transform:
+    translateX(
+      -50%
+    );
+}
+
+
+.archive-fullscreen-controls
+.archive-controls {
+  margin: 0;
+
+  width: 100%;
+}
+
+
+.archive-fullscreen-controls
+.archive-zoom-switch {
+  flex: 1;
+
+  justify-content:
+    space-around;
+}
+
+
+/* =========================
+   BODY LOCK
+========================= */
+
+body.archive-fullscreen-open {
+  overflow: hidden !important;
+
+  overscroll-behavior:
+    none;
+}
+
+
+/* =========================
    LIGHTBOX
 ========================= */
 
@@ -576,7 +818,7 @@
 
   inset: 0;
 
-  z-index: 9999;
+  z-index: 40000;
 
   display: grid;
 
@@ -593,7 +835,9 @@
     );
 
   backdrop-filter:
-    blur(20px);
+    blur(
+      20px
+    );
 
   animation:
     archiveFadeIn
@@ -615,8 +859,7 @@
   justify-content:
     center;
 
-  padding:
-    60px;
+  padding: 60px;
 }
 
 
@@ -631,8 +874,7 @@
       120px
     );
 
-  object-fit:
-    contain;
+  object-fit: contain;
 
   animation:
     archiveImageIn
@@ -647,7 +889,7 @@
 
 
 /* =========================
-   LIGHTBOX INFORMATION
+   LIGHTBOX INFO
 ========================= */
 
 .archive-lightbox-info {
@@ -662,8 +904,7 @@
   align-items:
     flex-start;
 
-  padding:
-    80px;
+  padding: 80px;
 
   border-left:
     1px solid
@@ -677,15 +918,13 @@
 
 
 .archive-lightbox-info span {
-  margin-bottom:
-    18px;
+  margin-bottom: 18px;
 
   color: #e7d7b2;
 
   font-size: 0.65rem;
 
-  letter-spacing:
-    3px;
+  letter-spacing: 3px;
 }
 
 
@@ -732,7 +971,7 @@
 
 
 /* =========================
-   CLOSE BUTTON
+   LIGHTBOX CLOSE
 ========================= */
 
 .archive-close {
@@ -743,7 +982,9 @@
   right: 28px;
 
   transform:
-    translateY(-50%);
+    translateY(
+      -50%
+    );
 
   width: 60px;
 
@@ -751,42 +992,26 @@
 
   display: flex;
 
-  align-items:
-    center;
+  align-items: center;
 
   justify-content:
     center;
 
+  border: none;
+
   background:
     transparent;
-
-  border: none;
 
   color: #fff8ec;
 
   cursor: pointer;
 
   font-size: 2.3rem;
-
-  transition:
-    transform
-    0.3s ease,
-    opacity
-    0.3s ease;
-}
-
-
-.archive-close:hover {
-  transform:
-    translateY(-50%)
-    translateX(-6px);
-
-  opacity: 0.7;
 }
 
 
 /* =========================
-   LIGHTBOX ANIMATIONS
+   ANIMATIONS
 ========================= */
 
 @keyframes archiveFadeIn {
@@ -808,21 +1033,25 @@
     opacity: 0;
 
     transform:
-      scale(0.92);
+      scale(
+        0.92
+      );
   }
 
   to {
     opacity: 1;
 
     transform:
-      scale(1);
+      scale(
+        1
+      );
   }
 
 }
 
 
 /* =========================
-   TABLET
+   TABLET / MOBILE
 ========================= */
 
 @media screen and
@@ -846,8 +1075,7 @@
 
 
   .archive-title-group h2 {
-    font-size:
-      3rem;
+    font-size: 3rem;
   }
 
 
@@ -862,10 +1090,119 @@
   }
 
 
+  /* Normal preview */
+
   .archive-viewport {
     height: 590px;
+
+    cursor: default;
+
+    touch-action:
+      pan-y;
   }
 
+
+  /*
+   * Preview cannot be
+   * dragged or clicked.
+   */
+
+  .archive-preview-wrapper
+  .archive-canvas {
+    pointer-events: none;
+  }
+
+
+  .archive-preview-wrapper
+  .archive-grid-item {
+    pointer-events: none;
+  }
+
+
+  /* =========================
+     MOBILE FULLSCREEN BUTTON
+  ========================= */
+
+  .archive-mobile-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+      center;
+
+    pointer-events: none;
+  }
+
+
+  .archive-fullscreen-button {
+    position: relative;
+
+    z-index: 101;
+
+    pointer-events: auto;
+
+    padding:
+      14px
+      20px;
+
+    border:
+      1px solid
+      rgba(
+        231,
+        215,
+        178,
+        0.65
+      );
+
+    background:
+      rgba(
+        2,
+        7,
+        17,
+        0.92
+      );
+
+    backdrop-filter:
+      blur(
+        14px
+      );
+
+    color: #fff8ec;
+
+    font-family: inherit;
+
+    font-size: 0.68rem;
+
+    letter-spacing: 2px;
+
+    text-transform:
+      uppercase;
+
+    cursor: pointer;
+
+    box-shadow:
+      0
+      10px
+      35px
+      rgba(
+        0,
+        0,
+        0,
+        0.4
+      );
+  }
+
+
+  /* =========================
+     MOBILE LIGHTBOX
+  ========================= */
 
   .archive-lightbox {
     grid-template-columns:
@@ -891,8 +1228,7 @@
 
     width: 100%;
 
-    padding:
-      30px;
+    padding: 30px;
 
     border-left: none;
 
@@ -930,17 +1266,11 @@
     transform: none;
   }
 
-
-  .archive-close:hover {
-    transform:
-      translateX(-5px);
-  }
-
 }
 
 
 /* =========================
-   MOBILE
+   SMALL MOBILE
 ========================= */
 
 @media screen and
@@ -987,14 +1317,12 @@
 
 
   .archive-drag-hint {
-    font-size:
-      0.55rem;
+    font-size: 0.55rem;
   }
 
 
   .archive-gallery-link {
-    font-size:
-      0.58rem;
+    font-size: 0.58rem;
   }
 
 
@@ -1003,34 +1331,21 @@
   }
 
 
-  .archive-controls {
-    width: 92%;
+  .archive-fullscreen-button {
+    padding:
+      13px
+      17px;
 
-    margin:
-      20px
-      auto
-      0;
+    font-size: 0.6rem;
   }
 
 
   .archive-percentage {
     min-width: 58px;
 
-    padding:
-      10px;
+    padding: 10px;
 
-    font-size:
-      0.62rem;
-  }
-
-
-  .archive-zoom-switch {
-    flex: 1;
-
-    justify-content:
-      space-around;
-
-    overflow-x: auto;
+    font-size: 0.62rem;
   }
 
 
@@ -1039,14 +1354,11 @@
       8px
       6px;
 
-    font-size:
-      0.52rem;
+    font-size: 0.5rem;
 
-    letter-spacing:
-      1px;
+    letter-spacing: 0.8px;
 
-    white-space:
-      nowrap;
+    white-space: nowrap;
   }
 
 
@@ -1061,14 +1373,28 @@
 
 
   .archive-lightbox-info {
-    padding:
-      22px;
+    padding: 22px;
   }
 
 
   .archive-lightbox-info h3 {
-    font-size:
-      2rem;
+    font-size: 2rem;
   }
 
+}
+
+
+/* =========================
+   WEBSITE NAVBAR
+========================= */
+
+/*
+ * Your normal navbar stays
+ * above the fullscreen archive.
+ */
+
+.navbar {
+  position: fixed;
+
+  z-index: 35000;
 }

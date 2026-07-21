@@ -778,6 +778,26 @@ text, this is already styled for it.
 
 @media screen and (max-width: 768px) {
 
+  .hero-overlay {
+    background:
+      radial-gradient(
+        ellipse at 20% 52%,
+        rgba(2, 7, 15, 0.28) 0%,
+        rgba(2, 7, 15, 0.14) 32%,
+        rgba(2, 7, 15, 0.04) 52%,
+        transparent 72%
+      ),
+
+      linear-gradient(
+        180deg,
+        rgba(2, 7, 15, 0.08) 0%,
+        transparent 30%,
+        transparent 80%,
+        rgba(2, 7, 15, 0.12) 100%
+      );
+  }
+
+
   .hero-container {
     min-height: 720px;
   }
@@ -792,22 +812,6 @@ text, this is already styled for it.
       brightness(0.5)
       contrast(1.08)
       saturate(0.68);
-  }
-
-
-  .hero-overlay {
-    background:
-      linear-gradient(
-        90deg,
-        rgba(2, 7, 15, 0.94),
-        rgba(2, 7, 15, 0.58)
-      ),
-
-      linear-gradient(
-        180deg,
-        rgba(2, 7, 15, 0.2),
-        rgba(2, 7, 15, 0.65)
-      );
   }
 
 
@@ -879,7 +883,7 @@ text, this is already styled for it.
 
   .hero-profile-contact {
     right: 22px;
-    bottom: 24px;
+    bottom: 55px;
 
     width: 92px;
     height: 92px;
