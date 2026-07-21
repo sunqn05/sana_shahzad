@@ -4,10 +4,15 @@ import React, {
   useRef,
   useState,
 } from "react";
+
 import LiquidEther from "./LiquidEther";
 import { Link } from "react-router-dom";
 import "./OceanIntro.css";
 
+
+/* =========================================
+   SCRAMBLE WORD
+========================================= */
 
 function ScrambleWord({
   word,
@@ -85,8 +90,7 @@ function ScrambleWord({
       return;
     }
 
-    hasAutoPlayedRef.current =
-      true;
+    hasAutoPlayedRef.current = true;
 
     timeoutRef.current =
       setTimeout(() => {
@@ -121,9 +125,7 @@ function ScrambleWord({
   return (
     <span
       className="scramble-word"
-      onMouseEnter={
-        handleHover
-      }
+      onMouseEnter={handleHover}
     >
       {text}
     </span>
@@ -131,37 +133,63 @@ function ScrambleWord({
 }
 
 
-function OceanIntro() {
+/* =========================================
+   OCEAN INTRO
+========================================= */
 
-  const [isMobile, setIsMobile] = useState(
+function OceanIntro() {
+  const [
+    isMobile,
+    setIsMobile,
+  ] = useState(
     window.innerWidth <= 768
   );
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const sectionRef =
     useRef(null);
 
-  const [introVisible, setIntroVisible] =
-    useState(false);
+  const [
+    introVisible,
+    setIntroVisible,
+  ] = useState(false);
 
+
+  /* =========================
+     MOBILE CHECK
+  ========================= */
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(
+        window.innerWidth <= 768
+      );
+    };
+
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
+
+    return () => {
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+    };
+  }, []);
+
+
+  /* =========================
+     INTRO OBSERVER
+  ========================= */
 
   useEffect(() => {
     const section =
       sectionRef.current;
 
-    if (!section) return;
-
+    if (!section) {
+      return;
+    }
 
     const observer =
       new IntersectionObserver(
@@ -179,9 +207,7 @@ function OceanIntro() {
         }
       );
 
-
     observer.observe(section);
-
 
     return () => {
       observer.disconnect();
@@ -195,7 +221,9 @@ function OceanIntro() {
       ref={sectionRef}
     >
 
-      {/* LIQUID BACKGROUND */}
+      {/* =========================
+          LIQUID BACKGROUND
+      ========================== */}
 
       <div className="ocean-intro-background">
 
@@ -205,7 +233,7 @@ function OceanIntro() {
               "#001B33",
               "#0A4D68",
               "#3FA7D6",
-              "#E7D7B2"
+              "#E7D7B2",
             ]}
             mouseForce={12}
             cursorSize={220}
@@ -222,7 +250,9 @@ function OceanIntro() {
       </div>
 
 
-      {/* DECORATIVE PARTICLES */}
+      {/* =========================
+          DECORATIVE PARTICLES
+      ========================== */}
 
       <div className="ocean-particles">
 
@@ -242,7 +272,11 @@ function OceanIntro() {
 
 
       <div className="ocean-intro-inner">
-        {/* TOP TEXT */}
+
+
+        {/* =========================
+            TOP TEXT
+        ========================== */}
 
         <div className="ocean-intro-copy ocean-intro-copy-top">
 
@@ -286,25 +320,18 @@ function OceanIntro() {
         </div>
 
 
-        {/* WHALE */}
+        {/* =========================
+            WHALE
+        ========================== */}
 
         <div className="jellyfish-scene">
 
           <div className="jellyfish-glow" />
 
-          <div
-            className="
-              jellyfish-ring
-              jellyfish-ring-one
-            "
-          />
+          <div className="jellyfish-ring jellyfish-ring-one" />
 
-          <div
-            className="
-              jellyfish-ring
-              jellyfish-ring-two
-            "
-          />
+          <div className="jellyfish-ring jellyfish-ring-two" />
+
 
           <div className="jellyfish-wrapper">
 
@@ -312,17 +339,13 @@ function OceanIntro() {
               src="/images/me/me-15.png"
               alt=""
               className="jellyfish-image"
+              draggable="false"
             />
 
           </div>
 
 
-          <div
-            className="
-              jellyfish-label
-              jellyfish-label-one
-            "
-          >
+          <div className="jellyfish-label jellyfish-label-one">
 
             <span className="label-number">
               01
@@ -333,12 +356,7 @@ function OceanIntro() {
           </div>
 
 
-          <div
-            className="
-              jellyfish-label
-              jellyfish-label-two
-            "
-          >
+          <div className="jellyfish-label jellyfish-label-two">
 
             <span className="label-number">
               02
@@ -349,12 +367,7 @@ function OceanIntro() {
           </div>
 
 
-          <div
-            className="
-              jellyfish-label
-              jellyfish-label-three
-            "
-          >
+          <div className="jellyfish-label jellyfish-label-three">
 
             <span className="label-number">
               03
@@ -367,7 +380,9 @@ function OceanIntro() {
         </div>
 
 
-        {/* BOTTOM TEXT */}
+        {/* =========================
+            BOTTOM TEXT
+        ========================== */}
 
         <div className="ocean-intro-copy ocean-intro-copy-bottom">
 
@@ -420,5 +435,6 @@ function OceanIntro() {
     </section>
   );
 }
+
 
 export default OceanIntro;

@@ -561,6 +561,7 @@
 
   z-index: 3;
 
+  /* Must receive mouse movement */
   pointer-events: none;
 }
 
