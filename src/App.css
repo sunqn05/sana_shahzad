@@ -2,6 +2,18 @@
   text-align: center;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: clip;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -13,9 +25,24 @@
   box-sizing: border-box;
 }
 
+html,
 body {
-  background: black;
-  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  background: #03070d;
+
+  overflow-x: clip;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: no-preference) {
