@@ -1398,3 +1398,8 @@ body.archive-fullscreen-open {
 
   z-index: 35000;
 }
+
+.archive-gallery-link,
+.archive-fullscreen-button {
+  font-variant-emoji: text;
+}

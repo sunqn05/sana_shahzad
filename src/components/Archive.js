@@ -1136,7 +1136,7 @@ function Archive() {
             to="/gallery"
             className="archive-gallery-link"
           >
-            Enter Gallery ↗
+            Enter Gallery {"\u2197\uFE0E"}
           </Link>
 
         </div>
@@ -1189,7 +1189,7 @@ function Archive() {
                 openFullscreen
               }
             >
-              Explore Fullscreen ↗
+              Explore Fullscreen {"\u2197\uFE0E"}
             </button>
 
           </div>
