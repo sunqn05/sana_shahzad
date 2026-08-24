@@ -34,7 +34,7 @@ function Cards() {
   ];
 
   return (
-    <section className="cards-section">
+    <section className="cards-section" id="explore-my-work">
       <div className="work-showcase">
         <div className="work-heading">
           <span>02 — EXPLORE</span>

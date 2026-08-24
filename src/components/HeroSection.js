@@ -17,7 +17,7 @@ function HeroSection() {
   const videoRef = useRef(null); 
 
   const scrollToWork = () => {
-    document.getElementById('archive')?.scrollIntoView({
+    document.getElementById('explore-my-work')?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
