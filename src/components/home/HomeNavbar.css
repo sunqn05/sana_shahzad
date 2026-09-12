@@ -33,6 +33,10 @@
   text-decoration: none;
 }
 
+html.developer-home-active .home-nav:not(.home-nav-scrolled):not(.home-nav-open) {
+  color: #071824;
+}
+
 .home-nav-scrolled,
 .home-nav-open {
   color: #071522;

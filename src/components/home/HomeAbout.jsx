@@ -15,7 +15,7 @@ export default function HomeAbout() {
         lines={['A little', 'about me.']}
         meta="A LITTLE CONTEXT"
         variant="split-subtle"
-      />
+      >
       <div className="home-about-grid">
         <div>
           <div className="home-about-copy" data-reveal>
@@ -30,6 +30,7 @@ export default function HomeAbout() {
         </figure>
       </div>
       <div className="home-about-foot home-meta" data-reveal><span>COMPUTER SCIENCE</span><span>MATHEMATICAL SCIENCES</span><span>GAME STUDIES</span></div>
+      </AnimatedSectionHeader>
     </section>
   );
 }

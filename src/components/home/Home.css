@@ -1,6 +1,6 @@
 
 /* All content styles are scoped to the homepage; existing routes keep their CSS. */
-.developer-home { --home-cream: #f2f4f3; --home-paper: #dce4e7; --home-navy: #071824; --home-muted: #65727b; --home-border: #ccd4d8; --home-blue: #6f98ad; --home-cyan: #a9c3cf; --home-gutter: clamp(24px, 5vw, 100px); color: var(--home-navy); background: var(--home-cream); font-family: Arial, Helvetica, sans-serif; --home-display-font: "against regular", Georgia, serif; line-height: 1.6; }
+.developer-home { --home-cream: #f2f4f3; --home-paper: #dce4e7; --home-navy: #071824; --home-muted: #65727b; --home-border: #ccd4d8; --home-blue: #6f98ad; --home-cyan: #a9c3cf; --home-gutter: clamp(24px, 5vw, 100px); --navbar-height: 78px; color: var(--home-navy); background: var(--home-cream); font-family: Arial, Helvetica, sans-serif; --home-display-font: "against regular", Georgia, serif; line-height: 1.6; }
 .developer-home, .developer-home *, .developer-home *::before, .developer-home *::after { box-sizing: border-box; }
 .developer-home :is(h1, h2, h3, p, li, a, button, figcaption) { max-width: 100%; overflow-wrap: anywhere; }
 .developer-home :is(h1, h2, h3) { min-width: 0; text-wrap: balance; }
@@ -12,6 +12,7 @@
 .developer-home ::selection { color: var(--home-cream); background: #25617a; }
 .developer-home .home-meta { font-size: 10px; line-height: 1.5; letter-spacing: 0.14em; font-weight: 500; }
 .developer-home .home-text-reveal { display: block; min-width: 0; max-width: 100%; }
+.developer-home .home-visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
 /* Leave room for serifs, accents and descenders inside each animation mask. */
 .developer-home .home-mask { display: block; max-width: 100%; overflow: hidden; padding: 0.06em 0.055em 0.12em; }
 .developer-home .home-mask + .home-mask { margin-top: -0.12em; }
@@ -22,187 +23,74 @@
 .developer-home .home-display { font-family: var(--home-display-font); font-size: clamp(2.75rem, 8vw, 9.375rem); font-weight: 400; letter-spacing: -0.045em; line-height: 1; }
 .developer-home .home-content-heading { font-family: var(--home-display-font); font-size: clamp(2rem, 4.4vw, 4.875rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.035em; }
 .developer-home .home-motion-header { position: relative; height: clamp(360px, 50svh, 540px); margin-bottom: clamp(42px, 7vw, 90px); overflow: hidden; isolation: isolate; }
-.developer-home .split-screen-section { width: 100vw !important; max-width: 100vw !important; height: 100svh; min-height: 560px; margin-left: calc(0px - var(--home-gutter)) !important; margin-bottom: clamp(42px, 7vw, 90px); }
-.developer-home .split-screen-section.is-split-pinned { left: 0 !important; margin-left: 0 !important; }
+.developer-home .split-screen-section { display: flex; flex-direction: column; width: 100% !important; max-width: none !important; height: calc(100svh - var(--navbar-height)); min-height: 0; margin: 0 !important; overflow: hidden; background: var(--home-cream); color: var(--home-navy); }
+.developer-home .split-screen-section.is-split-pinned { left: 0 !important; }
 .developer-home .split-screen-section .home-section-top,
 .developer-home .split-screen-section .home-motion-header-copy { padding-right: var(--home-gutter); padding-left: var(--home-gutter); }
+.developer-home .split-screen-section .home-section-top { flex: 0 0 auto; padding-top: clamp(18px, 3svh, 30px); }
 .developer-home .home-motion-header .home-section-top { position: relative; z-index: 4; }
 .developer-home .home-motion-header-stage { position: relative; height: calc(100% - 40px); }
 .developer-home .home-motion-header-copy { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(180px, 0.6fr); align-items: end; gap: clamp(28px, 5vw, 80px); height: 100%; padding: clamp(34px, 6svh, 70px) 0 clamp(24px, 4svh, 44px); }
 .developer-home .home-motion-header-copy .home-content-heading { font-size: clamp(3.75rem, 7vw, 7.5rem); line-height: 0.9; }
 .developer-home .home-motion-header-description { justify-self: end; max-width: 280px; color: var(--home-muted); font-size: 14px; line-height: 1.7; }
-.developer-home .split-screen-layer { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
-.developer-home .split-half { position: absolute; overflow: hidden; background: var(--home-paper); border-color: rgba(7, 24, 36, 0.12); }
-.developer-home .split-half-content { position: absolute; top: 0; right: 0; left: 0; display: grid; place-items: center; width: 100%; height: 100svh; padding: var(--home-gutter); }
-.developer-home .split-half-bottom .split-half-content { top: auto; bottom: 0; }
-.developer-home .split-half-content span { color: rgba(7, 24, 36, 0.16); font-family: var(--home-display-font); font-size: clamp(4rem, 9vw, 10rem); line-height: 0.88; letter-spacing: -0.045em; text-align: center; white-space: nowrap; }
-.developer-home .split-screen-section--vertical .split-half-top { top: 0; right: 0; left: 0; height: 50%; border-bottom: 1px solid; }
-.developer-home .split-screen-section--vertical .split-half-bottom { right: 0; bottom: 0; left: 0; height: 50%; border-top: 1px solid; }
-.developer-home .split-screen-section--horizontal .split-half-left { top: 0; bottom: 0; left: 0; width: 50%; border-right: 1px solid; }
-.developer-home .split-screen-section--horizontal .split-half-right { top: 0; right: 0; bottom: 0; width: 50%; border-left: 1px solid; }
-.developer-home .split-screen-section--vertical-asymmetric .split-half-top { top: 0; right: 0; left: 0; height: 40%; border-bottom: 1px solid; }
-.developer-home .split-screen-section--vertical-asymmetric .split-half-bottom { right: 0; bottom: 0; left: 0; height: 60%; border-top: 1px solid; }
-.developer-home .split-screen-section--horizontal .split-half-content span { color: rgba(242, 244, 243, 0.18); }
-.developer-home .split-screen-section--vertical-asymmetric .split-half { background: rgba(220, 228, 231, 0.96); }
+.developer-home .home-split-stage { flex: 1 1 auto; height: auto; min-height: 0; }
+.developer-home .home-split-content { display: flex; flex-direction: column; justify-content: center; width: 100%; height: 100%; min-height: 0; padding: clamp(16px, 2.5svh, 28px) var(--home-gutter) clamp(20px, 3svh, 34px); }
+.developer-home .home-split-support { flex: 0 0 auto; max-width: 330px; margin: 0 0 clamp(14px, 2svh, 24px) auto; color: var(--home-muted); font-size: 13px; line-height: 1.6; text-align: right; }
+.developer-home .split-screen-layer { position: absolute; inset: 0; z-index: 5; width: 100%; pointer-events: none; }
+.developer-home .split-half { position: absolute; right: 0; left: 0; height: 50%; overflow: hidden; background: var(--home-navy); will-change: transform; }
+.developer-home .split-half-top { top: 0; border-bottom: 1px solid rgba(242, 244, 243, 0.08); }
+.developer-home .split-half-bottom { bottom: 0; border-top: 1px solid rgba(242, 244, 243, 0.08); }
+.developer-home .split-title-composition { position: absolute; right: 0; left: 0; display: grid; place-items: center; width: 100%; height: calc(100svh - var(--navbar-height)); padding: clamp(24px, 4vw, 72px) var(--home-gutter); }
+.developer-home .split-half-top .split-title-composition { top: 0; }
+.developer-home .split-half-bottom .split-title-composition { bottom: 0; }
+.developer-home .split-title { display: block; width: min(100%, 1500px); color: var(--home-cream); font-family: var(--home-display-font); font-size: clamp(3.5rem, min(9vw, 16svh), 10rem); font-weight: 400; line-height: 0.88; letter-spacing: -0.045em; text-align: center; }
+.developer-home .split-title-line { display: block; }
 .developer-home .home-text-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 22px; padding: 10px 0; border-bottom: 1px solid currentColor; font-size: 13px; line-height: 1.4; }
 .developer-home .home-text-link span { display: inline-block; transition: transform 0.25s ease; }
 .developer-home .home-text-link:hover span { transform: translate(3px, -3px); }
-/* One ocean video; its poster is always underneath, independent of playback. */
-.developer-home .home-hero { position: relative; height: 100svh; min-height: min(620px, 100svh); color: var(--home-cream); background: var(--home-navy); isolation: isolate; }
-.developer-home .home-hero-media { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
-.developer-home .home-hero-media img, .developer-home .home-hero-media video { position: absolute; width: 100%; height: 100%; object-fit: cover; }
+/* Light hero with a centered cinematic ocean banner. */
+.developer-home .home-hero { position: relative; height: 100svh; min-height: min(640px, 100svh); color: var(--home-navy); background: var(--home-cream); isolation: isolate; }
+.developer-home .home-hero-content { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; width: 100%; height: 100%; padding: calc(var(--navbar-height) + clamp(12px, 2svh, 22px)) var(--home-gutter) clamp(18px, 2.5svh, 28px); overflow: hidden; }
+.developer-home .home-hero-eyebrow,
+.developer-home .home-hero-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; margin: 0; padding: 0; color: var(--home-muted); }
+.developer-home .home-hero-eyebrow > :first-child::before { content: ""; display: inline-block; width: 5px; height: 5px; margin: 0 10px 2px 0; border-radius: 50%; background: var(--home-blue); }
+.developer-home .home-hero-composition { align-self: center; display: grid; grid-template-rows: auto clamp(205px, 36svh, 390px) auto; row-gap: clamp(4px, 0.8svh, 9px); width: 100%; min-height: 0; padding-block: clamp(8px, 1.5svh, 18px); }
+.developer-home .home-hero-name-row { position: relative; z-index: 2; width: min(86vw, 1600px); margin: 0 auto; color: var(--home-navy); font-weight: 400; }
+.developer-home .home-hero-name-row--top { align-self: end; }
+.developer-home .home-hero-name-row--bottom { align-self: start; }
+.developer-home .home-hero-name { display: block; width: 100%; font-family: var(--home-display-font); font-size: clamp(4rem, min(8.2vw, 15svh), 9rem); font-weight: 400; line-height: 0.76; letter-spacing: -0.045em; white-space: nowrap; }
+.developer-home .home-hero-name .home-mask { display: flex; width: 100%; padding: 0.12em 0.04em; margin: 0; overflow: hidden; }
+.developer-home .home-hero-name-row--top .home-mask { justify-content: flex-start; }
+.developer-home .home-hero-name-row--bottom .home-mask { justify-content: flex-end; }
+.developer-home .home-hero-banner { position: relative; align-self: center; justify-self: center; width: min(86vw, 1600px); height: 100%; overflow: hidden; background: var(--home-navy); }
+.developer-home .home-hero-banner::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: rgba(7, 24, 36, 0.36); }
+.developer-home .home-hero-media { position: absolute; inset: 0; overflow: hidden; }
+.developer-home .home-hero-media img,
+.developer-home .home-hero-media video { position: absolute; width: 100%; height: 100%; object-fit: cover; }
 .developer-home .home-hero-media video { opacity: 0; transition: opacity 0.7s ease; }
 .developer-home .home-hero-media video.is-playing { opacity: 1; }
-.developer-home .home-hero::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(6,19,33,0.45), rgba(6,19,33,0.4) 40%, rgba(6,19,33,0.6) 70%, rgba(6,19,33,0.7)); }
-/* =========================================
-   HERO CONTENT
-========================================= */
-
-.developer-home .home-hero-content {
-  position: relative;
-
-  width: 100%;
-  height: 100svh;
-
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-
-  padding:
-    clamp(78px, 9vh, 96px)
-    var(--home-gutter)
-    28px;
-
-  overflow: hidden;
-}
-
-/* =========================================
-   HERO META
-========================================= */
-
-.developer-home .home-hero-eyebrow,
-.developer-home .home-hero-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  gap: 20px;
-  width: 100%;
-
-  margin: 0;
-  padding: 0;
-
-  color: var(--home-cream);
-}
-
-
-/* A small marker keeps the opening metadata tied to the cool accent. */
-
-.developer-home
-.home-hero-eyebrow
-> :first-child::before {
-  content: "";
-
-  display: inline-block;
-
-  width: 5px;
-  height: 5px;
-
-  margin:
-    0
-    10px
-    2px
-    0;
-
-  border-radius: 50%;
-
-  background: var(--home-cyan);
-}
-
-
-.developer-home .home-hero h1 {
-  align-self: center;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  color: var(--home-cream);
-}
-
-.developer-home .home-hero-lockup {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(180px, 0.72fr) minmax(0, 1fr);
-  align-items: center;
-  width: min(100%, 1480px);
-  margin-inline: auto;
-  gap: clamp(18px, 3vw, 58px);
-}
-
-.developer-home .home-hero-name {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  font-family: var(--home-display-font);
-  font-size: clamp(4.25rem, 8.6vw, 9.4rem);
-  font-weight: 400;
-  line-height: 0.82;
-  letter-spacing: -0.045em;
-  white-space: nowrap;
-}
-
-.developer-home .home-hero-name-left .home-mask { justify-content: flex-start; }
-.developer-home .home-hero-name-right .home-mask { justify-content: flex-end; }
-.developer-home .home-hero-name .home-mask {
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  padding: 0.14em 0.04em 0.08em;
-  margin: -0.08em 0 0;
-  overflow: hidden;
-}
-
-.developer-home .home-hero-role {
-  display: grid;
-  place-items: center;
-  min-width: 0;
-  color: var(--home-cyan);
-  font-size: clamp(0.67rem, 1.05vw, 1rem);
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  line-height: 1.35;
-  text-align: center;
-}
-
-.developer-home .home-hero-role-mask {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  min-height: 2.8em;
-  overflow: hidden;
-}
-
-.developer-home .home-hero-role-word {
-  display: block;
-  max-width: 100%;
-  animation: home-role-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
+.developer-home .home-hero-role { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; padding: 20px; color: var(--home-cream); font-size: clamp(0.67rem, 1.05vw, 1rem); font-weight: 500; letter-spacing: 0.16em; line-height: 1.35; text-align: center; }
+.developer-home .home-hero-role-mask { display: grid; place-items: center; width: min(100%, 330px); min-height: 2.8em; overflow: hidden; }
+.developer-home .home-hero-role-word { display: block; max-width: 100%; animation: home-role-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
 @keyframes home-role-enter {
   from { opacity: 0; transform: translateY(100%); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.developer-home .home-hero-footer { padding-top: 20px; border-top: 1px solid rgba(242, 244, 243, 0.28); }
+.developer-home .home-hero-footer { padding-top: 16px; border-top: 1px solid var(--home-border); }
 
 /* Introduction */
-.developer-home .home-about { padding-top: 58px; padding-bottom: 65px; }
+.developer-home .home-about { padding: 0; border-radius: 0; }
 
-.developer-home .home-about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr); gap: clamp(2rem, 5vw, 6rem); align-items: center; padding: 35px 0 20px; }
+.developer-home .home-about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr); gap: clamp(2rem, 5vw, 6rem); align-items: center; flex: 1 1 auto; min-height: 0; padding: 0 0 clamp(10px, 1.5svh, 18px); }
 
 .developer-home .home-about-grid > div { container-type: inline-size; }
 
 .developer-home .home-about .home-display { font-size: clamp(3.5rem, 13cqi, 7rem); line-height: 0.88; }
 .developer-home .home-about .home-motion-header .home-display { font-size: clamp(4rem, 8vw, 8rem); }
 
-.developer-home .home-about-copy { max-width: 510px; margin-top: 22px; }
+.developer-home .home-about-copy { max-width: 510px; margin-top: 0; }
 
 .developer-home .home-about-copy p { font-size: 14px; line-height: 1.7; margin-bottom: 14px; color: var(--home-muted); }
 
@@ -210,7 +98,7 @@
 
 .developer-home .home-about-figure { width: 100%; max-width: 540px; justify-self: end; }
 
-.developer-home .home-about-image { width: 100%; height: clamp(360px, 55vh, 540px); overflow: hidden; background: #d8d9d4; }
+.developer-home .home-about-image { width: 100%; height: clamp(280px, 44svh, 440px); overflow: hidden; background: #d8d9d4; }
 
 .developer-home .home-about-image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
 
@@ -222,11 +110,11 @@
    SKILLS
 ========================================= */
 
-.developer-home .home-skills { min-height: auto; padding: 55px var(--home-gutter) 60px; }
+.developer-home .home-skills { min-height: auto; padding: 0; border-radius: 0; }
 
 .developer-home .home-skills .home-content-heading { font-size: clamp(3rem, 5vw, 5.5rem); line-height: 0.92; }
 
-.developer-home .home-skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.35vw, 20px); align-items: stretch; }
+.developer-home .home-skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 1.35vw, 18px); align-items: stretch; flex: 1 1 auto; min-height: 0; }
 .developer-home .home-skills-grid > [data-card],
 .developer-home .home-projects-grid > [data-card],
 .developer-home .home-experience-grid > [data-card] { display: flex; min-width: 0; }
@@ -562,9 +450,9 @@
   transform: translate(4px, -4px);
 }
 
-.developer-home .home-experience { background: var(--home-paper); }
+.developer-home .home-experience { padding: 0; border-radius: 0; background: var(--home-cream); }
 
-.developer-home .home-experience-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; gap: clamp(14px, 1.8vw, 24px); }
+.developer-home .home-experience-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; flex: 1 1 auto; min-height: 0; gap: clamp(14px, 1.8vw, 24px); }
 
 .developer-home .home-experience-card { width: 100%; height: 100%; padding: clamp(22px, 2.5vw, 32px); border: 1px solid var(--home-border); border-radius: 14px; background: var(--home-cream); box-shadow: none; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease, border-color 0.3s ease; }
 
@@ -666,13 +554,7 @@
 }
 
 @media (max-width: 1100px) {
-  .developer-home .home-hero-lockup {
-    grid-template-columns: minmax(0, 1fr) minmax(150px, 0.58fr) minmax(0, 1fr);
-    gap: clamp(12px, 2vw, 28px);
-  }
-
   .developer-home .home-hero-name { font-size: clamp(3.7rem, 8vw, 6.8rem); }
-  .developer-home .home-skills-grid,
   .developer-home .home-projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -683,12 +565,17 @@
 }
 
 @media (max-width: 900px) {
+  .developer-home { --navbar-height: 72px; }
+  .developer-home .split-screen-section { height: auto; min-height: calc(100svh - var(--navbar-height)); overflow: visible; }
+  .developer-home .split-screen-layer { display: none; }
+  .developer-home .home-split-stage { flex: 1 1 auto; height: auto; overflow: visible; }
+  .developer-home .home-split-content { height: auto; padding-block: 32px 55px; }
+  .developer-home .home-split-support { margin-right: auto; margin-left: 0; text-align: left; }
+  .developer-home .home-skills-grid { grid-template-rows: none; }
   .developer-home .home-hero { min-height: 560px; }
-  .developer-home .home-hero-content { padding-top: 78px; }
-  .developer-home .home-hero-lockup { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px clamp(14px, 4vw, 32px); }
-  .developer-home .home-hero-role { grid-column: 1 / -1; grid-row: 2; min-height: 2.8em; }
-  .developer-home .home-hero-name-left { grid-column: 1; grid-row: 1; }
-  .developer-home .home-hero-name-right { grid-column: 2; grid-row: 1; }
+  .developer-home .home-hero-content { padding-top: calc(var(--navbar-height) + 12px); }
+  .developer-home .home-hero-composition { grid-template-rows: auto clamp(190px, 34svh, 320px) auto; }
+  .developer-home :is(.home-hero-banner, .home-hero-name-row) { width: min(90vw, 1600px); }
   .developer-home .home-hero-name { font-size: clamp(3.25rem, 10vw, 5.8rem); }
 }
 
@@ -741,14 +628,14 @@
 }
 
 @media (min-width: 1800px) {
-  .developer-home .home-sheet { padding-inline: max(var(--home-gutter), calc((100vw - 1600px) / 2)); }
+  .developer-home .home-sheet:not(.home-about):not(.home-skills):not(.home-experience) { padding-inline: max(var(--home-gutter), calc((100vw - 1600px) / 2)); }
 }
-@media (max-width: 1100px) {
+@media (max-width: 900px) {
   .developer-home .home-skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 900px) {
   .developer-home .home-hero { position: relative; }
-  .developer-home .home-sheet { padding-top: 55px; padding-bottom: 75px; border-radius: 0; }
+  .developer-home .home-sheet:not(.home-about):not(.home-skills):not(.home-experience) { padding-top: 55px; padding-bottom: 75px; border-radius: 0; }
   .developer-home .home-archive-sheet { border-radius: 0; }
   .developer-home .home-about-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 28px; }
   .developer-home .home-about-figure figcaption { flex-direction: column; gap: 5px; }
@@ -775,7 +662,8 @@
 }
 /* Keep the complete hero visible on short landscape screens and at zoom. */
 @media (max-height: 600px) {
-  .developer-home .home-hero-content { padding-top: 78px; }
+  .developer-home .home-hero-content { padding-top: var(--navbar-height); padding-bottom: 12px; }
+  .developer-home .home-hero-composition { grid-template-rows: auto minmax(150px, 30svh) auto; padding-block: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html.developer-home-active { scroll-behavior: auto; }
@@ -785,7 +673,7 @@
   .developer-home .home-skill-card:hover, .developer-home .home-skill-card li:hover, .developer-home .home-project-card:hover img { transform: none; }
 }
 @media (max-width: 600px) {
-  .developer-home .home-skills { padding: 38px var(--home-gutter) 45px; }
+  .developer-home .home-skills { padding: 0; }
   .developer-home .home-skills .home-content-heading { font-size: clamp(2.2rem, 10vw, 3rem); line-height: 0.95; }
   .developer-home .home-skills-grid { grid-template-columns: 1fr; gap: 10px; }
   .developer-home .home-skill-card { padding: 18px; border-radius: 12px; }
@@ -795,8 +683,7 @@
 }
 
 @media (min-width: 1101px) {
-  .developer-home .home-skills-grid > [data-card]:nth-child(2),
-  .developer-home .home-skills-grid > [data-card]:nth-child(5) { padding-top: 28px; }
+  .developer-home .home-skills-grid > [data-card] { padding-top: 0; }
 }
 
 @media (min-width: 901px) {
@@ -808,14 +695,17 @@
 
 @media (max-width: 1023px), (max-height: 699px), (prefers-reduced-motion: reduce) {
   .developer-home .home-hero { min-height: 0; }
-  .developer-home .home-hero-content { padding: 82px var(--home-gutter) 24px; }
-  .developer-home .home-hero-name { font-size: clamp(4.25rem, 17vw, 9rem); }
+  .developer-home .home-hero-name { font-size: clamp(3rem, min(10vw, 13svh), 7rem); }
   .developer-home .home-sheet,
   .developer-home .home-archive-sheet { border-radius: 0; }
 }
 
 @media (max-width: 600px) {
   .developer-home .home-hero-eyebrow { justify-content: flex-start; }
+  .developer-home .home-hero-composition { align-content: center; grid-template-rows: auto clamp(190px, 28svh, 240px) auto; row-gap: 10px; }
+  .developer-home :is(.home-hero-banner, .home-hero-name-row) { width: 100%; }
+  .developer-home .home-hero-name { font-size: clamp(2.6rem, 13vw, 3.4rem); line-height: 1; }
+  .developer-home .home-hero-name .home-mask { padding: 0.08em 0.02em; }
   .developer-home .home-hero-footer { align-items: flex-end; }
   .developer-home .home-hero-footer > :last-child { max-width: 12ch; text-align: right; }
   .developer-home .archive-header-right { flex-direction: column; align-items: flex-start; }

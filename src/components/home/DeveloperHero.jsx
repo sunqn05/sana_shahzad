@@ -122,39 +122,6 @@ export default function DeveloperHero() {
       data-reveal-root
     >
 
-      {/* OCEAN BACKGROUND */}
-
-      <div
-        className="home-hero-media"
-        aria-hidden="true"
-      >
-        <img
-          className="home-hero-poster"
-          src="/images/video-poster.png"
-          alt=""
-          fetchPriority="high"
-        />
-
-        <video
-          ref={video}
-          className={playing ? "is-playing" : ""}
-          src="/videos/video-wave.mp4"
-          poster="/images/video-poster.png"
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onPlaying={() => setPlaying(true)}
-          onError={() => setPlaying(false)}
-          onLoadedMetadata={() =>
-            ScrollTrigger.refresh()
-          }
-        />
-      </div>
-
-
-      {/* HERO CONTENT */}
-
       <div className="home-hero-content">
 
         <div
@@ -171,17 +138,47 @@ export default function DeveloperHero() {
         </div>
 
 
-        <h1 id="home-name" className="home-hero-lockup" aria-label="Sana Shahzad">
-          <TextReveal className="home-hero-name home-hero-name-left" delay={0.15} lines={["SANA"]} />
-          <span className="home-hero-role" aria-live="polite">
-            <span className="home-hero-role-mask">
-              <span ref={roleRef} key={roles[roleIndex]} className="home-hero-role-word" data-reveal>
-                {roles[roleIndex]}
+        <div className="home-hero-composition">
+          <h1 id="home-name" className="home-hero-name-row home-hero-name-row--top" aria-label="Sana Shahzad">
+            <TextReveal className="home-hero-name" delay={0.15} lines={["SANA"]} />
+          </h1>
+
+          <div className="home-hero-banner">
+            <div className="home-hero-media" aria-hidden="true">
+              <img
+                className="home-hero-poster"
+                src="/images/video-poster.png"
+                alt=""
+                fetchPriority="high"
+              />
+              <video
+                ref={video}
+                className={playing ? "is-playing" : ""}
+                src="/videos/video-wave.mp4"
+                poster="/images/video-poster.png"
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                onPlaying={() => setPlaying(true)}
+                onError={() => setPlaying(false)}
+                onLoadedMetadata={() => ScrollTrigger.refresh()}
+              />
+            </div>
+
+            <span className="home-hero-role" aria-live="polite">
+              <span className="home-hero-role-mask">
+                <span ref={roleRef} key={roles[roleIndex]} className="home-hero-role-word" data-reveal>
+                  {roles[roleIndex]}
+                </span>
               </span>
             </span>
-          </span>
-          <TextReveal className="home-hero-name home-hero-name-right" delay={0.28} lines={["SHAHZAD"]} />
-        </h1>
+          </div>
+
+          <div className="home-hero-name-row home-hero-name-row--bottom" aria-hidden="true">
+            <TextReveal className="home-hero-name" delay={0.28} lines={["SHAHZAD"]} />
+          </div>
+        </div>
 
         <div className="home-hero-footer home-meta" data-reveal>
           <span>TORONTO, CANADA</span>

@@ -26,9 +26,11 @@ export default function ExperienceSection() {
         label="04 / EXPERIENCE"
         lines={['Experience.', 'Growing through doing.']}
         meta="PEOPLE, IDEAS & IMPACT"
+        splitLines={['Experience']}
         variant="split-side"
-      />
+      >
       <div className="home-experience-grid">{experience.map((item, index) => <div data-card key={item.organization}><ExperienceCard item={item} index={index} /></div>)}</div>
+      </AnimatedSectionHeader>
     </section>
   );
 }

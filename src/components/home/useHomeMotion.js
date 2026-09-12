@@ -77,7 +77,13 @@ export function useSectionHeaderMotion(ref) {
   useLayoutEffect(() => {
     const media = gsap.matchMedia();
 
-    media.add('(prefers-reduced-motion: no-preference)', () => {
+    media.add({
+      desktop: '(min-width: 901px)',
+      motion: '(prefers-reduced-motion: no-preference)',
+    }, context => {
+      const { desktop, motion } = context.conditions;
+      if (!motion) return undefined;
+
       const section = ref.current;
       if (!section) return undefined;
 
@@ -91,13 +97,16 @@ export function useSectionHeaderMotion(ref) {
           const description = header.querySelector('[data-header-description]');
 
           if (variant.startsWith('split')) {
+            if (!desktop) return;
             const firstPanel = header.querySelector('[data-split-panel="first"]');
             const secondPanel = header.querySelector('[data-split-panel="second"]');
-            const horizontalSplit = variant === 'split';
             const timeline = gsap.timeline({
               scrollTrigger: {
                 trigger: header,
-                start: 'top top',
+                start: () => {
+                  const navbarHeight = parseFloat(getComputedStyle(header).getPropertyValue('--navbar-height')) || 78;
+                  return `top ${navbarHeight}px`;
+                },
                 end: '+=100%',
                 pin: true,
                 scrub: true,
@@ -109,13 +118,11 @@ export function useSectionHeaderMotion(ref) {
 
             timeline
               .to(firstPanel, {
-                xPercent: horizontalSplit ? -100 : 0,
-                yPercent: horizontalSplit ? 0 : -100,
+                yPercent: -100,
                 ease: 'none',
               }, 0)
               .to(secondPanel, {
-                xPercent: horizontalSplit ? 100 : 0,
-                yPercent: horizontalSplit ? 0 : 100,
+                yPercent: 100,
                 ease: 'none',
               }, 0);
             return;

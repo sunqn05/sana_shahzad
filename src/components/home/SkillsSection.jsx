@@ -25,9 +25,11 @@ export default function SkillsSection() {
         label="02 / TOOLKIT"
         lines={['Skills.', 'The stack.']}
         meta="THE THINGS I WORK WITH"
+        splitLines={['Skills']}
         variant="split"
-      />
+      >
       <div className="home-skills-grid">{skills.map((skill, index) => <div data-card key={skill.title}><SkillCard skill={skill} index={index} /></div>)}</div>
+      </AnimatedSectionHeader>
     </section>
   );
 }
