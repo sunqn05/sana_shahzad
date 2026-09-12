@@ -6,6 +6,7 @@ import ProjectsSection from '../home/ProjectsSection';
 import ExperienceSection from '../home/ExperienceSection';
 import HomeContact from '../home/HomeContact';
 import Archive from '../Archive';
+import ChapterHeader from '../home/ChapterHeader';
 import '../home/Home.css';
 
 export default function Home() {
@@ -22,11 +23,16 @@ export default function Home() {
   return (
     <main className="developer-home" id="home-main" tabIndex={-1}>
       <DeveloperHero />
+      <ChapterHeader id="about" label="01 / ABOUT" meta="A LITTLE CONTEXT" title="About me" align="bottom-right" />
       <HomeAbout />
+      <ChapterHeader id="skills" label="02 / SKILLS" meta="TOOLS & TECHNOLOGIES" title="Skills" align="upper-left" tone="dark" />
       <SkillsSection />
+      <ChapterHeader id="projects" label="03 / PROJECTS" meta="SELECTED WORK" title="Projects" align="bottom-right" />
       <ProjectsSection />
+      <ChapterHeader id="experience" label="04 / EXPERIENCE" meta="PEOPLE, IDEAS & IMPACT" title="Experience" align="upper-left" tone="dark" />
       <ExperienceSection />
-      <div className="home-archive-sheet" id="archive" tabIndex={-1}><Archive /></div>
+      <ChapterHeader id="archive" label="05 / ARCHIVE" meta="OUTSIDE OF CODE" title="Archive" align="bottom-right" />
+      <div className="home-archive-sheet home-chapter-content" id="archive-content"><Archive /></div>
       <HomeContact />
     </main>
   );

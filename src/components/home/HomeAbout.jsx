@@ -1,21 +1,14 @@
 import React, { useRef } from 'react';
-import AnimatedSectionHeader from './AnimatedSectionHeader';
-import { useSectionHeaderMotion, useSectionReveal } from './useHomeMotion';
+import { useSectionReveal } from './useHomeMotion';
 
 export default function HomeAbout() {
   const root = useRef(null);
   useSectionReveal(root);
-  useSectionHeaderMotion(root);
   return (
-    <section className="home-sheet home-about" id="about" ref={root} tabIndex={-1} aria-labelledby="home-about-title">
-      <AnimatedSectionHeader
-        headingClass="home-display"
-        id="home-about-title"
-        label="01 / ABOUT"
-        lines={['A little', 'about me.']}
-        meta="A LITTLE CONTEXT"
-        variant="split-subtle"
-      >
+    <section className="home-sheet home-chapter-content home-about" id="about-content" ref={root} aria-labelledby="about-title">
+      <div className="home-content-label home-meta" data-reveal>
+        <span>01 / ABOUT</span><span>A LITTLE CONTEXT</span>
+      </div>
       <div className="home-about-grid">
         <div>
           <div className="home-about-copy" data-reveal>
@@ -30,7 +23,6 @@ export default function HomeAbout() {
         </figure>
       </div>
       <div className="home-about-foot home-meta" data-reveal><span>COMPUTER SCIENCE</span><span>MATHEMATICAL SCIENCES</span><span>GAME STUDIES</span></div>
-      </AnimatedSectionHeader>
     </section>
   );
 }

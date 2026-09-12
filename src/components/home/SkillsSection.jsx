@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { skills } from './homeData';
-import AnimatedSectionHeader from './AnimatedSectionHeader';
-import { useSectionHeaderMotion, useSectionReveal } from './useHomeMotion';
+import { useSectionReveal } from './useHomeMotion';
 
 function SkillCard({ skill, index }) {
   return (
@@ -16,20 +15,12 @@ function SkillCard({ skill, index }) {
 export default function SkillsSection() {
   const root = useRef(null);
   useSectionReveal(root);
-  useSectionHeaderMotion(root);
   return (
-    <section className="home-sheet home-skills" id="skills" tabIndex={-1} ref={root} aria-labelledby="home-skills-title">
-      <AnimatedSectionHeader
-        description={<>Technology.<br />Systems. Design.</>}
-        id="home-skills-title"
-        label="02 / TOOLKIT"
-        lines={['Skills.', 'The stack.']}
-        meta="THE THINGS I WORK WITH"
-        splitLines={['Skills']}
-        variant="split"
-      >
+    <section className="home-sheet home-chapter-content home-skills" id="skills-content" ref={root} aria-labelledby="skills-title">
+      <div className="home-content-label home-meta" data-reveal>
+        <span>02 / SKILLS</span><span>TOOLS &amp; TECHNOLOGIES</span>
+      </div>
       <div className="home-skills-grid">{skills.map((skill, index) => <div data-card key={skill.title}><SkillCard skill={skill} index={index} /></div>)}</div>
-      </AnimatedSectionHeader>
     </section>
   );
 }
