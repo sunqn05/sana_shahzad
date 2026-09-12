@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 import { useSectionReveal } from "./home/useHomeMotion";
+import TextReveal from "./home/TextReveal";
 
 import "./Archive.css";
 
@@ -1134,9 +1135,11 @@ function Archive() {
 
   return (
     <section
-      className="archive-section"
-      id="creative-archive"
+      className="archive-section home-section"
+      id="archive"
       ref={sectionRef}
+      tabIndex={-1}
+      aria-labelledby="archive-title"
     >
 
       {/* =========================
@@ -1150,6 +1153,10 @@ function Archive() {
           <span className="archive-label" data-reveal>
             05 / ARCHIVE
           </span>
+
+          <h2 className="home-section-title home-section-title--left" id="archive-title">
+            <TextReveal>Archive</TextReveal>
+          </h2>
 
         </div>
 

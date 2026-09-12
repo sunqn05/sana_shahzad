@@ -1,16 +1,20 @@
 import React, { useRef } from 'react';
 import { useSectionReveal } from './useHomeMotion';
+import TextReveal from './TextReveal';
 
 export default function HomeAbout() {
   const root = useRef(null);
   useSectionReveal(root);
   return (
-    <section className="home-sheet home-chapter-content home-about" id="about-content" ref={root} aria-labelledby="about-title">
+    <section className="home-sheet home-section home-about" id="about" ref={root} tabIndex={-1} aria-labelledby="about-title">
       <div className="home-content-label home-meta" data-reveal>
         <span>01 / ABOUT</span><span>A LITTLE CONTEXT</span>
       </div>
       <div className="home-about-grid">
-        <div>
+        <div className="home-about-editorial">
+          <h2 className="home-section-title home-section-title--left" id="about-title">
+            <TextReveal>About me</TextReveal>
+          </h2>
           <div className="home-about-copy" data-reveal>
             <p className="home-lead">A developer’s mindset.<br />A creative point of view.</p>
             <p>I’m Sana, a Computer Science student at the University of Toronto, with minors in Mathematical Sciences and Game Studies.</p>
