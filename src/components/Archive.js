@@ -49,6 +49,31 @@ function Archive() {
   const [isFullscreen, setIsFullscreen] =
     useState(false);
 
+  // Portaled dialogs keep keyboard focus inside and return it to their opener.
+  useEffect(() => {
+    if (!selectedImage && !isFullscreen) return undefined;
+    const opener = document.activeElement;
+    const dialog = document.querySelector(selectedImage ? '.archive-lightbox' : '.archive-fullscreen-portal');
+    const app = document.getElementById('root');
+    const wasInert = app?.inert;
+    if (app) app.inert = true;
+    dialog?.querySelector(selectedImage ? '.archive-close' : '.archive-fullscreen-close')?.focus();
+    const trapFocus = event => {
+      if (event.key !== 'Tab' || !dialog) return;
+      const controls = [...dialog.querySelectorAll('button, a[href]')].filter(element => element.tabIndex >= 0);
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener('keydown', trapFocus);
+    return () => {
+      document.removeEventListener('keydown', trapFocus);
+      if (app) app.inert = wasInert;
+      if (opener?.isConnected) opener.focus({ preventScroll: true });
+    };
+  }, [selectedImage, isFullscreen]);
+
   /* =========================
      IMAGES
   ========================= */
@@ -497,7 +522,9 @@ function Archive() {
         ".archive-grid-item"
       );
 
-    gsap.fromTo(
+    const intro = gsap.matchMedia();
+    intro.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.fromTo(
       items,
       {
         opacity: 0,
@@ -517,9 +544,12 @@ function Archive() {
         ease:
           "power3.out",
       }
-    );
+      );
+    });
 
     return () => {
+      intro.revert();
+      gsap.killTweensOf(canvas);
       if (
         draggableRef.current
       ) {
@@ -752,8 +782,7 @@ function Archive() {
         x,
         y,
 
-        duration:
-          0.8,
+        duration: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 0.8,
 
         ease:
           "power3.inOut",
@@ -952,6 +981,7 @@ function Archive() {
               type="button"
 
               className="archive-grid-item"
+              tabIndex={isMobile && !fullscreen ? -1 : 0}
 
               key={
                 fullscreen
@@ -998,6 +1028,8 @@ function Archive() {
                 }`}
 
                 draggable="false"
+                loading="lazy"
+                decoding="async"
               />
             </button>
           )
@@ -1111,7 +1143,7 @@ function Archive() {
         <div className="archive-title-group">
 
           <span className="archive-label">
-            03 — ARCHIVE
+            05 / OUTSIDE OF CODE
           </span>
 
           <h2>
@@ -1207,7 +1239,7 @@ function Archive() {
         isFullscreen &&
         createPortal(
 
-          <div className="archive-fullscreen-portal">
+          <div className="archive-fullscreen-portal" role="dialog" aria-modal="true" aria-label="Explore creative archive">
 
             {/* TOP BAR */}
 
@@ -1271,6 +1303,9 @@ function Archive() {
 
           <div
             className="archive-lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Creative archive image preview"
 
             onClick={
               closeImage

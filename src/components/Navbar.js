@@ -1,8 +1,14 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import HomeNavbar from './home/HomeNavbar';
 import './Navbar.css';
 
 function Navbar() {
+  const { pathname } = useLocation();
+  return pathname === '/' ? <HomeNavbar /> : <LegacyNavbar />;
+}
+
+function LegacyNavbar() {
 
   const [click, setClick] = useState(false);
 

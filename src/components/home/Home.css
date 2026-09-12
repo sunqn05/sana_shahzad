@@ -1,0 +1,816 @@
+
+/* All content styles are scoped to the homepage; existing routes keep their CSS. */
+.developer-home { --home-cream: #f4f3ef; --home-paper: #faf9f6; --home-navy: #071824; --home-muted: #596873; --home-border: #d2dadd; --home-blue: #587f98; --home-cyan: #a9c3cf; --home-gutter: clamp(24px, 5vw, 100px); color: var(--home-navy); background: var(--home-navy); font-family: Arial, Helvetica, sans-serif; --home-display-font: "against regular", Georgia, serif; line-height: 1.6; }
+.developer-home .home-hero-name {
+  max-width: none;
+}
+.developer-home, .developer-home *, .developer-home *::before, .developer-home *::after { box-sizing: border-box; }
+.developer-home :is(h1, h2, h3, p, li, a, button, figcaption) { max-width: 100%; overflow-wrap: anywhere; }
+.developer-home :is(h1, h2, h3) { min-width: 0; text-wrap: balance; }
+.developer-home :is(.home-sheet, .home-section-intro, .home-about-grid, .home-skills-grid, .home-projects-grid, .home-experience-grid) > * { min-width: 0; max-width: 100%; }
+.developer-home a { color: inherit; text-decoration: none; }
+.developer-home button { font: inherit; }
+.developer-home :is(a, button):focus-visible { outline: 2px solid var(--home-blue); outline-offset: 6px; }
+.developer-home :is(section, footer, .home-archive-sheet)[id] { scroll-margin-top: 72px; }
+.developer-home ::selection { color: var(--home-cream); background: #25617a; }
+.developer-home .home-meta { font-size: 10px; line-height: 1.5; letter-spacing: 0.14em; font-weight: 500; }
+.developer-home .home-text-reveal { display: block; min-width: 0; max-width: 100%; }
+/* Leave room for serifs, accents and descenders inside each animation mask. */
+.developer-home .home-mask { display: block; max-width: 100%; overflow: hidden; padding: 0.06em 0.055em 0.12em; }
+.developer-home .home-mask + .home-mask { margin-top: -0.12em; }
+.developer-home .home-reveal-inner { display: block; max-width: 100%; overflow-wrap: anywhere; }
+.developer-home .home-chapter { position: relative; isolation: isolate; }
+.developer-home .home-sheet { position: relative; z-index: 2; padding: 80px var(--home-gutter) 110px; background: var(--home-cream); }
+.developer-home .home-section-top { display: flex; justify-content: space-between; gap: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--home-border); }
+.developer-home .home-section-top > :last-child { color: var(--home-muted); }
+.developer-home .home-display { font-family: var(--home-display-font); font-size: clamp(2.75rem, 8vw, 9.375rem); font-weight: 400; letter-spacing: -0.045em; line-height: 1; }
+.developer-home .home-content-heading { font-family: var(--home-display-font); font-size: clamp(2rem, 4.4vw, 4.875rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.035em; }
+.developer-home .home-section-intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 35px; margin: 48px 0; flex-wrap: wrap; }
+.developer-home .home-section-intro > p { color: var(--home-muted); font-size: 14px; line-height: 1.7; }
+.developer-home .home-text-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 22px; padding: 10px 0; border-bottom: 1px solid currentColor; font-size: 13px; line-height: 1.4; }
+.developer-home .home-text-link span { display: inline-block; transition: transform 0.25s ease; }
+.developer-home .home-text-link:hover span { transform: translate(3px, -3px); }
+.developer-home .home-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 40px; padding: 18px 24px; border: 1px solid currentColor; font-size: 12px; transition: background 0.25s ease, color 0.25s ease; }
+.developer-home .home-button-light { color: var(--home-navy); background: var(--home-cream); border-color: var(--home-cream); }
+.developer-home .home-button-light:hover { background: transparent; color: var(--home-cream); }
+
+/* One ocean video; its poster is always underneath, independent of playback. */
+.developer-home .home-hero { position: sticky; top: 0; height: 100svh; min-height: 0; color: var(--home-cream); background: var(--home-navy); isolation: isolate; }
+.developer-home .home-hero-media { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+.developer-home .home-hero-media img, .developer-home .home-hero-media video { position: absolute; width: 100%; height: 100%; object-fit: cover; }
+.developer-home .home-hero-media video { opacity: 0; transition: opacity 0.7s ease; }
+.developer-home .home-hero-media video.is-playing { opacity: 1; }
+.developer-home .home-hero::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(6,19,33,0.45), rgba(6,19,33,0.4) 40%, rgba(6,19,33,0.6) 70%, rgba(6,19,33,0.7)); }
+/* =========================================
+   HERO CONTENT
+========================================= */
+
+.developer-home .home-hero-content {
+  position: relative;
+
+  width: 100%;
+  height: 100svh;
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  padding:
+    90px
+    0
+    18px;
+
+  overflow: hidden;
+}
+
+/* =========================================
+   HERO META
+========================================= */
+
+.developer-home .home-hero-eyebrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+  width: 100%;
+
+  margin: 0;
+  padding: 18px var(--home-gutter);
+
+  color: var(--home-cream);
+}
+
+
+/* cyan dot beside SOFTWARE DEVELOPER */
+
+.developer-home
+.home-hero-eyebrow
+> :first-child::before {
+  content: "";
+
+  display: inline-block;
+
+  width: 5px;
+  height: 5px;
+
+  margin:
+    0
+    10px
+    2px
+    0;
+
+  border-radius: 50%;
+
+  background: var(--home-cyan);
+}
+
+
+/* =========================================
+   GIANT SANA
+========================================= */
+
+
+@font-face {
+  font-family: "against regular";
+  src: url("../../assets/fonts/against regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* =========================================
+   GIANT HERO NAME
+========================================= */
+
+.developer-home .home-hero h1 {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: clamp(8px, 1.2vh, 18px);
+
+  width: 100vw;
+
+  margin: 0;
+  padding: 0;
+
+  color: var(--home-cream);
+
+  overflow: visible;
+}
+
+
+/* GIANT SANA */
+
+.developer-home .home-hero-name {
+  display: block;
+
+  width: 100vw;
+  max-width: none;
+
+  font-family: var(--home-display-font);
+
+  font-size: clamp(9rem, 28vw, 34rem);
+  font-weight: 400;
+
+  line-height: 0.82;
+
+  letter-spacing: -0.015em;
+
+  text-align: center;
+  white-space: nowrap;
+
+  /*
+    Important:
+    make SANA fill the width
+    WITHOUT making it taller.
+  */
+  transform: scaleX(1.11);
+
+  transform-origin: center bottom;
+}
+
+
+/* reveal mask */
+
+.developer-home .home-hero-name .home-mask {
+  width: 100%;
+
+  max-width: none;
+
+  padding:
+    0.13em
+    0
+    0.025em;
+
+  margin: -0.1em 0 0;
+
+  overflow: hidden;
+}
+
+/* text reveal mask */
+
+.developer-home .home-hero-name .home-mask {
+  /*
+   * Svetze has tall/thin details that extend
+   * beyond a tight line box, so give the mask
+   * more room above the letters.
+   */
+  padding:
+    0.14em
+    0.01em
+    0.05em;
+
+  margin: -0.10em 0 0;
+}
+/* Introduction */
+/* Introduction */
+.developer-home .home-about { padding-top: 58px; padding-bottom: 65px; }
+
+.developer-home .home-about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr); gap: clamp(2rem, 5vw, 6rem); align-items: center; padding: 35px 0 20px; }
+
+.developer-home .home-about-grid > div { container-type: inline-size; }
+
+.developer-home .home-about .home-display { font-size: clamp(3.5rem, 13cqi, 7rem); line-height: 0.88; }
+
+.developer-home .home-about-copy { max-width: 510px; margin-top: 22px; }
+
+.developer-home .home-about-copy p { font-size: 14px; line-height: 1.7; margin-bottom: 14px; color: var(--home-muted); }
+
+.developer-home .home-about-copy .home-lead { font-size: 19px; line-height: 1.4; color: var(--home-navy); margin-bottom: 18px; }
+
+.developer-home .home-about-copy a { margin-top: 4px; }
+
+.developer-home .home-about-figure { width: 100%; max-width: 540px; justify-self: end; }
+
+.developer-home .home-about-image { width: 100%; height: clamp(360px, 55vh, 540px); overflow: hidden; background: #d8d9d4; }
+
+.developer-home .home-about-image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+
+.developer-home .home-about-figure figcaption { display: flex; justify-content: space-between; gap: 15px; padding-top: 12px; font-size: 9px; }
+
+.developer-home .home-about-foot { display: flex; flex-wrap: wrap; gap: 24px; padding-top: 18px; border-top: 1px solid var(--home-border); color: var(--home-muted); }
+
+/* Sticky type panels are covered by the following sheet without added pin space. */
+
+.developer-home .home-transition { position: sticky; top: 0; height: 78svh; min-height: 620px; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: clamp(0.5rem, 2svh, 1.5rem); padding: clamp(5.25rem, 10svh, 7rem) var(--home-gutter) clamp(1rem, 3svh, 2.5rem); overflow: clip; color: var(--home-navy); background: #e6e7e0; }
+
+.developer-home .home-transition-background { position: absolute; inset: -4%; background: #e6e7e0; }
+
+.developer-home .home-transition-top, .developer-home .home-transition-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; position: relative; z-index: 1; }
+
+.developer-home .home-transition-top { padding-bottom: clamp(0.5rem, 2svh, 1.5rem); border-bottom: 1px solid #06132140; }
+
+.developer-home .home-transition-bottom { align-items: center; }
+
+.developer-home .home-transition-heading { --word-width: 26cqi; --word-max: 26rem; container-type: size; display: grid; align-items: center; width: 100%; min-height: 0; position: relative; z-index: 1; font-family: var(--home-display-font); font-weight: 400; line-height: 0.9; letter-spacing: -0.025em; text-align: center; white-space: nowrap; }
+
+.developer-home .home-transition-heading .home-text-reveal { width: 100%; max-width: none; white-space: nowrap; font-size: clamp(min(2rem, 10cqi, 48cqb), min(var(--word-width), 72cqb), var(--word-max)); }
+
+.developer-home .home-scroll-arrow { font-size: 35px; font-weight: 400; margin-left: 22px; vertical-align: middle; }
+
+.developer-home .home-transition-projects .home-transition-heading { --word-width: 14.5cqi; --word-max: 17rem; }
+
+.developer-home .home-transition-experience .home-transition-heading { --word-width: 12.5cqi; --word-max: 15rem; }
+
+.developer-home .home-transition-archive .home-transition-heading { --word-width: 18cqi; --word-max: 20rem; }
+
+/* Cards */
+/* =========================================
+   SKILLS
+========================================= */
+
+.developer-home .home-skills { min-height: auto; padding: 55px var(--home-gutter) 60px; }
+
+.developer-home .home-skills .home-section-top { padding-bottom: 12px; }
+
+.developer-home .home-skills .home-section-intro { margin: 20px 0 24px; }
+
+.developer-home .home-skills .home-content-heading { font-size: clamp(3rem, 5vw, 5.5rem); line-height: 0.92; }
+
+.developer-home .home-skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, auto); gap: 14px; }
+.developer-home .home-skill-card {
+  height: 100%;
+  min-height: 0;
+
+  padding: clamp(18px, 2vw, 24px);
+
+  /* transparent at rest */
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(6, 19, 33, 0.13);
+  border-radius: 16px;
+
+  box-shadow: none;
+
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+
+.developer-home .home-skill-card:hover {
+  transform: translateY(-6px);
+
+  background: rgba(255, 255, 255, 0.22);
+
+  border-color: rgba(59, 142, 174, 0.32);
+
+  box-shadow:
+    0 18px 45px rgba(6, 19, 33, 0.11),
+    0 4px 12px rgba(6, 19, 33, 0.05);
+}
+
+.developer-home .home-skill-card::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.42) 0%,
+      rgba(255, 255, 255, 0.10) 22%,
+      transparent 45%
+    );
+
+  opacity: 0.55;
+}
+.developer-home .home-card-top { display: flex; justify-content: space-between; gap: 16px; color: var(--home-muted); margin-bottom: clamp(12px, 1.8vh, 20px); }
+
+.developer-home .home-card-top > :last-child {
+  display: inline-block;
+
+  font-size: 18px;
+  line-height: 1;
+
+  color: var(--home-blue);
+
+  transition: transform 0.3s ease;
+}
+
+
+.developer-home .home-skill-card:hover
+.home-card-top > :last-child {
+  transform: translate(4px, -4px);
+}
+.developer-home .home-skill-card h3 { font-size: clamp(13px, 1vw, 15px); letter-spacing: 0.01em; font-weight: 600; margin-bottom: clamp(10px, 1.5vh, 16px); }
+
+.developer-home .home-skill-card ul { display: flex; flex-direction: column; align-items: flex-start; gap: clamp(2px, 0.55vh, 6px); margin: 0; padding: 0; list-style: none; color: var(--home-muted); font-size: clamp(12px, 0.9vw, 14px); line-height: 1.45; }
+
+.developer-home .home-skill-card li { transition: transform 0.2s ease, color 0.2s ease; }
+
+.developer-home .home-skill-card li:hover { transform: translateX(4px); color: var(--home-navy); }
+
+.developer-home .home-skill-card:hover {
+  transform: translateY(-4px);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.10)
+    );
+
+  border-color: rgba(255, 255, 255, 0.7);
+
+  box-shadow:
+    0 14px 40px rgba(6, 19, 33, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(6, 19, 33, 0.05);
+}
+
+/* =========================================
+   PROJECTS SECTION
+========================================= */
+
+.developer-home .home-projects { padding-top: 48px; padding-bottom: 75px; }
+
+.developer-home .home-projects .home-section-top { padding-bottom: 14px; }
+
+.developer-home .home-projects .home-section-intro { margin: 24px 0 32px; }
+
+.developer-home .home-projects .home-content-heading { font-size: clamp(3rem, 5vw, 5.7rem); line-height: 0.95; }
+
+
+/* =========================================
+   PROJECT GRID
+========================================= */
+
+.developer-home .home-projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+
+
+/* =========================================
+   PROJECT CARD
+========================================= */
+
+.developer-home .home-project-card {
+  display: block;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  border: 1px solid var(--home-border);
+  border-radius: 14px;
+
+  box-shadow: none;
+
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+
+/* =========================================
+   PROJECT IMAGE / PLACEHOLDER
+========================================= */
+
+.developer-home .home-project-image {
+  position: relative;
+
+  aspect-ratio: 16 / 10;
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #dce5e5,
+      #c8d8dc
+    );
+}
+
+
+.developer-home .home-project-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.developer-home .home-project-monogram {
+  font-family: var(--home-display-font);
+
+  font-size: clamp(4rem, 7vw, 7rem);
+  font-weight: 400;
+
+  color: rgba(6, 19, 33, 0.55);
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================
+   PROJECT CONTENT
+========================================= */
+
+.developer-home .home-project-details {
+  padding: 24px;
+}
+
+
+.developer-home .home-project-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+
+  color: var(--home-muted);
+}
+
+
+.developer-home .home-project-arrow {
+  display: inline-block;
+
+  color: var(--home-blue);
+
+  font-size: 18px;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+.developer-home .home-project-details h3 {
+  margin-bottom: 12px;
+
+  font-family: var(--home-display-font);
+
+  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+  font-weight: 400;
+
+  line-height: 1;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+.developer-home .home-project-details p {
+  color: var(--home-muted);
+
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+
+/* =========================================
+   TECHNOLOGY TAGS
+========================================= */
+
+.developer-home .home-project-technologies {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin: 20px 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+
+.developer-home .home-project-technologies li {
+  padding: 6px 10px;
+
+  border: 1px solid rgba(6, 19, 33, 0.1);
+  border-radius: 100px;
+
+  font-size: 10px;
+
+  color: var(--home-muted);
+
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
+/* =========================================
+   PROJECT CTA
+========================================= */
+
+.developer-home .home-project-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 25px;
+  padding-top: 15px;
+
+  border-top: 1px solid var(--home-border);
+
+  font-size: 12px;
+}
+
+
+.developer-home .home-project-cta span:last-child {
+  display: inline-block;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+/* =========================================
+   PROJECT HOVER
+========================================= */
+
+.developer-home .home-project-card:hover {
+  transform: translateY(-8px);
+
+  border-color: rgba(59, 142, 174, 0.4);
+
+  box-shadow:
+    0 22px 50px rgba(6, 19, 33, 0.13),
+    0 5px 15px rgba(6, 19, 33, 0.05);
+}
+
+
+.developer-home .home-project-card:hover .home-project-image img {
+  transform: scale(1.045);
+}
+
+
+.developer-home .home-project-card:hover .home-project-monogram {
+  transform: scale(1.07);
+}
+
+
+.developer-home .home-project-card:hover .home-project-details h3 {
+  transform: translateY(-2px);
+}
+
+
+.developer-home .home-project-card:hover .home-project-arrow {
+  transform: translate(4px, -4px);
+}
+
+
+.developer-home .home-project-card:hover .home-project-cta span:last-child {
+  transform: translate(4px, -4px);
+}
+
+.developer-home .home-experience { background: var(--home-paper); }
+
+.developer-home .home-experience-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+
+.developer-home .home-experience-card { height: 100%; padding: 32px; border: 1px solid var(--home-border); border-radius: 14px; background: var(--home-cream); box-shadow: none; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease, border-color 0.3s ease; }
+
+.developer-home .home-experience-card:hover { transform: translateY(-6px); border-color: rgba(59,142,174,0.32); box-shadow: 0 18px 45px rgba(6,19,33,0.10), 0 4px 12px rgba(6,19,33,0.04); }
+
+.developer-home .home-experience-dates { font-size: 12px; color: var(--home-muted); margin-bottom: 12px; }
+
+.developer-home .home-experience-card h3 { font-family: var(--home-display-font); font-size: clamp(1.5rem, 3vw, 3rem); font-weight: 400; line-height: 1.12; letter-spacing: -0.035em; }
+
+.developer-home .home-organization { font-size: 14px; margin-top: 12px; }
+
+.developer-home .home-experience-description { border-top: 1px solid var(--home-border); padding-top: 26px; margin-top: 28px; font-size: 14px; color: var(--home-muted); }
+
+.developer-home .home-experience-card ul { padding-left: 17px; margin-top: 18px; color: var(--home-muted); font-size: 14px; }
+
+.developer-home .home-experience-card li + li { margin-top: 8px; }
+
+@media (max-width: 600px) { .developer-home .home-experience-grid { grid-template-columns: 1fr; } }
+
+/* Reuse the archive, with restrained colors and borders. */
+.developer-home .home-archive-sheet { position: relative; z-index: 2; background: var(--home-navy); }
+.developer-home .archive-section { background: var(--home-navy); color: var(--home-cream); padding-top: 75px; }
+.developer-home .archive-header { width: auto; margin-inline: var(--home-gutter); max-width: none; }
+.developer-home .archive-title-group { min-width: 0; max-width: 100%; }
+.developer-home .archive-title-group h2 { font-family: var(--home-display-font); font-size: clamp(2rem, 5vw, 4.7rem); font-weight: 400; line-height: 1.1; }
+.developer-home .archive-label, .developer-home .archive-drag-hint { color: #b4c7cf; }
+.developer-home .archive-gallery-link { color: var(--home-cream); }
+.developer-home .archive-grid-item { box-shadow: none; }
+.developer-home .archive-grid-item:hover { box-shadow: none; border-color: var(--home-cyan); }
+.developer-home .archive-controls { box-shadow: none; border-radius: 6px; }
+
+/* =========================================
+   CONTACT / CLOSING
+========================================= */
+
+.developer-home .home-contact {
+  padding-top: 60px;
+  padding-bottom: 28px;
+}
+
+.developer-home .home-contact .home-display {
+  margin-top: 38px;
+  max-width: 1050px;
+
+  font-size: clamp(4rem, 8vw, 8.5rem);
+  line-height: 0.88;
+}
+
+.developer-home .home-contact .home-display em {
+  color: #366a7c;
+}
+
+.developer-home .home-contact-links {
+  margin: 38px 0 60px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 40px;
+}
+
+.developer-home .home-contact-email {
+  font-size: clamp(18px, 1.7vw, 26px);
+
+  padding: 8px 0;
+
+  border-bottom: 1px solid var(--home-border);
+
+  overflow-wrap: anywhere;
+}
+
+.developer-home .home-contact-email span {
+  margin-left: 14px;
+}
+
+.developer-home .home-contact-socials {
+  display: flex;
+  align-items: center;
+
+  gap: 26px;
+
+  flex-wrap: wrap;
+}
+
+.developer-home .home-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid var(--home-border);
+
+  color: var(--home-muted);
+}
+
+/* Let the display font's descenders fit inside the reveal mask */
+.developer-home .home-contact .home-display {
+  line-height: 0.95;
+}
+
+.developer-home .home-contact .home-display .home-mask {
+  padding-top: 0.08em;
+  padding-bottom: 0.22em;
+  overflow: hidden;
+}
+
+.developer-home .home-contact .home-display .home-mask + .home-mask {
+  margin-top: -0.08em;
+}
+
+@media (max-width: 900px) {
+  .developer-home .home-projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .developer-home .home-projects { padding-top: 45px; }
+  .developer-home .home-projects-grid { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 1800px) {
+  .developer-home .home-sheet { padding-inline: max(var(--home-gutter), calc((100vw - 1600px) / 2)); }
+}
+@media (max-width: 1100px) {
+  .developer-home .home-skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .developer-home .home-hero-actions { gap: 18px; }
+  .developer-home .home-hero-copy { font-size: 12px; }
+}
+@media (max-width: 900px) {
+  .developer-home .home-hero { position: relative; }
+  .developer-home .home-transition { position: relative; height: 90svh; }
+  .developer-home .home-sheet { padding-top: 55px; padding-bottom: 75px; }
+  .developer-home .home-hero-copy { font-size: 14px; }
+  .developer-home .home-hero-caption > span { display: none; }
+  .developer-home .home-about-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 28px; }
+  .developer-home .home-about-figure figcaption { flex-direction: column; gap: 5px; }
+  .developer-home .home-section-intro { align-items: flex-start; flex-direction: column; gap: 20px; margin-block: 35px; }
+  .developer-home .home-experience-card { padding: 25px; }
+}
+@media (max-width: 600px) {
+  .developer-home { --home-gutter: 22px; }
+  .developer-home .home-meta { font-size: 9px; letter-spacing: 0.1em; }
+  .developer-home .home-section-top > :last-child { display: none; }
+  .developer-home .home-hero-eyebrow > :last-child { display: none; }
+  .developer-home .home-hero-eyebrow { justify-content: center; }
+  .developer-home .home-hero-copy { font-size: 13px; }
+  .developer-home .home-hero-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; width: 100%; }
+  .developer-home .home-hero-actions .home-button { grid-column: 1 / -1; }
+  .developer-home .home-transition { height: 85svh; }
+  .developer-home .home-transition-top > :last-child { display: none; }
+  .developer-home .home-transition-bottom { align-items: flex-end; }
+  .developer-home .home-transition-bottom > :first-child { max-width: 52%; }
+  .developer-home .home-transition-bottom > :last-child { font-size: 0; }
+  .developer-home .home-scroll-arrow { font-size: 34px; }
+  .developer-home .home-about-grid { grid-template-columns: 1fr; padding-block: 42px; gap: 45px; }
+  .developer-home .home-about-figure { max-width: 420px; width: 100%; }
+  .developer-home .home-about-figure figcaption { flex-direction: row; }
+  .developer-home .home-about-foot { gap: 15px 24px; }
+  .developer-home .home-skills-grid, .developer-home .home-projects-grid, .developer-home .home-experience-grid { grid-template-columns: 1fr; }
+  .developer-home .home-skill-card { padding: 25px; }
+  .developer-home .home-card-top { margin-bottom: 22px; }
+  .developer-home .home-experience-card { padding: 27px 24px; }
+  .developer-home .home-contact .home-display { font-size: clamp(2rem, 10vw, 4.5rem); }
+  .developer-home .home-contact-links { margin-bottom: 60px; }
+  .developer-home .home-contact-socials { gap: 20px; }
+  .developer-home .home-footer-bottom { flex-wrap: wrap; font-size: 8px; }
+}
+/* Keep the complete hero visible on short landscape screens and at zoom. */
+@media (max-height: 600px) {
+  .developer-home .home-hero-content { padding-top: 78px; }
+  .developer-home .home-hero-intro { gap: 3px; }
+  .developer-home .home-hero-copy { font-size: 12px; line-height: 1.45; }
+  .developer-home .home-hero-copy p + p { margin-top: 2px; }
+  .developer-home .home-hero-actions { display: flex; gap: 8px 18px; }
+  .developer-home .home-hero-actions .home-button { padding: 10px 14px; gap: 20px; }
+  .developer-home .home-hero-caption { padding-block: 2px; }
+  .developer-home .home-transition { height: 100svh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.developer-home-active { scroll-behavior: auto; }
+  .developer-home *, .home-nav * { animation: none !important; transition: none !important; }
+  .developer-home .home-hero, .developer-home .home-transition { position: relative; }
+  .developer-home .home-hero-media video, .developer-home .home-hero-caption button { display: none; }
+  .developer-home .home-skill-card:hover, .developer-home .home-skill-card li:hover, .developer-home .home-project-card:hover img { transform: none; }
+}
+.developer-home .home-transition { color: var(--home-navy); background: #dbe3e6; }
+
+.developer-home .home-transition-background { background: #dbe3e6; }
+
+@media (max-width: 600px) {
+  .developer-home .home-skills { padding: 38px var(--home-gutter) 45px; }
+  .developer-home .home-skills .home-section-intro { margin: 18px 0 22px; }
+  .developer-home .home-skills .home-content-heading { font-size: clamp(2.2rem, 10vw, 3rem); line-height: 0.95; }
+  .developer-home .home-skills-grid { grid-template-columns: 1fr; gap: 10px; }
+  .developer-home .home-skill-card { padding: 18px; border-radius: 12px; }
+  .developer-home .home-card-top { margin-bottom: 12px; }
+  .developer-home .home-skill-card h3 { font-size: 13px; margin-bottom: 9px; }
+  .developer-home .home-skill-card ul { gap: 2px; font-size: 12px; line-height: 1.4; }
+  .developer-home .home-transition-skills .home-transition-heading { --word-width: 20cqi; --word-max: 15rem; }
+}
