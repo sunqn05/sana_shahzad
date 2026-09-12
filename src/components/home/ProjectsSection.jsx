@@ -18,7 +18,7 @@ export default function ProjectsSection() {
       aria-labelledby="projects-title"
     >
       <div className="home-content-label home-meta" data-reveal>
-        <span>03 / SELECTED WORK</span><span>SOFTWARE / WEB / INTERACTIVE</span>
+        <span>03 / SELECTED WORK ♡</span><span>SOFTWARE ♡ WEB ♡ INTERACTIVE</span>
       </div>
       <h2 className="home-section-title home-section-title--left" id="projects-title">
         <TextReveal>Projects</TextReveal>

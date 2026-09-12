@@ -1151,7 +1151,7 @@ function Archive() {
         <div className="archive-title-group">
 
           <span className="archive-label" data-reveal>
-            05 / ARCHIVE
+            05 / ARCHIVE ♡
           </span>
 
           <h2 className="home-section-title home-section-title--left" id="archive-title">
@@ -1164,7 +1164,7 @@ function Archive() {
         <div className="archive-header-right">
 
           <p className="archive-intro-copy" data-reveal>
-            Outside of code.<br />A different kind of exploration.
+            A creative moodboard 
           </p>
 
           <span className="archive-drag-hint" data-reveal>

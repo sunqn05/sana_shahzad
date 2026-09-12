@@ -17,7 +17,7 @@ export default function DeveloperHero() {
   const roleRef = useRef(null);
 
   const [playing, setPlaying] = useState(false);
-  const roles = ["SOFTWARE DEVELOPER", "GRAPHIC DESIGNER", "ENGINEER"];
+  const roles = ["♡ SOFTWARE DEVELOPER ♡", "♡ GRAPHIC DESIGNER ♡", "♡ GAME DEVELOPER ♡", "♡ WEB DEVELOPER ♡", "♡ ARTIST ♡", "♡ HUMAN ♡"];
   const [roleIndex, setRoleIndex] = useState(0);
 
   useSectionReveal(root);
@@ -26,13 +26,13 @@ export default function DeveloperHero() {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (preference.matches) return undefined;
 
-    const entranceDelay = 1.9;
+    const entranceDelay = 1.2;
     let interval;
     const timeout = window.setTimeout(() => {
       if (roleRef.current) ScrollTrigger.refresh();
       interval = window.setInterval(() => {
         setRoleIndex(current => (current + 1) % roles.length);
-      }, 4200);
+      }, 2200);
     }, entranceDelay * 1000);
 
     return () => {
@@ -129,11 +129,11 @@ export default function DeveloperHero() {
           data-reveal
         >
           <span>
-            PORTFOLIO / 2026
+            PORTFOLIO / 2026 ♡
           </span>
 
           <span>
-            SOFTWARE DEVELOPER &amp; CREATIVE
+            GAME &amp; SOFTWARE DEVELOPER
           </span>
         </div>
 
@@ -182,7 +182,7 @@ export default function DeveloperHero() {
 
         <div className="home-hero-footer home-meta" data-reveal>
           <span>TORONTO, CANADA</span>
-          <span>SCROLL TO EXPLORE <span aria-hidden="true">→</span></span>
+          <span>SCROLL TO EXPLORE <span aria-hidden="true"></span>♡</span>
         </div>
 
       </div>

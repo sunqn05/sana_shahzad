@@ -1,17 +1,17 @@
 export const profile = {
   email: 'sanashahzad0169@gmail.com',
   github: 'https://github.com/sunqn05',
-  linkedin: 'https://www.linkedin.com/in/sana-shahzad-01726328b',
+  linkedin: 'www.linkedin.com/in/sanashahzad',
   resume: '/Sana-Shahzad-Resume.pdf',
 };
 
 export const skills = [
   { title: 'Languages', items: ['Python', 'Java', 'C', 'C#', 'JavaScript', 'TypeScript'] },
-  { title: 'Web & Frameworks', items: ['React', 'Vite', 'HTML/CSS', 'Tailwind CSS'] },
   { title: 'Systems & Networking', items: ['Linux', 'TCP/IP', 'Socket Programming', 'Processes & Threads', 'Memory Management', 'Client-Server Architecture'] },
   { title: 'Developer Tools & IDEs', items: ['Git', 'GitHub', 'VS Code', 'Visual Studio', 'IntelliJ IDEA', 'PyCharm'] },
   { title: 'Design Software', items: ['Figma', 'Adobe Photoshop', 'Illustrator', 'InDesign', 'Autodesk Maya', 'Unity'] },
   { title: 'Design & Interactive', items: ['UI/UX Design', 'Graphic Design', 'Game Design', '3D Modeling', 'Pixel Art', 'Responsive Web Design'] },
+  { title: 'Web & Frameworks', items: ['React', 'Vite', 'HTML/CSS', 'Tailwind CSS'],}
 ];
 
 // Add projects here when ready. Each entry uses this shape:
@@ -40,7 +40,7 @@ export const projects = [
   {
     id: "her-closet",
     title: "Her Closet",
-    category: "HACKATHON",
+    category: "SOFTWARE DEVELOPMENT",
     description:
       "An AI-powered shopping engine and personalized discovery platform for modest fashion across fragmented retail stores.",
     technologies: [
@@ -72,13 +72,13 @@ export const projects = [
 // Experience from the supplied Sana Shahzad résumé.
 export const experience = [
   {
-    organization: 'Ultimate Coders', role: 'Coding Instructor', dates: 'Aug 2025 — Present',
+    organization: 'ULTIMATE CODERS ♡', role: 'Coding Instructor', dates: 'Aug 2025 - Present',
     category: 'TECHNICAL EDUCATION',
-    description: 'Making complex coding concepts approachable through hands-on, project-based learning.',
+    description: 'Making complex coding concepts approachable through hands-on, debugging, project-based learning, including game, web, and software development.',
     details: ['Teach Scratch, Python, HTML, CSS, JavaScript, and Arduino.', 'Adapt lessons to different learning styles in small-group settings.'],
   },
   {
-    organization: 'MCSS', role: 'VP Marketing', dates: 'Aug 2026 — Present',
+    organization: 'MCSS ♡', role: 'VP Marketing', dates: 'Aug 2026 - Present',
     category: 'LEADERSHIP & COMMUNICATION',
     description: 'Co-leading marketing strategy and creative direction for the Mathematical & Computational Sciences Society at UTM.',
     details: ['Coordinate social media and graphic design initiatives.', 'Bring photography and videography into the society’s communications.'],

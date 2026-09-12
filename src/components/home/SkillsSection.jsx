@@ -19,7 +19,7 @@ export default function SkillsSection() {
   return (
     <section className="home-sheet home-section home-skills" id="skills" ref={root} tabIndex={-1} aria-labelledby="skills-title">
       <div className="home-content-label home-meta" data-reveal>
-        <span>02 / SKILLS</span><span>TOOLS &amp; TECHNOLOGIES</span>
+        <span>02 / SKILLS ♡</span><span>TOOLS &amp; TECHNOLOGIES</span>
       </div>
       <h2 className="home-section-title home-section-title--right" id="skills-title">
         <TextReveal>Skills</TextReveal>

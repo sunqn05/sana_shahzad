@@ -20,7 +20,7 @@ export default function ExperienceSection() {
   return (
     <section className="home-sheet home-section home-experience" id="experience" ref={root} tabIndex={-1} aria-labelledby="experience-title">
       <div className="home-content-label home-meta" data-reveal>
-        <span>04 / EXPERIENCE</span><span>GROWING THROUGH DOING</span>
+        <span>04 / EXPERIENCE ♡</span><span>GROWING THROUGH DOING</span>
       </div>
       <h2 className="home-section-title home-section-title--right" id="experience-title">
         <TextReveal>Experience</TextReveal>
