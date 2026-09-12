@@ -11,7 +11,10 @@ import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 import TextReveal from "./home/TextReveal";
-import { useSectionReveal } from "./home/useHomeMotion";
+import {
+  useSectionHeaderMotion,
+  useSectionReveal,
+} from "./home/useHomeMotion";
 
 import "./Archive.css";
 
@@ -20,6 +23,7 @@ gsap.registerPlugin(Draggable);
 function Archive() {
   const sectionRef = useRef(null);
   useSectionReveal(sectionRef);
+  useSectionHeaderMotion(sectionRef);
 
   /* =========================
      PREVIEW REFS
@@ -1144,28 +1148,32 @@ function Archive() {
           HEADER
       ========================== */}
 
-      <div className="archive-header">
+      <div
+        className="archive-header"
+        data-motion-header
+        data-motion-variant="parallax-subtle"
+      >
 
         <div className="archive-title-group">
 
-          <span className="archive-label" data-reveal>
+          <span className="archive-label" data-header-meta>
             05 / OUTSIDE OF CODE
           </span>
 
-          <h2>
+          <h2 data-header-title>
             <TextReveal>Creative Archive</TextReveal>
           </h2>
 
         </div>
 
 
-        <div className="archive-header-right" data-reveal>
+        <div className="archive-header-right" data-header-description>
 
-          <p className="archive-intro-copy">
+          <p className="archive-intro-copy" data-reveal>
             Outside of code.<br />A different kind of exploration.
           </p>
 
-          <span className="archive-drag-hint">
+          <span className="archive-drag-hint" data-reveal>
 
             {isMobile
               ? "Interactive Archive"
@@ -1177,6 +1185,7 @@ function Archive() {
           <Link
             to="/gallery"
             className="archive-gallery-link"
+            data-reveal
           >
             Enter Gallery {"\u2197\uFE0E"}
           </Link>

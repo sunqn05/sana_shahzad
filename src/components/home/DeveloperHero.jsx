@@ -14,10 +14,32 @@ import TextReveal from "./TextReveal";
 export default function DeveloperHero() {
   const root = useRef(null);
   const video = useRef(null);
+  const roleRef = useRef(null);
 
   const [playing, setPlaying] = useState(false);
+  const roles = ["SOFTWARE DEVELOPER", "GRAPHIC DESIGNER", "ENGINEER"];
+  const [roleIndex, setRoleIndex] = useState(0);
 
   useSectionReveal(root);
+
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (preference.matches) return undefined;
+
+    const entranceDelay = 1.9;
+    let interval;
+    const timeout = window.setTimeout(() => {
+      if (roleRef.current) ScrollTrigger.refresh();
+      interval = window.setInterval(() => {
+        setRoleIndex(current => (current + 1) % roles.length);
+      }, 4200);
+    }, entranceDelay * 1000);
+
+    return () => {
+      if (interval) window.clearInterval(interval);
+      window.clearTimeout(timeout);
+    };
+  }, [roles.length]);
 
   /* =========================================
      VIDEO PLAYBACK
@@ -149,17 +171,16 @@ export default function DeveloperHero() {
         </div>
 
 
-        <h1
-          id="home-name"
-          aria-label="Sana Shahzad"
-        >
-          <TextReveal
-            className="home-hero-name"
-            delay={0.15}
-            lines={["SANA", "SHAHZAD"]}
-          >
-            SANA SHAHZAD
-          </TextReveal>
+        <h1 id="home-name" className="home-hero-lockup" aria-label="Sana Shahzad">
+          <TextReveal className="home-hero-name home-hero-name-left" delay={0.15} lines={["SANA"]} />
+          <span className="home-hero-role" aria-live="polite">
+            <span className="home-hero-role-mask">
+              <span ref={roleRef} key={roles[roleIndex]} className="home-hero-role-word" data-reveal>
+                {roles[roleIndex]}
+              </span>
+            </span>
+          </span>
+          <TextReveal className="home-hero-name home-hero-name-right" delay={0.28} lines={["SHAHZAD"]} />
         </h1>
 
         <div className="home-hero-footer home-meta" data-reveal>

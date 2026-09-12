@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { experience } from './homeData';
-import { useSectionReveal } from './useHomeMotion';
-import TextReveal from './TextReveal';
+import AnimatedSectionHeader from './AnimatedSectionHeader';
+import { useSectionHeaderMotion, useSectionReveal } from './useHomeMotion';
 
 function ExperienceCard({ item, index }) {
   return (
@@ -17,13 +17,18 @@ function ExperienceCard({ item, index }) {
 export default function ExperienceSection() {
   const root = useRef(null);
   useSectionReveal(root);
+  useSectionHeaderMotion(root);
   return (
     <section className="home-sheet home-experience" id="experience" tabIndex={-1} ref={root} aria-labelledby="home-experience-title">
-      <div className="home-section-top home-meta" data-reveal><span>04 / EXPERIENCE</span><span>PEOPLE, IDEAS & IMPACT</span></div>
-      <div className="home-experience-composition">
-        <div className="home-section-intro"><h2 className="home-content-heading" id="home-experience-title"><TextReveal lines={['Experience.', 'Growing through doing.']} /></h2><p data-reveal>Sharing what I know.<br />Learning from the people around me.</p></div>
-        <div className="home-experience-grid">{experience.map((item, index) => <div data-card key={item.organization}><ExperienceCard item={item} index={index} /></div>)}</div>
-      </div>
+      <AnimatedSectionHeader
+        description={<>Sharing what I know.<br />Learning from the people around me.</>}
+        id="home-experience-title"
+        label="04 / EXPERIENCE"
+        lines={['Experience.', 'Growing through doing.']}
+        meta="PEOPLE, IDEAS & IMPACT"
+        variant="split-side"
+      />
+      <div className="home-experience-grid">{experience.map((item, index) => <div data-card key={item.organization}><ExperienceCard item={item} index={index} /></div>)}</div>
     </section>
   );
 }

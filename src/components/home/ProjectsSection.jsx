@@ -1,13 +1,14 @@
 import React, { useRef } from "react";
 import ProjectCard from "./ProjectCard";
 import { projects } from "./homeData";
-import { useSectionReveal } from "./useHomeMotion";
-import TextReveal from "./TextReveal";
+import AnimatedSectionHeader from "./AnimatedSectionHeader";
+import { useSectionHeaderMotion, useSectionReveal } from "./useHomeMotion";
 
 export default function ProjectsSection() {
   const root = useRef(null);
 
   useSectionReveal(root);
+  useSectionHeaderMotion(root);
 
   return (
     <section
@@ -17,37 +18,30 @@ export default function ProjectsSection() {
       ref={root}
       aria-labelledby="home-projects-title"
     >
-      <div className="home-section-top home-meta" data-reveal>
-        <span>03 / SELECTED WORK</span>
-        <span>SOFTWARE / WEB / INTERACTIVE</span>
-      </div>
-
-      <div className="home-projects-composition">
-        <div className="home-section-intro">
-          <h2
-            className="home-content-heading"
-            id="home-projects-title"
-          >
-            <TextReveal lines={['Projects.', 'Ideas made real.']} />
-          </h2>
-
-          <p data-reveal>
+      <AnimatedSectionHeader
+        description={
+          <>
             A few things I’ve built,
             <br />
             designed, and explored.
-          </p>
-        </div>
+          </>
+        }
+        id="home-projects-title"
+        label="03 / SELECTED WORK"
+        lines={['Projects.', 'Ideas made real.']}
+        meta="SOFTWARE / WEB / INTERACTIVE"
+        variant="parallax"
+      />
 
-        <div className="home-projects-grid">
-          {projects.map((project, index) => (
-            <div data-card key={project.id}>
-              <ProjectCard
-                project={project}
-                index={index}
-              />
-            </div>
-          ))}
-        </div>
+      <div className="home-projects-grid">
+        {projects.map((project, index) => (
+          <div data-card key={project.id}>
+            <ProjectCard
+              project={project}
+              index={index}
+            />
+          </div>
+        ))}
       </div>
     </section>
   );

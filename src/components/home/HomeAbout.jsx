@@ -1,16 +1,23 @@
 import React, { useRef } from 'react';
-import { useSectionReveal } from './useHomeMotion';
-import TextReveal from './TextReveal';
+import AnimatedSectionHeader from './AnimatedSectionHeader';
+import { useSectionHeaderMotion, useSectionReveal } from './useHomeMotion';
 
 export default function HomeAbout() {
   const root = useRef(null);
   useSectionReveal(root);
+  useSectionHeaderMotion(root);
   return (
     <section className="home-sheet home-about" id="about" ref={root} tabIndex={-1} aria-labelledby="home-about-title">
-      <div className="home-section-top home-meta" data-reveal><span>01 / ABOUT</span><span>A LITTLE CONTEXT</span></div>
+      <AnimatedSectionHeader
+        headingClass="home-display"
+        id="home-about-title"
+        label="01 / ABOUT"
+        lines={['A little', 'about me.']}
+        meta="A LITTLE CONTEXT"
+        variant="split-subtle"
+      />
       <div className="home-about-grid">
         <div>
-          <h2 className="home-display" id="home-about-title"><TextReveal lines={['A little', 'about me.']} /></h2>
           <div className="home-about-copy" data-reveal>
             <p className="home-lead">A developer’s mindset.<br />A creative point of view.</p>
             <p>I’m Sana, a Computer Science student at the University of Toronto, with minors in Mathematical Sciences and Game Studies.</p>
