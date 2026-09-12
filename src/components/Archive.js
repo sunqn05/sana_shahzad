@@ -1155,6 +1155,10 @@ function Archive() {
 
         <div className="archive-header-right">
 
+          <p className="archive-intro-copy">
+            Outside of code.<br />A different kind of exploration.
+          </p>
+
           <span className="archive-drag-hint">
 
             {isMobile

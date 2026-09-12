@@ -1,23 +1,13 @@
-import React, { useLayoutEffect, useRef } from 'react';
-import { gsap, useSectionReveal } from './useHomeMotion';
+import React, { useRef } from 'react';
+import { useSectionReveal } from './useHomeMotion';
 import TextReveal from './TextReveal';
 
 export default function HomeAbout() {
   const root = useRef(null);
   useSectionReveal(root);
-  useLayoutEffect(() => {
-    const media = gsap.matchMedia();
-    media.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
-      gsap.fromTo('.home-about-image img', { yPercent: -3, scale: 1.08 }, {
-        yPercent: 3, ease: 'none',
-        scrollTrigger: { trigger: root.current, start: 'top bottom', end: 'bottom top', scrub: 0.8 },
-      });
-    }, root);
-    return () => media.revert();
-  }, []);
   return (
     <section className="home-sheet home-about" id="about" ref={root} tabIndex={-1} aria-labelledby="home-about-title">
-      <div className="home-section-top home-meta" data-reveal><span>01 / INTRODUCTION</span><span>A LITTLE CONTEXT</span></div>
+      <div className="home-section-top home-meta" data-reveal><span>01 / ABOUT</span><span>A LITTLE CONTEXT</span></div>
       <div className="home-about-grid">
         <div>
           <h2 className="home-display" id="home-about-title"><TextReveal lines={['A little', 'about me.']} /></h2>

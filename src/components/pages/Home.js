@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import DeveloperHero from '../home/DeveloperHero';
 import HomeAbout from '../home/HomeAbout';
-import SectionTransition from '../home/SectionTransition';
 import SkillsSection from '../home/SkillsSection';
 import ProjectsSection from '../home/ProjectsSection';
 import ExperienceSection from '../home/ExperienceSection';
 import HomeContact from '../home/HomeContact';
 import Archive from '../Archive';
+import { useHorizontalScroll } from '../home/useHomeMotion';
 import '../home/Home.css';
 
 export default function Home() {
+  const horizontal = useRef(null);
+  const track = useRef(null);
+  useHorizontalScroll(horizontal, track);
+
   useEffect(() => {
     const previousTitle = document.title;
     document.title = 'Sana Shahzad — Software Developer';
@@ -22,24 +26,17 @@ export default function Home() {
 
   return (
     <main className="developer-home" id="home-main" tabIndex={-1}>
-      <div className="home-chapter"><DeveloperHero /><HomeAbout /></div>
-      <div className="home-chapter">
-        <SectionTransition title="SKILLS" number="02" label="THE TOOLKIT" note="TECHNOLOGY / SYSTEMS / DESIGN" variant="skills" />
-        <SkillsSection />
+      <div className="home-horizontal-scroll" ref={horizontal}>
+        <div className="home-horizontal-track" ref={track}>
+          <DeveloperHero />
+          <HomeAbout />
+          <SkillsSection />
+          <ProjectsSection />
+          <ExperienceSection />
+          <div className="home-archive-sheet" id="archive" tabIndex={-1}><Archive /></div>
+          <HomeContact />
+        </div>
       </div>
-      <div className="home-chapter">
-        <SectionTransition title="PROJECTS" number="03" label="SELECTED WORK" note="IDEAS INTO EXPERIENCES" variant="projects" />
-        <ProjectsSection />
-      </div>
-      <div className="home-chapter">
-        <SectionTransition title="EXPERIENCE" number="04" label="ALONG THE WAY" note="LEARNING / TEACHING / LEADING" variant="experience" />
-        <ExperienceSection />
-      </div>
-      <div className="home-chapter">
-        <SectionTransition title="ARCHIVE" number="05" label="OUTSIDE OF CODE" note="A DIFFERENT KIND OF EXPLORATION" variant="archive" />
-        <div className="home-archive-sheet" id="archive" tabIndex={-1}><Archive /></div>
-      </div>
-      <HomeContact />
     </main>
   );
 }

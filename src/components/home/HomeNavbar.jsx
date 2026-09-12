@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { gsap } from './useHomeMotion';
+import { gsap, scrollToHomeSection } from './useHomeMotion';
 import './HomeNavbar.css';
 
 const homeSections = ['About', 'Skills', 'Projects', 'Experience', 'Archive'];
@@ -58,7 +58,7 @@ export default function HomeNavbar() {
 
     if (!isHome) {
       event.preventDefault();
-      routerNavigate(`/#${id}`);
+      routerNavigate(id === 'home-main' ? '/' : `/#${id}`);
       return;
     }
 
@@ -67,9 +67,10 @@ export default function HomeNavbar() {
       event.preventDefault();
       window.history.pushState(null, '', `#${id}`);
       target.focus({ preventScroll: true });
-      target.scrollIntoView({
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-      });
+      scrollToHomeSection(
+        id,
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      );
     }
   };
 

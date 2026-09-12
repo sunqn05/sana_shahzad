@@ -27,7 +27,7 @@ export default function ProjectsSection() {
           className="home-content-heading"
           id="home-projects-title"
         >
-          <TextReveal>Ideas, made real.</TextReveal>
+          <TextReveal lines={['Projects.', 'Ideas made real.']} />
         </h2>
 
         <p data-reveal>

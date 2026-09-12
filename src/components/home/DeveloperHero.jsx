@@ -1,12 +1,10 @@
 import React, {
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from "react";
 
 import {
-  gsap,
   ScrollTrigger,
   useSectionReveal,
 } from "./useHomeMotion";
@@ -90,52 +88,6 @@ export default function DeveloperHero() {
     };
   }, []);
 
-
-  /* =========================================
-     HERO SCROLL MOTION
-  ========================================= */
-
-  useLayoutEffect(() => {
-    const media = gsap.matchMedia();
-
-    media.add(
-      "(min-width: 901px) and (prefers-reduced-motion: no-preference)",
-      () => {
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: root.current.parentElement,
-              start: "top top",
-              end: () => `+=${window.innerHeight}`,
-              scrub: 0.8,
-              invalidateOnRefresh: true,
-            },
-          })
-          .to(
-            ".home-hero-media",
-            {
-              scale: 1.06,
-              ease: "none",
-            },
-            0
-          )
-          .to(
-            ".home-hero-content",
-            {
-              y: -60,
-              opacity: 0.5,
-              ease: "none",
-            },
-            0
-          );
-      },
-      root
-    );
-
-    return () => media.revert();
-  }, []);
-
-
   /* =========================================
      HERO
   ========================================= */
@@ -188,26 +140,32 @@ export default function DeveloperHero() {
           data-reveal
         >
           <span>
-            SOFTWARE DEVELOPER
+            PORTFOLIO / 2026
           </span>
 
           <span>
-            BASED IN TORONTO, ON
+            SOFTWARE DEVELOPER &amp; CREATIVE
           </span>
         </div>
 
 
         <h1
           id="home-name"
-          aria-label="Sana"
+          aria-label="Sana Shahzad"
         >
           <TextReveal
             className="home-hero-name"
             delay={0.15}
+            lines={["SANA", "SHAHZAD"]}
           >
-            SANA
+            SANA SHAHZAD
           </TextReveal>
         </h1>
+
+        <div className="home-hero-footer home-meta" data-reveal>
+          <span>TORONTO, CANADA</span>
+          <span>SCROLL TO EXPLORE <span aria-hidden="true">→</span></span>
+        </div>
 
       </div>
 

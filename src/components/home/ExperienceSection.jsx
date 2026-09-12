@@ -20,7 +20,7 @@ export default function ExperienceSection() {
   return (
     <section className="home-sheet home-experience" id="experience" tabIndex={-1} ref={root} aria-labelledby="home-experience-title">
       <div className="home-section-top home-meta" data-reveal><span>04 / EXPERIENCE</span><span>PEOPLE, IDEAS & IMPACT</span></div>
-      <div className="home-section-intro"><h2 className="home-content-heading" id="home-experience-title"><TextReveal>Growing through doing.</TextReveal></h2><p data-reveal>Sharing what I know.<br />Learning from the people around me.</p></div>
+      <div className="home-section-intro"><h2 className="home-content-heading" id="home-experience-title"><TextReveal lines={['Experience.', 'Growing through doing.']} /></h2><p data-reveal>Sharing what I know.<br />Learning from the people around me.</p></div>
       <div className="home-experience-grid">{experience.map((item, index) => <div data-card key={item.organization}><ExperienceCard item={item} index={index} /></div>)}</div>
     </section>
   );

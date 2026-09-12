@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useNavigationType } from "react-router-dom";
+import { scrollToHomeSection } from "./home/useHomeMotion";
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -8,8 +9,7 @@ function ScrollToTop() {
   useEffect(() => {
     if (hash) {
       const frame = window.requestAnimationFrame(() => {
-        const target = document.getElementById(decodeURIComponent(hash.slice(1)));
-        target?.scrollIntoView({ behavior: "auto", block: "start" });
+        scrollToHomeSection(decodeURIComponent(hash.slice(1)), "auto");
       });
       return () => window.cancelAnimationFrame(frame);
     }
