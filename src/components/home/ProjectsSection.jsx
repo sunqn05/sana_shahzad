@@ -22,30 +22,32 @@ export default function ProjectsSection() {
         <span>SOFTWARE / WEB / INTERACTIVE</span>
       </div>
 
-      <div className="home-section-intro">
-        <h2
-          className="home-content-heading"
-          id="home-projects-title"
-        >
-          <TextReveal lines={['Projects.', 'Ideas made real.']} />
-        </h2>
+      <div className="home-projects-composition">
+        <div className="home-section-intro">
+          <h2
+            className="home-content-heading"
+            id="home-projects-title"
+          >
+            <TextReveal lines={['Projects.', 'Ideas made real.']} />
+          </h2>
 
-        <p data-reveal>
-          A few things I’ve built,
-          <br />
-          designed, and explored.
-        </p>
-      </div>
+          <p data-reveal>
+            A few things I’ve built,
+            <br />
+            designed, and explored.
+          </p>
+        </div>
 
-      <div className="home-projects-grid">
-        {projects.map((project, index) => (
-          <div data-card key={project.id}>
-            <ProjectCard
-              project={project}
-              index={index}
-            />
-          </div>
-        ))}
+        <div className="home-projects-grid">
+          {projects.map((project, index) => (
+            <div data-card key={project.id}>
+              <ProjectCard
+                project={project}
+                index={index}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

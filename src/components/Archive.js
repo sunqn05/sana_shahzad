@@ -10,12 +10,17 @@ import { Link } from "react-router-dom";
 
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
+import TextReveal from "./home/TextReveal";
+import { useSectionReveal } from "./home/useHomeMotion";
 
 import "./Archive.css";
 
 gsap.registerPlugin(Draggable);
 
 function Archive() {
+  const sectionRef = useRef(null);
+  useSectionReveal(sectionRef);
+
   /* =========================
      PREVIEW REFS
   ========================= */
@@ -1132,6 +1137,7 @@ function Archive() {
     <section
       className="archive-section"
       id="creative-archive"
+      ref={sectionRef}
     >
 
       {/* =========================
@@ -1142,18 +1148,18 @@ function Archive() {
 
         <div className="archive-title-group">
 
-          <span className="archive-label">
+          <span className="archive-label" data-reveal>
             05 / OUTSIDE OF CODE
           </span>
 
           <h2>
-            Creative Archive
+            <TextReveal>Creative Archive</TextReveal>
           </h2>
 
         </div>
 
 
-        <div className="archive-header-right">
+        <div className="archive-header-right" data-reveal>
 
           <p className="archive-intro-copy">
             Outside of code.<br />A different kind of exploration.

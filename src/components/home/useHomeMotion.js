@@ -6,6 +6,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const horizontalHomeQuery = '(min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)';
 
+const motionPreferenceQuery = '(prefers-reduced-motion: no-preference)';
+
 export function useHorizontalScroll(containerRef, trackRef) {
   useLayoutEffect(() => {
     const media = gsap.matchMedia();
@@ -75,11 +77,36 @@ export function scrollToHomeSection(id, behavior = 'smooth') {
   return true;
 }
 
-// Visible default styles; matchMedia cleans up on preference and route changes.
+function createEntryTrigger(element, horizontalAnimation) {
+  if (horizontalAnimation) {
+    return {
+      trigger: element,
+      containerAnimation: horizontalAnimation,
+      start: 'left 88%',
+      once: true,
+    };
+  }
+
+  return {
+    trigger: element,
+    start: 'top 85%',
+    once: true,
+  };
+}
+
+// The same reveal vocabulary is rebuilt for horizontal and vertical layouts.
+// Horizontal entries are tied to the one pinned track tween with
+// containerAnimation; the child triggers themselves are inexpensive and do
+// not scrub.
 export function useSectionReveal(ref) {
   useLayoutEffect(() => {
     const media = gsap.matchMedia();
-    media.add('(prefers-reduced-motion: no-preference)', () => {
+    media.add({
+      horizontal: horizontalHomeQuery,
+      motionAllowed: motionPreferenceQuery,
+    }, context => {
+      if (!context.conditions.motionAllowed) return undefined;
+
       const section = ref.current;
       if (!section) return undefined;
 
@@ -87,71 +114,53 @@ export function useSectionReveal(ref) {
       const frame = window.requestAnimationFrame(() => {
         revealContext = gsap.context(() => {
           const select = gsap.utils.selector(section);
-          const horizontalAnimation = ScrollTrigger.getById('home-horizontal-scroll')?.animation;
-
-          if (horizontalAnimation) {
-            const timeline = gsap.timeline(section.hasAttribute('data-reveal-root') ? {} : {
-              scrollTrigger: {
-                trigger: section,
-                containerAnimation: horizontalAnimation,
-                start: 'left 86%',
-                once: true,
-              },
-            });
-
-            select('[data-text-reveal]').forEach((group, index) => {
-              timeline.from(group.querySelectorAll('[data-reveal-line]'), {
-                yPercent: 110,
-                opacity: 0,
-                duration: 0.9,
-                ease: 'power3.out',
-                stagger: 0.08,
-                delay: Number(group.dataset.revealDelay) || 0,
-              }, index * 0.06);
-            });
-            const revealElements = select('[data-reveal]');
-            const cards = select('[data-card]');
-            const images = select('[data-image-reveal]');
-            if (revealElements.length) timeline.from(revealElements, {
-              y: 30, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.05,
-            }, 0.08);
-            if (cards.length) timeline.from(cards, {
-              y: 50, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.06,
-            }, 0.14);
-            if (images.length) timeline.from(images, {
-              clipPath: 'inset(100% 0% 0% 0%)', duration: 0.9, ease: 'power3.out',
-            }, 0);
-            return;
-          }
-
-          const triggerFor = element => ({
-            trigger: section.hasAttribute('data-reveal-root') ? section : element,
-            start: 'top 85%',
-            once: true,
-          });
+          const horizontalAnimation = context.conditions.horizontal
+            ? ScrollTrigger.getById('home-horizontal-scroll')?.animation
+            : null;
+          const isOpeningPanel = section.hasAttribute('data-reveal-root');
+          const triggerFor = element => (isOpeningPanel
+            ? undefined
+            : createEntryTrigger(element, horizontalAnimation));
 
           select('[data-text-reveal]').forEach(group => {
             gsap.from(group.querySelectorAll('[data-reveal-line]'), {
-              yPercent: 110, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08,
+              yPercent: 110,
+              xPercent: horizontalAnimation ? 6 : 0,
+              opacity: 0,
+              duration: 0.9,
+              ease: 'power3.out',
+              stagger: 0.08,
               delay: Number(group.dataset.revealDelay) || 0,
               scrollTrigger: triggerFor(group),
             });
           });
           select('[data-reveal]').forEach(element => {
             gsap.from(element, {
-              y: 30, opacity: 0, duration: 0.7, ease: 'power3.out',
+              x: horizontalAnimation ? 24 : 0,
+              y: horizontalAnimation ? 0 : 30,
+              opacity: 0,
+              duration: 0.7,
+              ease: 'power3.out',
               scrollTrigger: triggerFor(element),
             });
           });
-          select('[data-card]').forEach((element, index) => {
+          select('[data-card]').forEach(element => {
             gsap.from(element, {
-              y: 50, opacity: 0, duration: 0.7, ease: 'power3.out', delay: (index % 3) * 0.06,
+              x: horizontalAnimation ? 34 : 0,
+              y: horizontalAnimation ? 14 : 50,
+              opacity: 0,
+              duration: 0.75,
+              ease: 'power3.out',
               scrollTrigger: triggerFor(element),
             });
           });
           select('[data-image-reveal]').forEach(element => {
             gsap.from(element, {
-              clipPath: 'inset(100% 0% 0% 0%)', duration: 0.9, ease: 'power3.out',
+              clipPath: horizontalAnimation
+                ? 'inset(0% 100% 0% 0%)'
+                : 'inset(100% 0% 0% 0%)',
+              duration: 0.9,
+              ease: 'power3.out',
               scrollTrigger: triggerFor(element),
             });
           });
