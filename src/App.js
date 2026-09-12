@@ -1,23 +1,20 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
+import HomeNavbar from './components/home/HomeNavbar';
 import Home from './components/pages/Home';
 import Gallery from './components/pages/ArtGallery';
-import Projects from './components/pages/Projects';
-import About from './components/pages/AboutMe';
 import ScrollToTop from "./components/ScrollToTop";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Navbar />
+      <HomeNavbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/about" element={<About />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

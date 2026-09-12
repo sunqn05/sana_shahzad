@@ -1,5 +1,7 @@
-.App {
-  text-align: center;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html,
@@ -7,129 +9,16 @@ body,
 #root {
   width: 100%;
   max-width: 100%;
-
   margin: 0;
   padding: 0;
-
-  overflow-x: clip;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 html,
-body {
-  width: 100%;
-  max-width: 100%;
-
-  margin: 0;
-  padding: 0;
-
-  background: #03070d;
-
-  overflow-x: clip;
-}
-
+body,
 #root {
-  width: 100%;
-  max-width: 100%;
-
   overflow-x: clip;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-.home,
-.photography,
-.graphicdesign,
-.projects,
-.about {
-  display: flex;
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-}
-
-.photography {
-  background: url('../public/images/img-3.jpg') center center/cover no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
-}
-
-.graphicdesign {
-  background: url('../public/images/img-4.jpg') center center/cover no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
-}
-
-.projects {
-  background: url('../public/images/img-5.jpg') center center/cover no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
-}
-
-.about {
-  background: url('../public/images/img-9.jpg') center center/cover no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
-}
-
-:root {
-  --deep-bg: #020617;
-  --ocean-bg: #061826;
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(94, 231, 255, 0.18);
-  --cyan: #5ee7ff;
-  --soft-text: #cbd5e1;
-  --muted-text: #94a3b8;
+body {
+  background: #071824;
 }

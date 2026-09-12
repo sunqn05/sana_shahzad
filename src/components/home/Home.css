@@ -20,7 +20,7 @@
 .developer-home .home-mask + .home-mask { margin-top: -0.12em; }
 .developer-home .home-reveal-inner { display: block; max-width: 100%; overflow-wrap: anywhere; }
 .developer-home .home-chapter { position: relative; isolation: isolate; }
-.developer-home .home-sheet { position: relative; z-index: 2; padding: 80px var(--home-gutter) 110px; background: var(--home-cream); }
+.developer-home .home-sheet { position: relative; z-index: 2; padding: 80px var(--home-gutter) 110px; background: var(--home-cream); border-radius: 28px 28px 0 0; }
 .developer-home .home-section-top { display: flex; justify-content: space-between; gap: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--home-border); }
 .developer-home .home-section-top > :last-child { color: var(--home-muted); }
 .developer-home .home-display { font-family: var(--home-display-font); font-size: clamp(2.75rem, 8vw, 9.375rem); font-weight: 400; letter-spacing: -0.045em; line-height: 1; }
@@ -110,15 +110,6 @@
 ========================================= */
 
 
-@font-face {
-  font-family: "against regular";
-  src: url("../../assets/fonts/against regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-
 /* =========================================
    GIANT HERO NAME
 ========================================= */
@@ -172,28 +163,11 @@
 }
 
 
-/* reveal mask */
-
 .developer-home .home-hero-name .home-mask {
   width: 100%;
-
   max-width: none;
-
-  padding:
-    0.13em
-    0
-    0.025em;
-
-  margin: -0.1em 0 0;
-
-  overflow: hidden;
-}
-
-/* text reveal mask */
-
-.developer-home .home-hero-name .home-mask {
   /*
-   * Svetze has tall/thin details that extend
+   * The display font has tall details that extend
    * beyond a tight line box, so give the mask
    * more room above the letters.
    */
@@ -203,8 +177,9 @@
     0.05em;
 
   margin: -0.10em 0 0;
+  overflow: hidden;
 }
-/* Introduction */
+
 /* Introduction */
 .developer-home .home-about { padding-top: 58px; padding-bottom: 65px; }
 
@@ -234,7 +209,7 @@
 
 /* Sticky type panels are covered by the following sheet without added pin space. */
 
-.developer-home .home-transition { position: sticky; top: 0; height: 78svh; min-height: 620px; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: clamp(0.5rem, 2svh, 1.5rem); padding: clamp(5.25rem, 10svh, 7rem) var(--home-gutter) clamp(1rem, 3svh, 2.5rem); overflow: clip; color: var(--home-navy); background: #e6e7e0; }
+.developer-home .home-transition { position: sticky; top: 0; height: 78svh; min-height: 620px; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: clamp(0.5rem, 2svh, 1.5rem); padding: clamp(5.25rem, 10svh, 7rem) var(--home-gutter) clamp(1rem, 3svh, 2.5rem); overflow: clip; color: var(--home-navy); background: #e6e7e0; will-change: transform, filter; }
 
 .developer-home .home-transition-background { position: absolute; inset: -4%; background: #e6e7e0; }
 
@@ -256,7 +231,6 @@
 
 .developer-home .home-transition-archive .home-transition-heading { --word-width: 18cqi; --word-max: 20rem; }
 
-/* Cards */
 /* =========================================
    SKILLS
 ========================================= */
@@ -291,18 +265,6 @@
     background 0.3s ease;
 }
 
-
-.developer-home .home-skill-card:hover {
-  transform: translateY(-6px);
-
-  background: rgba(255, 255, 255, 0.22);
-
-  border-color: rgba(59, 142, 174, 0.32);
-
-  box-shadow:
-    0 18px 45px rgba(6, 19, 33, 0.11),
-    0 4px 12px rgba(6, 19, 33, 0.05);
-}
 
 .developer-home .home-skill-card::before {
   content: "";
@@ -632,7 +594,7 @@
 @media (max-width: 600px) { .developer-home .home-experience-grid { grid-template-columns: 1fr; } }
 
 /* Reuse the archive, with restrained colors and borders. */
-.developer-home .home-archive-sheet { position: relative; z-index: 2; background: var(--home-navy); }
+.developer-home .home-archive-sheet { position: relative; z-index: 2; overflow: hidden; background: var(--home-navy); border-radius: 28px 28px 0 0; }
 .developer-home .archive-section { background: var(--home-navy); color: var(--home-cream); padding-top: 75px; }
 .developer-home .archive-header { width: auto; margin-inline: var(--home-gutter); max-width: none; }
 .developer-home .archive-title-group { min-width: 0; max-width: 100%; }
@@ -745,7 +707,8 @@
 @media (max-width: 900px) {
   .developer-home .home-hero { position: relative; }
   .developer-home .home-transition { position: relative; height: 90svh; }
-  .developer-home .home-sheet { padding-top: 55px; padding-bottom: 75px; }
+  .developer-home .home-sheet { padding-top: 55px; padding-bottom: 75px; border-radius: 0; }
+  .developer-home .home-archive-sheet { border-radius: 0; }
   .developer-home .home-hero-copy { font-size: 14px; }
   .developer-home .home-hero-caption > span { display: none; }
   .developer-home .home-about-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 28px; }

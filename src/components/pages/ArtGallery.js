@@ -135,20 +135,13 @@ function ArtGallery() {
   };
 
   useEffect(() => {
-    if (window.location.hash) {
-      const section = document.querySelector(
-        window.location.hash
-      );
-
-      if (section) {
-        setTimeout(() => {
-          section.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }, 100);
-      }
-    }
+    const previousTitle = document.title;
+    document.title = "Sana Shahzad — Creative Gallery";
+    document.documentElement.classList.add("gallery-active");
+    return () => {
+      document.title = previousTitle;
+      document.documentElement.classList.remove("gallery-active");
+    };
   }, []);
 
   useEffect(() => {
@@ -182,21 +175,11 @@ function ArtGallery() {
   }, [lightbox]);
 
   useEffect(() => {
-    if (window.location.hash) {
-      const section = document.querySelector(
-        window.location.hash
-      );
-
-      if (section) {
-        setTimeout(() => {
-          section.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }, 100);
-      }
-    }
-  }, []);
+    if (!lightbox) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [lightbox]);
 
   const photography = [
     {
@@ -305,7 +288,7 @@ function ArtGallery() {
 
   return (
     
-  <div className="gallery-page">
+  <main className="gallery-page" id="gallery-main" tabIndex={-1}>
 
     <div className="gallery-liquid-background">
       <LiquidEther
@@ -385,6 +368,9 @@ function ArtGallery() {
       <div
         className="gallery-lightbox"
         onClick={closeLightbox}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${lightbox.item.title} image viewer`}
       >
         <button
           className="lightbox-close"
@@ -451,7 +437,7 @@ function ArtGallery() {
       </div>
     )}
 
-  </div>
+  </main>
 );
 
 }

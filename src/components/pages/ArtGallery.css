@@ -4,9 +4,10 @@
 
 .gallery-page {
   position: relative;
-  min-height: 100vh;
-  color: white;
-  background: #020617;
+  min-height: 100svh;
+  color: #edf1f5;
+  background: #071824;
+  font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
@@ -14,7 +15,7 @@
   position: fixed;
   inset: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
@@ -40,6 +41,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
+  background: linear-gradient(180deg, rgba(7, 24, 36, 0.08), rgba(7, 24, 36, 0.42));
 }
 
 .gallery-hero,
@@ -56,7 +58,7 @@
 ========================= */
 
 .gallery-hero {
-  min-height: 100vh;
+  min-height: 100svh;
 
   display: flex;
   flex-direction: column;
@@ -69,7 +71,7 @@
 }
 
 .gallery-label {
-  color: var(--cyan);
+  color: #a9c3cf;
 
   text-transform: uppercase;
   letter-spacing: 4px;
@@ -85,8 +87,8 @@
 
   font-size: clamp(3.5rem, 8vw, 7rem);
 
-  font-family: Georgia, serif;
-  font-weight: 500;
+  font-family: "against regular", Georgia, serif;
+  font-weight: 400;
 
   line-height: 0.88;
 
@@ -98,13 +100,13 @@
 
   margin: 16px 0;
 
-  color: var(--cyan);
+  color: #a9c3cf;
 }
 
 .gallery-description {
   max-width: 620px;
 
-  color: var(--soft-text);
+  color: #c7d2d8;
 
   line-height: 1.8;
 
@@ -174,7 +176,7 @@
 ========================= */
 
 .gallery-section {
-  min-height: 100vh;
+  min-height: 100svh;
 
   padding: 80px 5% 100px;
 
@@ -183,6 +185,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  scroll-margin-top: 78px;
+  border-top: 1px solid rgba(237, 241, 245, 0.14);
 }
 
 
@@ -207,7 +211,7 @@
 }
 
 .section-heading p {
-  color: var(--cyan);
+  color: #a9c3cf;
 
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -220,8 +224,8 @@
 .section-heading h2 {
   font-size: clamp(2rem, 4vw, 3.5rem);
 
-  font-family: Georgia, serif;
-  font-weight: 500;
+  font-family: "against regular", Georgia, serif;
+  font-weight: 400;
 
   line-height: 1;
 
@@ -1165,4 +1169,16 @@
     max-width: 94vw;
     max-height: 72vh;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.gallery-active { scroll-behavior: auto; }
+  .gallery-page *,
+  .gallery-page *::before,
+  .gallery-page *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .gallery-explore { opacity: 0.8; }
 }

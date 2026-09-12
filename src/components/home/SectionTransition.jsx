@@ -8,10 +8,35 @@ export default function SectionTransition({ title, number, label, note, variant 
   useLayoutEffect(() => {
     const media = gsap.matchMedia();
     media.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
-      gsap.timeline({ scrollTrigger: { trigger: root.current.parentElement, start: 'top top',
-        end: () => `+=${window.innerHeight}`, scrub: 0.8, invalidateOnRefresh: true } })
-        .to('.home-transition-heading', { y: -35, ease: 'none' }, 0)
-        .to('.home-transition-background', { scale: 1.06, yPercent: -3, ease: 'none' }, 0);
+      const panel = root.current;
+      const incomingSheet = panel?.nextElementSibling;
+
+      if (!panel || !incomingSheet) return undefined;
+
+      const heading = panel.querySelector('.home-transition-heading');
+      const background = panel.querySelector('.home-transition-background');
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: incomingSheet,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: 0.8,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      timeline
+        .fromTo(incomingSheet, { y: 48 }, { y: 0, ease: 'none' }, 0)
+        .fromTo(panel, { scale: 1, filter: 'brightness(1)' }, {
+          scale: 0.96,
+          filter: 'brightness(0.9)',
+          transformOrigin: 'center top',
+          ease: 'none',
+        }, 0)
+        .to(heading, { y: -24, ease: 'none' }, 0)
+        .to(background, { scale: 1.04, yPercent: -2, ease: 'none' }, 0);
+
+      return () => timeline.kill();
     }, root);
     return () => media.revert();
   }, [variant]);

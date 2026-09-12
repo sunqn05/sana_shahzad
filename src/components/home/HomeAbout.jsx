@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { gsap, useSectionReveal } from './useHomeMotion';
 import TextReveal from './TextReveal';
 
@@ -26,7 +25,6 @@ export default function HomeAbout() {
             <p className="home-lead">A developer’s mindset.<br />A creative point of view.</p>
             <p>I’m Sana, a Computer Science student at the University of Toronto, with minors in Mathematical Sciences and Game Studies.</p>
             <p>I enjoy turning ideas into software that’s useful, thoughtful, and personal. My interests span systems programming, web development, and interactive experiences.</p>
-            <Link className="home-text-link" to="/about">More About Me <span aria-hidden="true">↗</span></Link>
           </div>
         </div>
         <figure className="home-about-figure" data-image-reveal>
