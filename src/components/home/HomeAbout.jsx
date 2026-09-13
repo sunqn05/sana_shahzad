@@ -1,148 +1,136 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useSectionReveal } from './useHomeMotion';
 import TextReveal from './TextReveal';
 
-const aboutPanels = [
+const aboutCards = [
   {
+    id: 'university-of-toronto',
     title: 'University of Toronto',
     description: 'Computer Science major with minors in Mathematical Sciences and Game Studies.',
     image: '/images/about/about-8.jpg',
-    imageAlt: 'Toronto skyline at night',
+    link: null,
   },
   {
+    id: 'outside-of-developing',
     title: 'Outside of Developing',
-    description: 'I love gaming, music, food, painting, and creative exploration outside of code.',
+    description: 'Gaming, music, food, painting, and creative exploration outside of code.',
     image: '/images/about/about-5.jpg',
-    imageAlt: 'Coffee, pastries, and a compact camera',
+    link: null,
   },
   {
+    id: 'current-goals',
     title: 'Current Goals',
-    description: 'Building a portfolio that blends software development, design, and interactive experiences.',
+    description: 'Building a portfolio that blends development, design, and interactive experiences.',
     image: '/images/about/about-9.jpg',
-    imageAlt: 'A creative workspace with a laptop and coffee',
+    link: null,
   },
   {
+    id: 'photography',
     title: 'Photography',
-    description: 'A personal interest that inspires my eye for mood, framing, and visual storytelling.',
+    description: 'An eye for mood, framing, and visual storytelling.',
     image: '/images/about/about-2.jpg',
-    imageAlt: 'A camera ready for a photography session',
+    link: null,
   },
   {
+    id: 'programming',
     title: 'Programming',
-    description: 'I enjoy turning ideas into useful, thoughtful software with a strong technical foundation.',
+    description: 'Turning ideas into thoughtful software with a strong technical foundation.',
     image: '/images/about/about-3.jpg',
-    imageAlt: 'A programming workspace with code on screen',
+    link: null,
   },
   {
+    id: 'graphic-design',
     title: 'Graphic Design',
-    description: 'Branding, posters, visual identity, and digital design are a major part of my creative background.',
+    description: 'Branding, posters, visual identity, and digital design.',
     image: '/images/about/about-4.jpg',
-    imageAlt: 'Graphic design work in progress on a laptop',
+    link: null,
+  },
+  {
+    id: 'spotify',
+    title: 'Spotify',
+    description: 'My soundtrack for focus and everyday life.',
+    image: '/images/about/about-7.jpg',
+    link: null,
+  },
+  {
+    id: 'youtube',
+    title: 'YouTube',
+    description: 'What I’m watching, learning from, and creating.',
+    image: '/images/about/about-12.jpg',
+    link: null,
+  },
+  {
+    id: 'pinterest',
+    title: 'Pinterest',
+    description: 'A visual moodboard of references, palettes, and ideas.',
+    image: '/images/about/about-6.jpg',
+    link: null,
   },
 ];
 
 export default function HomeAbout() {
   const root = useRef(null);
-  const panelStack = useRef(null);
-  const [activePanel, setActivePanel] = useState(null);
-  const [supportsHover, setSupportsHover] = useState(false);
+  const [activeCard, setActiveCard] = useState(null);
+  const [focusedCard, setFocusedCard] = useState(null);
 
   useSectionReveal(root);
-
-  useEffect(() => {
-    const query = window.matchMedia('(hover: hover) and (pointer: fine)');
-    const updateInputMode = () => {
-      setSupportsHover(query.matches);
-      setActivePanel(null);
-    };
-
-    updateInputMode();
-    query.addEventListener('change', updateInputMode);
-    return () => query.removeEventListener('change', updateInputMode);
-  }, []);
-
-  useEffect(() => {
-    if (supportsHover) return undefined;
-
-    const closeOnOutsideTap = event => {
-      if (!panelStack.current?.contains(event.target)) setActivePanel(null);
-    };
-
-    document.addEventListener('pointerdown', closeOnOutsideTap);
-    return () => document.removeEventListener('pointerdown', closeOnOutsideTap);
-  }, [supportsHover]);
-
-  const closeWhenInteractionLeaves = event => {
-    if (!supportsHover || event.currentTarget.contains(document.activeElement)) return;
-    setActivePanel(null);
-  };
 
   return (
     <section className="home-sheet home-section home-about" id="about" ref={root} tabIndex={-1} aria-labelledby="about-title">
       <div className="home-content-label home-meta" data-reveal>
         <span>01 / ABOUT ♡</span><span>A LITTLE CONTEXT</span>
       </div>
-      <div className="home-about-grid">
-        <div className="home-about-editorial">
-          <h2 className="home-section-title home-section-title--left" id="about-title">
-            <TextReveal>About me</TextReveal>
-          </h2>
-          <div className="home-about-copy" data-reveal>
-            <p className="home-lead">A developer’s mindset with a creative point of view. ♡</p>
-            <p>I’m Sana Shahzad, a Computer Science student at the University of Toronto, with minors in Mathematical Sciences and Game Studies.</p>
-            <p>I enjoy turning ideas into software that’s useful, thoughtful, and personal. My interests span systems programming, web development, and interactive experiences.</p>
-          </div>
+
+      <div className="home-about-intro">
+        <h2 className="home-section-title home-section-title--left" id="about-title">
+          <TextReveal>About me</TextReveal>
+        </h2>
+        <div className="home-about-copy" data-reveal>
+          <p className="home-lead">A developer’s mindset with a creative point of view. ♡</p>
+          <p>I enjoy turning ideas into software that’s useful, thoughtful, and personal. My interests span systems programming, web development, and interactive experiences.</p>
         </div>
+      </div>
 
-        <div
-          className="home-about-panel-stack"
-          data-reveal
-          ref={panelStack}
-          onMouseLeave={closeWhenInteractionLeaves}
-          onBlur={event => {
-            if (!event.currentTarget.contains(event.relatedTarget)) setActivePanel(null);
-          }}
-        >
-          {aboutPanels.map((panel, index) => {
-            const isActive = activePanel === index;
-            const triggerId = `about-panel-trigger-${index}`;
-            const contentId = `about-panel-content-${index}`;
+      <div className="home-about-card-gallery" data-reveal>
+        {aboutCards.map((card, index) => {
+          const isExpanded = focusedCard === index || (focusedCard === null && activeCard === index);
+          const descriptionId = `about-card-description-${card.id}`;
 
-            return (
-              <article
-                className={`home-about-panel${isActive ? ' is-active' : ''}`}
-                key={panel.title}
-                onMouseEnter={() => { if (supportsHover) setActivePanel(index); }}
+          return (
+            <article
+              className={`home-about-flex-card${isExpanded ? ' is-active' : ''}`}
+              key={card.id}
+              style={{ '--about-card-offset': `${[0, 10, 4, 12, 2, 9, 0, 11, 5][index]}px` }}
+            >
+              <button
+                className="home-about-flex-card-trigger"
+                type="button"
+                aria-expanded={isExpanded}
+                aria-controls={descriptionId}
+                onFocus={() => setFocusedCard(index)}
+                onBlur={() => setFocusedCard(null)}
+                onPointerUp={event => {
+                  if (event.pointerType === 'mouse') return;
+                  const target = event.currentTarget;
+                  setActiveCard(current => current === index ? null : index);
+                  target.blur();
+                }}
               >
-                <button
-                  className="home-about-panel-trigger"
-                  id={triggerId}
-                  type="button"
-                  aria-expanded={isActive}
-                  aria-controls={contentId}
-                  onFocus={() => setActivePanel(index)}
-                  onClick={() => {
-                    if (!supportsHover) setActivePanel(isActive ? null : index);
-                  }}
-                >
-                  {panel.title}
-                </button>
-                <div
-                  className="home-about-panel-body"
-                  id={contentId}
-                  role="region"
-                  aria-labelledby={triggerId}
-                  aria-hidden={!isActive}
-                >
-                  <div className="home-about-panel-content">
-                    <img src={panel.image} alt={panel.imageAlt} loading="lazy" />
-                    <p>{panel.description}</p>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+                <img src={card.image} alt="" loading="lazy" draggable="false" />
+                <span className="home-about-flex-card-overlay">
+                  <span className="home-about-flex-card-title">{card.title}</span>
+                  <span className="home-about-flex-card-description" id={descriptionId}>{card.description}</span>
+                </span>
+              </button>
+
+              {card.link && (
+                <a className="home-about-flex-card-link" href={card.link} target="_blank" rel="noreferrer">
+                  Visit {card.title}
+                </a>
+              )}
+            </article>
+          );
+        })}
       </div>
 
       <div className="home-about-foot home-meta" data-reveal>
