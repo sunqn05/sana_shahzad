@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSectionReveal } from './useHomeMotion';
 import TextReveal from './TextReveal';
 
@@ -25,13 +26,6 @@ const aboutCards = [
     link: null,
   },
   {
-    id: 'photography',
-    title: 'Photography',
-    description: 'An eye for mood, framing, and visual storytelling.',
-    image: '/images/about/about-2.jpg',
-    link: null,
-  },
-  {
     id: 'programming',
     title: 'Programming',
     description: 'Turning ideas into thoughtful software with a strong technical foundation.',
@@ -39,37 +33,45 @@ const aboutCards = [
     link: null,
   },
   {
+    id: 'photography',
+    title: 'Photography',
+    description: 'An eye for mood, framing, and visual storytelling.',
+    image: '/images/about/about-2.jpg',
+    link: '/gallery',
+  },
+  {
     id: 'graphic-design',
     title: 'Graphic Design',
     description: 'Branding, posters, visual identity, and digital design.',
     image: '/images/about/about-4.jpg',
-    link: null,
+    link: '/gallery',
   },
   {
     id: 'spotify',
     title: 'Spotify',
     description: 'My soundtrack for focus and everyday life.',
     image: '/images/about/about-7.jpg',
-    link: null,
+    link: "https://open.spotify.com/user/yndm2c0cvt6e8ey7juu5xdjoe?si=53b3657bee0c4e09",
   },
   {
     id: 'youtube',
     title: 'YouTube',
     description: 'What I’m watching, learning from, and creating.',
     image: '/images/about/about-12.jpg',
-    link: null,
+    link: "https://www.youtube.com/@ssunqn",
   },
   {
     id: 'pinterest',
     title: 'Pinterest',
     description: 'A visual moodboard of references, palettes, and ideas.',
     image: '/images/about/about-6.jpg',
-    link: null,
+    link: "https://pin.it/f8cZK3aUD",
   },
 ];
 
 export default function HomeAbout() {
   const root = useRef(null);
+  const cardGesture = useRef(null);
   const [activeCard, setActiveCard] = useState(null);
   const [focusedCard, setFocusedCard] = useState(null);
 
@@ -87,7 +89,7 @@ export default function HomeAbout() {
         </h2>
         <div className="home-about-copy" data-reveal>
           <p className="home-lead">A developer’s mindset with a creative point of view. ♡</p>
-          <p>I enjoy turning ideas into software that’s useful, thoughtful, and personal. My interests span systems programming, web development, and interactive experiences.</p>
+          <p>I enjoy turning ideas into software that’s useful, thoughtful, and personal. </p>
         </div>
       </div>
 
@@ -109,8 +111,38 @@ export default function HomeAbout() {
                 aria-controls={descriptionId}
                 onFocus={() => setFocusedCard(index)}
                 onBlur={() => setFocusedCard(null)}
+                onPointerDown={event => {
+                  if (event.pointerType === 'mouse') return;
+
+                  cardGesture.current = {
+                    pointerId: event.pointerId,
+                    index,
+                    startX: event.clientX,
+                    startY: event.clientY,
+                    moved: false,
+                  };
+                }}
+                onPointerMove={event => {
+                  const gesture = cardGesture.current;
+                  if (!gesture || gesture.pointerId !== event.pointerId) return;
+
+                  const distance = Math.hypot(
+                    event.clientX - gesture.startX,
+                    event.clientY - gesture.startY,
+                  );
+
+                  if (distance > 10) gesture.moved = true;
+                }}
+                onPointerCancel={event => {
+                  cardGesture.current = null;
+                  event.currentTarget.blur();
+                }}
                 onPointerUp={event => {
                   if (event.pointerType === 'mouse') return;
+                  const gesture = cardGesture.current;
+                  cardGesture.current = null;
+                  if (!gesture || gesture.pointerId !== event.pointerId || gesture.index !== index || gesture.moved) return;
+
                   const target = event.currentTarget;
                   setActiveCard(current => current === index ? null : index);
                   target.blur();
@@ -123,11 +155,15 @@ export default function HomeAbout() {
                 </span>
               </button>
 
-              {card.link && (
+              {card.link && (card.link.startsWith('/') ? (
+                <Link className="home-about-flex-card-link" to={card.link}>
+                  Visit {card.title}
+                </Link>
+              ) : (
                 <a className="home-about-flex-card-link" href={card.link} target="_blank" rel="noreferrer">
                   Visit {card.title}
                 </a>
-              )}
+              ))}
             </article>
           );
         })}

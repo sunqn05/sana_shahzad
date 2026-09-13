@@ -40,7 +40,7 @@ html.developer-home-active .home-nav:not(.home-nav-scrolled):not(.home-nav-open)
 .home-nav-scrolled,
 .home-nav-open {
   color: #071522;
-  background: rgba(217, 226, 231, 0.96);
+  background: #f2f4f3;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -113,7 +113,7 @@ html.developer-home-active .home-nav:not(.home-nav-scrolled):not(.home-nav-open)
   left: 24px;
   padding: 12px 20px;
   color: #061321;
-  background: #f5f2eb;
+  background: #edf1f5;
 }
 
 .home-nav .home-skip-link:focus { top: 12px; z-index: 2; }
@@ -147,7 +147,7 @@ html.developer-home-active .home-nav:not(.home-nav-scrolled):not(.home-nav-open)
     overflow-y: auto;
     padding: 20px clamp(22px, 5vw, 100px) 30px;
     color: #061321;
-    background: #d9e2e7;
+    background: #edf1f5;
     border-bottom: 1px solid rgba(7, 21, 34, 0.12);
   }
   .home-nav-open .home-nav-links { display: block; }
