@@ -65,10 +65,10 @@ html.developer-home-active { scroll-snap-type: y proximity; }
 /* Introduction */
 .developer-home .home-about { padding: clamp(72px, 7vw, 100px) var(--home-gutter) clamp(80px, 8vw, 116px); border-radius: 0; }
 
-.developer-home .home-about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr); gap: clamp(2rem, 5vw, 6rem); align-items: center; flex: 1 1 auto; min-height: 0; padding: 0 0 clamp(10px, 1.5svh, 18px); }
+.developer-home .home-about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: clamp(2rem, 5vw, 6rem); align-items: start; flex: 1 1 auto; min-height: 0; padding: 0 0 clamp(10px, 1.5svh, 18px); }
 
 .developer-home .home-about-grid > div { container-type: inline-size; }
-.developer-home .home-about-editorial { align-self: center; }
+.developer-home .home-about-editorial { align-self: start; }
 
 .developer-home .home-about-copy { max-width: 510px; margin-top: 0; }
 
@@ -76,13 +76,27 @@ html.developer-home-active { scroll-snap-type: y proximity; }
 
 .developer-home .home-about-copy .home-lead { font-size: 19px; line-height: 1.4; color: var(--home-navy); margin-bottom: 18px; }
 
-.developer-home .home-about-figure { width: 100%; max-width: 540px; justify-self: end; }
+.developer-home .home-about-panel-stack { width: 100%; max-width: 620px; justify-self: end; border-top: 1px solid var(--home-border); }
 
-.developer-home .home-about-image { width: 100%; height: clamp(280px, 44svh, 440px); overflow: hidden; background: #d8d9d4; }
+.developer-home .home-about-panel { border-bottom: 1px solid var(--home-border); }
 
-.developer-home .home-about-image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.developer-home .home-about-panel-trigger { display: block; width: 100%; min-height: 56px; padding: 17px 2px 15px; border: 0; color: var(--home-navy); background: transparent; cursor: pointer; font-size: clamp(11px, 0.9vw, 13px); font-weight: 600; letter-spacing: 0.1em; line-height: 1.35; text-align: left; text-transform: uppercase; transition: color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 
-.developer-home .home-about-figure figcaption { display: flex; justify-content: space-between; gap: 15px; padding-top: 12px; font-size: 9px; }
+.developer-home .home-about-panel.is-active .home-about-panel-trigger { color: #31596c; transform: translateX(7px); }
+
+.developer-home .home-about-panel-trigger:focus-visible { outline-offset: -3px; }
+
+.developer-home .home-about-panel-body { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease; }
+
+.developer-home .home-about-panel.is-active .home-about-panel-body { max-height: 190px; opacity: 1; }
+
+.developer-home .home-about-panel-content { display: grid; grid-template-columns: minmax(120px, 0.78fr) minmax(0, 1fr); align-items: end; gap: clamp(16px, 2vw, 26px); min-height: 0; padding: 2px 2px 18px; }
+
+.developer-home .home-about-panel-content img { display: block; width: 100%; height: 132px; object-fit: cover; filter: saturate(0.72) contrast(0.96); transform: translateY(12px); opacity: 0; transition: transform 0.5s 0.06s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s 0.06s ease; }
+
+.developer-home .home-about-panel-content p { margin: 0; padding-bottom: 2px; color: var(--home-muted); font-size: 13px; line-height: 1.65; transform: translateY(10px); opacity: 0; transition: transform 0.45s 0.1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s 0.1s ease; }
+
+.developer-home .home-about-panel.is-active :is(img, .home-about-panel-content p) { transform: translateY(0); opacity: 1; }
 
 .developer-home .home-about-foot { display: flex; flex-wrap: wrap; gap: 24px; padding-top: 18px; border-top: 1px solid var(--home-border); color: var(--home-muted); }
 
@@ -545,7 +559,9 @@ html.developer-home-active { scroll-snap-type: y proximity; }
   .developer-home .home-sheet.home-section { padding-top: clamp(84px, 12svh, 96px); padding-bottom: clamp(64px, 9svh, 84px); }
   .developer-home .home-section-title { margin-bottom: clamp(22px, 3svh, 30px); font-size: clamp(3.5rem, min(6.2vw, 13svh), 6.5rem); }
   .developer-home .home-content-label { margin-bottom: clamp(22px, 3svh, 30px); }
-  .developer-home .home-about-image { height: clamp(260px, 40svh, 380px); }
+  .developer-home .home-about-panel-trigger { min-height: 48px; padding-block: 13px 11px; }
+  .developer-home .home-about-panel.is-active .home-about-panel-body { max-height: 155px; }
+  .developer-home .home-about-panel-content img { height: 106px; }
   .developer-home .archive-section { padding-top: clamp(84px, 12svh, 96px); padding-bottom: clamp(64px, 9svh, 84px); }
 }
 
@@ -611,7 +627,8 @@ html.developer-home-active { scroll-snap-type: y proximity; }
   .developer-home .home-sheet.home-section { padding-top: clamp(82px, 10vw, 92px); padding-bottom: clamp(72px, 9vw, 90px); }
   .developer-home .archive-section { padding-top: clamp(82px, 10vw, 92px); padding-bottom: clamp(72px, 9vw, 90px); }
   .developer-home .home-about-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 28px; }
-  .developer-home .home-about-figure figcaption { flex-direction: column; gap: 5px; }
+  .developer-home .home-about-panel-content { grid-template-columns: minmax(100px, 0.72fr) minmax(0, 1fr); gap: 16px; }
+  .developer-home .home-about-panel-content img { height: 116px; }
   .developer-home .home-experience-card { padding: 25px; }
 }
 @media (max-width: 600px) {
@@ -626,8 +643,12 @@ html.developer-home-active { scroll-snap-type: y proximity; }
   .developer-home .home-hero-eyebrow > :last-child { display: none; }
   .developer-home .home-hero-eyebrow { justify-content: center; }
   .developer-home .home-about-grid { grid-template-columns: 1fr; padding: 0; gap: 36px; }
-  .developer-home .home-about-figure { max-width: 420px; width: 100%; }
-  .developer-home .home-about-figure figcaption { flex-direction: row; }
+  .developer-home .home-about-panel-stack { max-width: none; justify-self: stretch; }
+  .developer-home .home-about-panel-trigger { min-height: 52px; padding-block: 15px 13px; font-size: 11px; }
+  .developer-home .home-about-panel.is-active .home-about-panel-body { max-height: 170px; }
+  .developer-home .home-about-panel-content { grid-template-columns: minmax(96px, 0.62fr) minmax(0, 1fr); gap: 14px; padding-bottom: 16px; }
+  .developer-home .home-about-panel-content img { height: 112px; }
+  .developer-home .home-about-panel-content p { font-size: 12px; line-height: 1.55; }
   .developer-home .home-about-foot { gap: 15px 24px; }
   .developer-home .home-skills-grid, .developer-home .home-projects-grid, .developer-home .home-experience-grid { grid-template-columns: 1fr; }
   .developer-home .home-skill-card { padding: 25px; }
