@@ -11,7 +11,7 @@ import '../home/Home.css';
 export default function Home() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = 'Sana Shahzad — Software Developer';
+    document.title = 'Sana Shahzad';
     document.documentElement.classList.add('developer-home-active');
     return () => {
       document.title = previousTitle;

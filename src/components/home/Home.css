@@ -138,6 +138,7 @@ html.developer-home-active { scroll-snap-type: y proximity; }
   display: flex;
   flex-direction: column;
   min-height: calc(100svh - var(--navbar-height));
+  overflow-x: clip;
   padding: clamp(84px, 10svh, 100px) var(--home-gutter) clamp(28px, 3.5svh, 42px);
   border-radius: 0;
 }
@@ -562,7 +563,7 @@ html.developer-home-active { scroll-snap-type: y proximity; }
   transform: translate(4px, -4px);
 }
 
-.developer-home .home-experience { padding: clamp(72px, 7vw, 100px) var(--home-gutter) clamp(80px, 8vw, 116px); border-radius: 0; background: var(--home-cream); }
+.developer-home .home-experience { overflow-x: clip; padding: clamp(72px, 7vw, 100px) var(--home-gutter) clamp(80px, 8vw, 116px); border-radius: 0; background: var(--home-cream); }
 
 .developer-home .home-experience-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; flex: 1 1 auto; min-height: 0; gap: clamp(14px, 1.8vw, 24px); }
 
