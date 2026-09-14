@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ProjectCard from "./ProjectCard";
 import { projects } from "./homeData";
 import { useSectionReveal } from "./useHomeMotion";
@@ -6,8 +6,37 @@ import TextReveal from "./TextReveal";
 
 export default function ProjectsSection() {
   const root = useRef(null);
+  const [activeProject, setActiveProject] = useState(null);
 
   useSectionReveal(root);
+
+  useEffect(() => {
+    const resetFlippedCard = (event) => {
+      if (!event.target.closest(".home-project-card")) {
+        setActiveProject(null);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key !== "Escape") return;
+
+      const focusedCard = document.activeElement?.closest?.(".home-project-card");
+      if (focusedCard) focusedCard.focus();
+      setActiveProject(null);
+    };
+
+    document.addEventListener("pointerdown", resetFlippedCard);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("pointerdown", resetFlippedCard);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  const toggleProject = (projectId) => {
+    setActiveProject((current) => current === projectId ? null : projectId);
+  };
 
   return (
     <section
@@ -26,7 +55,12 @@ export default function ProjectsSection() {
       <div className="home-projects-grid">
         {projects.map((project, index) => (
           <div data-card key={project.id}>
-            <ProjectCard project={project} index={index} />
+            <ProjectCard
+              project={project}
+              index={index}
+              isFlipped={activeProject === project.id}
+              onToggle={toggleProject}
+            />
           </div>
         ))}
       </div>
