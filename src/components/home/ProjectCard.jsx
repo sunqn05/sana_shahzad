@@ -86,7 +86,7 @@ export default function ProjectCard({
             aria-label={`${project.linkLabel}: ${project.title}`}
           >
             <span>{project.linkLabel}</span>
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">↗︎</span>
           </a>
         </div>
       </div>
