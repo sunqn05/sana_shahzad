@@ -31,7 +31,7 @@ export const projects = [
       "CSS",
       "GSAP",
     ],
-    image: "/images/projects/website2.png",
+    image: "/images/projects/website.png",
     imageAlt: "Sana Shahzad developer portfolio homepage",
     href: "https://sanashahzad.netlify.app/",
     linkLabel: "View Website",
@@ -62,7 +62,7 @@ export const projects = [
     description:
       "Explore more of my development work, experiments, and projects on GitHub.",
     technologies: [],
-    image: "/images/projects/heart.jpg",
+    image: "/images/projects/github.png",
     imageAlt: "Collection of software development projects",
     href: "https://github.com/sunqn05",
     linkLabel: "Explore GitHub",
