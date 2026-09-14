@@ -6,10 +6,21 @@ import TextReveal from './TextReveal';
 function ExperienceCard({ item, index }) {
   return (
     <article className="home-experience-card">
-      <div className="home-card-top home-meta"><span>{String(index + 1).padStart(2, '0')} / {item.category}</span><span aria-hidden="true">♡</span></div>
-      <p className="home-experience-dates">{item.dates}</p><h3>{item.role}</h3><p className="home-organization">{item.organization}</p>
-      <p className="home-experience-description">{item.description}</p>
-      <ul>{item.details.map(detail => <li key={detail}>{detail}</li>)}</ul>
+      <div className="home-experience-banner" aria-hidden="true">
+        <img
+          src="/images/video-poster.png"
+          alt=""
+          loading="lazy"
+          width="572"
+          height="448"
+        />
+      </div>
+      <div className="home-experience-content">
+        <div className="home-card-top home-meta"><span>{String(index + 1).padStart(2, '0')} / {item.category}</span><span aria-hidden="true">♡</span></div>
+        <p className="home-experience-dates">{item.dates}</p><h3>{item.role}</h3><p className="home-organization">{item.organization}</p>
+        <p className="home-experience-description">{item.description}</p>
+        <ul>{item.details.map(detail => <li key={detail}>{detail}</li>)}</ul>
+      </div>
     </article>
   );
 }

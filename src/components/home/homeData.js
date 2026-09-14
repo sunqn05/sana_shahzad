@@ -1,7 +1,7 @@
 export const profile = {
   email: 'sanashahzad0169@gmail.com',
   github: 'https://github.com/sunqn05',
-  linkedin: 'www.linkedin.com/in/sanashahzad',
+  linkedin: 'https://www.linkedin.com/in/sanashahzad',
   resume: '/Sana-Shahzad-Resume.pdf',
 };
 
